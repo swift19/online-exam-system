@@ -1,2 +1,2 @@
-# online-class-system
+# online-exam-system
 test
