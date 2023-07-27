@@ -1,3 +1,11 @@
+<?php
+// Getting active directory
+$directoryURI = $_SERVER['REQUEST_URI'];
+$path = parse_url($directoryURI, PHP_URL_PATH);
+$components = explode('/', $path);
+$page = $components[3];
+// var_dump($page); -- for checking/debugging
+?>
 <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
@@ -9,25 +17,25 @@
                             <li class="nav-divider">Menu</li>
                             
                             <li class="nav-item ">
-                                <a class="nav-link active" href="dashboard.php"> <i class="fab fa-fw fa-wpforms"></i>Dashboard </a>
+                                <a class="nav-link <?php if($page == "dashboard.php"){ echo "active"; } ?>" href="dashboard.php"> <i class="fab fa-fw fa-wpforms"></i>Dashboard </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="vdo_list.php"><i class="fab fa-fw fa-wpforms"></i>Video List </a>
+                                <a class="nav-link <?php if($page == "vdo_list.php"){ echo "active"; } ?>" href="vdo_list.php"><i class="fab fa-fw fa-wpforms"></i>Video List </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="semester_list.php"><i class="fab fa-fw fa-wpforms"></i>Semester List </a>
+                                <a class="nav-link <?php if($page == "semester_list.php"){ echo "active"; } ?>" href="semester_list.php"><i class="fab fa-fw fa-wpforms"></i>Semester List </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="subject_list.php"><i class="fab fa-fw fa-wpforms"></i>Subject List </a>
+                                <a class="nav-link <?php if($page == "subject_list.php"){ echo "active"; } ?>" href="subject_list.php"><i class="fab fa-fw fa-wpforms"></i>Subject List </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="exam_list.php"><i class="fab fa-fw fa-wpforms"></i>Exam List</a>
+                                <a class="nav-link <?php if($page == "exam_list.php"){ echo "active"; } ?>" href="exam_list.php"><i class="fab fa-fw fa-wpforms"></i>Exam List</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="pdf_list.php"><i class="fab fa-fw fa-wpforms"></i>PDF Files</a>
+                                <a class="nav-link <?php if($page == "pdf_list.php"){ echo "active"; } ?>" href="pdf_list.php"><i class="fab fa-fw fa-wpforms"></i>PDF Files</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="student_list.php"><i class="fab fa-fw fa-wpforms"></i>Student List</a>
+                                <a class="nav-link <?php if($page == "student_list.php"){ echo "active"; } ?>" href="student_list.php"><i class="fab fa-fw fa-wpforms"></i>Student List</a>
                             </li>
                             
 
