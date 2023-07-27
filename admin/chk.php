@@ -1,23 +1,25 @@
 <?php
 	
-	$email = $_POST['email'];
+	$username = $_POST['username'];
 	$pass = $_POST['password'];
 	
 	include 'db.php';
-	$query = mysqli_query($link, "select * from admin where email = '$email' AND pass = '$pass'");
+	$query = mysqli_query($link, "select * from admin where username = '$username' AND pass = '$pass'");
 	while($data = mysqli_fetch_array($query))
 	{
 		$id = $data['id'];
+		$u  = $data['username'];
 		$n  = $data['name'];
 		$m  = $data['mobile'];
 		$e  = $data['email'];
 		$p  = $data['pass'];
 		$s  = $data['status'];
 	}
-	if (($e == $email && $p == $pass) && ($s != "")) 
+	if (($u == $username && $p == $pass) && ($s != "")) 
 		{
 			session_start();
 			$_SESSION['id'] = $id;
+			$_SESSION['u'] = $u;
 			$_SESSION['n'] = $n;
 			$_SESSION['m'] = $m;
 			$_SESSION['p'] = $p;

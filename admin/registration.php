@@ -42,12 +42,13 @@
                             if ($_POST['name'] != "") {                                        
                                 
                                 $name = $_POST['name'];
+                                $username = $_POST['username'];
                                 $mobile = $_POST['mobile'];
                                 $email = $_POST['email'];
                                 $password = $_POST['password'];
                                 $address = $_POST['address'];
-                                $ins = "INSERT INTO admin (name, mobile, email, pass, status) 
-                                        VALUES ('$name','$mobile', '$email', '$password', '1');";    
+                                $ins = "INSERT INTO admin (name,username, mobile, email, pass, status) 
+                                        VALUES ('$name','$username','$mobile', '$email', '$password', '1');";    
 
                                 if (mysqli_query ($link, $ins)) {           
                                     echo "<script>";
@@ -79,6 +80,9 @@
                     </div>
                     <div class="form-group">
                         <input name="email" class="form-control form-control-lg" id="email" type="text" placeholder="Email" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <input name="username" class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <input name="password" class="form-control form-control-lg" id="password" type="password" placeholder="Password" required>
