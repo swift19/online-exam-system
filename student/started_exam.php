@@ -71,7 +71,7 @@
 
                                         </h3>
 
-                                        <!-- <?php
+                                        <?php
 
                                             $et = $duration;
                                             $et = $et*60;
@@ -107,7 +107,7 @@
 
                                                }
                                                CountDown(<?php echo $et; ?>,div);
-                                        </script> -->
+                                        </script> 
 
 
                                     </div>
