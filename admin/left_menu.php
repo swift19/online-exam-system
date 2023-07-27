@@ -5,6 +5,8 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[3];
 // var_dump($page); -- for checking/debugging
+
+$noImage = "https://placehold.it/150/30a5ff/fff";
 ?>
 <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -14,6 +16,10 @@ $page = $components[3];
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
+                            <img src="<?php if ($_SESSION['i']) {
+                                    echo $_SESSION['i'];
+                            } else { echo $noImage; } ?>" class="img-responsive" width="150px" height="150px" alt="image" class="responsive">									
+    
                             <li class="nav-divider">Menu</li>
                             
                             <li class="nav-item ">
@@ -37,7 +43,9 @@ $page = $components[3];
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "student_list.php"){ echo "active"; } ?>" href="student_list.php"><i class="fab fa-fw fa-wpforms"></i>Student List</a>
                             </li>
-                            
+                            <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "edit_profile.php"){ echo "active"; } ?>" href="edit_profile.php"><i class="fab fa-fw fa-wpforms"></i>My Profile</a>
+                            </li>
 
                             
                         </ul>

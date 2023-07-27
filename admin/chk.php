@@ -14,6 +14,7 @@
 		$e  = $data['email'];
 		$p  = $data['pass'];
 		$s  = $data['status'];
+		$i  = $data['image'];
 	}
 	if (($u == $username && $p == $pass) && ($s != "")) 
 		{
@@ -24,7 +25,8 @@
 			$_SESSION['m'] = $m;
 			$_SESSION['p'] = $p;
 			$_SESSION['e'] = $e;
-			$_SESSION['s'] = $s;			
+			$_SESSION['s'] = $s;
+			$_SESSION['i'] = $i;
 				
 			echo "<script>";
 			echo "self.location='dashboard.php';";
