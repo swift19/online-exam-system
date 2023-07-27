@@ -6976,3 +6976,23 @@ Media Query
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {}
+
+/* Iframe */
+.container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    top: -60px;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
