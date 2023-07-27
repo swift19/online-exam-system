@@ -29,14 +29,14 @@
 </head>
 <body>
     <div class="preloader"></div>
-    <iframe class="responsive-iframe" src="https://phet.colorado.edu/sims/html/mean-share-and-balance/latest/mean-share-and-balance_all.html" ></iframe>
+    <iframe class="responsive-iframe" src="https://phet.colorado.edu/sims/html/density/latest/density_en.html" ></iframe>
 
 <script>
 	window.onload = function(){
     // hide the preloader with timeout 1sec
 		setTimeout(function(){
 			document.querySelector(".preloader").style.display = "none";
-		}, 1000)
+		}, 3000)
   }
 </script>
 
