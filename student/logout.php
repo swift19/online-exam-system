@@ -12,7 +12,7 @@
 	
 	
 		echo "<script>";
-		echo "self.location='index.php?msg=<font color=green>Log Out Successful.</font>';";
+		echo "self.location='index2.php?msg=<font color=green>Log Out Successful.</font>';";
 		echo "</script>";
 	
 ?>

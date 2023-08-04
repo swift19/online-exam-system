@@ -1,10 +1,10 @@
 <?php
 	
-	$email = $_POST['email'];
+	$studentid = $_POST['studentid'];
 	$pass = $_POST['password'];
 	
 	include 'db.php';
-	$query = mysqli_query($link, "select * from student where email = '$email' AND pass = '$pass'");
+	$query = mysqli_query($link, "select * from student where studentid = '$studentid' AND pass = '$pass'");
 	while($data = mysqli_fetch_array($query))
 	{
 		$id    = $data['id'];
@@ -16,7 +16,7 @@
 		$p     = $data['pass'];
 		$s     = $data['status'];
 	}
-	if (($e == $email && $p == $pass) && ($s != "")) 
+	if (($stdid == $studentid && $p == $pass) && ($s != "")) 
 		{
 			session_start();
 			$_SESSION['id']    = $id;
@@ -29,13 +29,13 @@
 			$_SESSION['s']     = $s;			
 				
 			echo "<script>";
-			echo "self.location='dashboard.php';";
+			echo "self.location='dashboard2.php';";
 			echo "</script>";	
 		 }
 	
 	else {
 		echo "<script>";
- 		echo "self.location='index.php?msg=<font color=red>Email or Password is incorrect.</font>';";
+ 		echo "self.location='index2.php?msg=<font color=red>Email or Password is incorrect.</font>';";
 		echo "</script>";		
 	}
 

@@ -156,7 +156,7 @@
    ========================================================================== */
 
 body {
-    font-family: 'Circular Std Book';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -173,7 +173,7 @@ h5,
 h6 {
     color: #3d405c;
     margin: 0px 0px 15px 0px;
-    font-family: 'Circular Std Medium';
+    font-family: Poppins;
 }
 
 h1 {
@@ -216,7 +216,7 @@ a {
 }
 
 a:hover {
-    color: #ff407b;
+    /* color: #ff407b; */
     text-decoration: none;
 }
 
@@ -292,16 +292,18 @@ button:focus {
 }
 
 select.form-control {
-    color: #71748d;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-position: 99% 52%;
     background-size: auto;
     background-repeat: no-repeat;
-    background-image: url(/images/down-arrow.png);
+    /* background-image: url(./../../images/down-arrow.png); */
     padding-right: 15px;
-    border: 1px solid #d2d2e4;
-    border-radius: 2px;
+    border-radius: 50px;
+    border: 1px solid #F037A5;
+    color: #F037A5;
+    font-family: Poppins;
+    width: 250px;
 }
 
 textarea.form-control {
@@ -1222,15 +1224,19 @@ Top Header
 .dashboard-header {}
 
 .dashboard-header .navbar {
-    padding: 0px;
-    border-bottom: 1px solid #e6e6f2;
+    /* padding: 0px; */
+    padding: 0px 20px;
+    /* border-bottom: 1px solid #e6e6f2; */
     -webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
     box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
     -webkit-transition: all 0.3s ease;
     min-height: 60px;
 }
 
-
+.bg-blue{
+    /* background-color: #221d9e; */
+    background: linear-gradient(180deg, #2D46B9 0%, #1E3163 100%);
+}
 
 .navbar-brand {
     display: inline-block;
@@ -1466,7 +1472,9 @@ Top Header
     margin: 0px;
 }
 
-.nav-user-name {}
+.nav-user-name {
+    padding-left: 10px;
+}
 
 .nav-user-info {
     background-color: #5969ff;
@@ -1943,8 +1951,13 @@ Container / Wrapper
 .dashboard-wrapper {
     position: relative;
     left: 0;
-    margin-left: 264px;
-    min-height: 870px !important;
+    /* margin-left: 264px; 
+    min-height: 870px !important; */
+    min-height: 650px !important;
+    background: url(../../images/dashboard-bg.png);
+    background-size: contain;
+    max-width: 100%;
+    /* max-height: 100%; */
 }
 
 .dashboard-content {
@@ -1996,7 +2009,7 @@ Pageheader
 -------------------------*/
 
 .page-header {
-    margin-bottom: 30px;
+    margin: 20px;
 }
 
 .page-breadcrumb {}
@@ -2041,8 +2054,9 @@ Pageheader
 }
 
 .pageheader-title {
-    font-size: 24px;
+    font-size: 40px;
     margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .pageheader-text {
