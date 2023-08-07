@@ -34,7 +34,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><a href="index.php"><img class="logo-img" src="assets/images/admin_logo.png" alt="logo"></a>
+            <div class="card-header text-center bg-blue"><a href="index.php"><img class="logo-img" src="assets/images/logo-stemulate.png" alt="logo"></a>
                 <span class="splash-description">
                     <?php 
                         if (isset($_GET['msg'])) {

@@ -1230,7 +1230,10 @@ Top Header
     min-height: 60px;
 }
 
-
+.bg-blue{
+    /* background-color: #221d9e; */
+    background: linear-gradient(180deg, #2D46B9 0%, #1E3163 100%);
+}
 
 .navbar-brand {
     display: inline-block;
@@ -1466,7 +1469,9 @@ Top Header
     margin: 0px;
 }
 
-.nav-user-name {}
+.nav-user-name {
+    padding-left: 10px;
+}
 
 .nav-user-info {
     background-color: #5969ff;
