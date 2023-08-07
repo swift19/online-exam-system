@@ -46,11 +46,13 @@
                     
       <h1 class="welcome-header reg">Create New Account</h1>
       <form action="#" method="post">
+        <span class="splash-description">
                     <?php 
                         if (isset($_GET['msg'])) {
                             echo $_GET['msg'];
                         }
                     ?>
+        </span>            
         <br/><br/><br/>
         <div class="form-grid">
           <div class="form-row">

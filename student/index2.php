@@ -22,11 +22,13 @@
     <div class="login-form">
       <p class="welcome-header">Welcome!</p>
       <form action="chk.php" method="post">
-      <?php 
+        <span class="splash-description">
+                    <?php 
                         if (isset($_GET['msg'])) {
                             echo $_GET['msg'];
                         }
-        ?>
+                    ?>
+        </span>
         <br/>
         <label for="student-no">Student No:</label>
         <input type="text" name="studentid" id="student-no" placeholder="Enter your Student No." class="rounded-input" required>

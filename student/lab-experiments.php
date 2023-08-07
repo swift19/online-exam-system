@@ -25,15 +25,25 @@
             // Get the canvas element
             var noSelection = document.getElementById('noSelection');
             var densityCanvas = document.getElementById('myDensityCanvas');
+            var volcanoCanvas = document.getElementById('myVolcanoCanvas');
             
             // Check the selectedExperiment value and show/hide the canvas accordingly
             if (selectedExperiment === "density") {
-                densityCanvas.style.display = "block"; // Show the canvas
-                noSelection.style.display = "none"; // Hide the canvas                
+                densityCanvas.style.display = "block"; // Show density 
+                volcanoCanvas.style.display = "none"; // Hide density 
+                noSelection.style.display = "none"; // Hide no selection
+            } else if (selectedExperiment === "volcano") {
+                densityCanvas.style.display = "none"; // Hide density
+                volcanoCanvas.style.display = "block"; // Show density 
+                noSelection.style.display = "none"; // Hide no selection         
             } else {
-                densityCanvas.style.display = "none"; // Show the canvas
-                noSelection.style.display = "block"; // Hide the canvas
+                densityCanvas.style.display = "none"; // Hide density 
+                volcanoCanvas.style.display = "none"; // Hide volcano 
+                noSelection.style.display = "block"; // Show no selection 
             }
+
+          
+
         }
     </script>
     <div class="dashboard-main-wrapper">
@@ -65,20 +75,23 @@
                                 <option value="density">Density</option>
                             </select>
                         </div>
-                        <button class="start-button" onclick="handleStartButtonClick()">Start</button>
+                        <button class="start-button" onclick="handleStartButtonClick()" id="resizeIframe">Start</button>
                 </div>
             </div>
             </div>
         </div>
 
-            <div class="canvas-container"  id="noSelection">            
+            <div class="canvas-container"  id="noSelection" >            
                 not selected
             </div>
 
-            <div class="canvas-container"  id="myDensityCanvas" style="display: none;">            
+            <div class="canvas-container" id="myDensityCanvas" style="display: none;">            
                 <iframe src="./experiment/iframe1.php" ></iframe>
             </div>
 
+            <div class="canvas-container" id="myVolcanoCanvas" style="display: none;">            
+                <iframe src="./experiment/volcano/index.html" ></iframe>
+            </div>
            
         </div>
        

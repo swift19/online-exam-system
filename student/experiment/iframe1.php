@@ -8,35 +8,64 @@
 <style>
     .responsive-iframe {
       position: absolute;
-      top: -10px;
-      left: 0;
-      bottom: 0px;
-      right: 0;
+      top: 0px;
+      left: 0px;
       width: 100%;
       height: 100%;
       border: none;
     }
 
-    .preloader{
-      background:#191f26 url(preloader.gif) no-repeat center center;
+    .preloader {
+      background: #191f26 url(preloader.gif) no-repeat center center;
       background-size: 50%;
-      height:100vh;
-      width:100%;
-      position:fixed;
-      z-index:100;
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Add background to the bottom of the iframe */
+    .iframe-container::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 55px; /* Adjust the height of the background as needed */
+      background-color: #f0f0f0; /* Set the background color to your desired color */
     }
 </style>
 </head>
 <body>
-    <div class="preloader"></div>
-    <iframe class="responsive-iframe" src="https://phet.colorado.edu/sims/html/density/latest/density_en.html" ></iframe>
 
+<div class="iframe-container">
+    <div class="preloader"></div>
+    <iframe class="responsive-iframe" 
+      src="https://phet.colorado.edu/sims/html/density/latest/density_en.html">
+    </iframe>
+</div>
+
+   
 <script>
 	window.onload = function(){
-    // hide the preloader with timeout 1sec
+    // hide the preloader with timeout 10sec
 		setTimeout(function(){
 			document.querySelector(".preloader").style.display = "none";
-		}, 3000)
+		}, 10000)
   }
 </script>
 
