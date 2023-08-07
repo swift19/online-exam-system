@@ -2,33 +2,18 @@
     session_start();     
     include 'db.php';   
     if ($_SESSION['p'] != "") {
-
-        if (isset($_PUT['upload'])) {
-            if (!isset($_FILES['image']['tmp_name'])) {
-                $msg = "Please select an image.";
-            } else {
-                $file = $_FILES['image']['tmp_name'];
-                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-                $image_name = addslashes($_FILES['image']['name']);
-                $image_size = getimagesize($_FILES['image']['tmp_name']);
-                if ($image_size == false)
-                    $msg = "That's not an image.";
-                else {
-                    move_uploaded_file($_FILES["image"]["tmp_name"], "assets/images/users/" . $_FILES["image"]["name"]);
-                    $location = "assets/images/users/" . $_FILES["image"]["name"];
-                    // $query = mysqli_query($con, "update admin set image ='$location' where ID='$_SESSION[id]'");
-                    // $msg = "Image Uploaded.";
-
-                    $ins = "UPDATE admin SET image ='$location' where id='$_SESSION[id]'";
-                    if (mysqli_query ($link, $ins)) {           
-                        echo "<script>";
-                        echo "self.location='#?msg=<font color=green>Added Success!</font>';";
-                        echo "</script>";
-                    } else {
-                        echo "no ins";
-                    }
-                }
-            }
+        
+        $query = mysqli_query($link, "select * from admin where id='$_SESSION[id]'");
+        while($data = mysqli_fetch_array($query))
+        {
+            $_SESSION['id'] = $data['id'];
+			$_SESSION['u'] = $data['username'];
+			$_SESSION['n'] = $data['name'];
+			$_SESSION['m'] = $data['mobile'];
+			$_SESSION['p'] = $data['email'];
+			$_SESSION['e'] = $data['pass'];
+			$_SESSION['s'] = $data['status'];
+			$_SESSION['i'] = $data['image'];
         }
 ?>
 <!doctype html>
@@ -39,7 +24,11 @@
 </head>
 
 <body>
-    
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+    </script>
     <div class="dashboard-main-wrapper">
         
          <div class="dashboard-header">
@@ -54,7 +43,63 @@
         <div class="dashboard-wrapper">
             <div class="container-fluid  dashboard-content">
                 <span class="splash-description">
-                    <?php                       
+                    <?php        
+                        // Upload Image
+                        if (isset($_POST['upload'])) {
+
+                            if (!isset($_FILES['image']['tmp_name'])) {
+                                $msg = "Please select an image.";
+                            } else {
+                                $file = $_FILES['image']['tmp_name'];
+                                $image_name = addslashes($_FILES['image']['name']);
+                                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                                $image_size = getimagesize($_FILES['image']['tmp_name']);
+                                
+                                $allowedFormats = array("jpg", "jpeg", "png", "gif");
+                                $maxFileSize = 5000000; // 5MB (in bytes)
+                            
+
+                                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                                    $file = $_FILES['image']['tmp_name'];
+                                    $image_name = $_FILES['image']['name'];
+                                    $image_size = $_FILES['image']['size'];
+                                    $image_type = $_FILES['image']['type'];
+                                
+                                    $allowedFormats = array("image/jpeg", "image/png", "image/gif");
+                                    $maxFileSize = 5000000; // 5MB (in bytes)
+                                
+                                    if (!in_array($image_type, $allowedFormats)) {
+                                        echo '<script language="javascript">';
+                                        echo 'alert("Only JPG, JPEG, PNG, and GIF formats are allowed.")';
+                                        echo '</script>';
+                                    } elseif ($image_size > $maxFileSize) {
+                                        echo '<script language="javascript">';
+                                        echo 'alert("File size is too large. Please choose a smaller image.")';
+                                        echo '</script>';
+                                    } else {
+                                        move_uploaded_file($_FILES["image"]["tmp_name"], "assets/images/users/" . $_FILES["image"]["name"]);
+                                        $location = "assets/images/users/" . $_FILES["image"]["name"];
+                                
+                                        $ins = "UPDATE admin SET image ='$location' where id='$_SESSION[id]'";
+                                        if (mysqli_query ($link, $ins)) {           
+                                            echo "<script>";
+                                            echo "self.location='edit_profile.php?msg=<font color=green>Update Image Success!</font>';";
+                                            echo "</script>";                                       
+                                        } else {
+                                            echo "<script>";
+                                            echo "self.location='edit_profile.php?msg=<font color=red>Not Success!</font>';";
+                                            echo "</script>";
+                                        }
+                                    }
+                                } else {
+                                    echo '<script language="javascript">';
+                                    echo 'alert("Please select an image.")';
+                                    echo '</script>';
+                                }
+                            }
+                            
+                        }
+                        // Update Profile
                         if (isset($_POST['name'])) {
                             if ($_POST['name'] != "") {                                        
                                 
@@ -69,14 +114,14 @@
                                           
                                 if (mysqli_query ($link, $ins)) {
                                     echo "<script>";
-                                    echo "self.location='edit_profile.php?msg=<font color=green>Update Success! Relogin Now</font>';";
-                                    echo "</script>";
+                                    echo "self.location='edit_profile.php?msg=<font color=green>Update Profile Success!</font>';";                                                                        
+                                    echo "</script>";                                    
                                 } else {
                                     echo "<script>";
                                     echo "self.location='edit_profile.php?msg=<font color=red>Not Success!</font>';";
                                     echo "</script>";
                                 }
-
+                                
                             }           
                         }               
                     ?>
@@ -113,7 +158,7 @@
                                     </div>
 
                                     
-                                    <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Save</button>
+                                    <button type="submit" name="save" class="btn btn-primary btn-lg btn-block" onclick="reloadPage()">Save</button>
                                 </form>
                             </div>
                         </div>
@@ -126,10 +171,10 @@
                             <div class="card-body">
 
                                 <div class="form-group">							
-                                        <form method="put" enctype="multipart/form-data">
-                                            <input type="hidden" value="1000000" name="MAX_FILE_SIZE" />
-                                            <input type="file" name="image" class="form-control responsive">
-                                            <button type="submit" name="upload" class="btn btn-primary responsive" ><em class="fa fa-upload"> Upload Image</em></button>																			
+                                        <form method="post" enctype="multipart/form-data">                                            
+                                            <input type="file" name="image" class="form-control responsive" accept="image/*" required>
+                                            <br/>
+                                            <button type="submit" name="upload" class="btn btn-primary responsive" onclick="reloadPage()"><em class="fa fa-upload"> Upload Image</em></button>																			
                                         </form>
 								    </div>
                             </div>
