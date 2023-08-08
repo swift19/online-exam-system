@@ -15,11 +15,8 @@
     <div class="dashboard-main-wrapper">
         
          <div class="dashboard-header">
-            <?php include 'header.php';  ?>
-        </div>
-        
-       <div class="nav-left-sidebar sidebar-dark">
-            <?php include 'left_menu.php'; ?>
+            <?php include 'header2.php';  ?>
+            <?php include 'navigation.php';  ?>
         </div>
         
         <div class="dashboard-wrapper">

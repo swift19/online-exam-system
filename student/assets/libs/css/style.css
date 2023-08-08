@@ -1961,7 +1961,8 @@ Container / Wrapper
 }
 
 .dashboard-content {
-    padding: 30px 30px 60px 30px;
+    /* padding: 30px 30px 60px 30px; */
+    padding: 30px 120px 60px 120px;
 }
 
 
