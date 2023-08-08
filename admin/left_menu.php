@@ -16,6 +16,7 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
+                            <br/>
                             <img src="<?php if ($_SESSION['i']) {
                                     echo $_SESSION['i'];
                             } else { echo $noImage; } ?>" class="img-responsive" width="150px" height="150px" alt="image" class="responsive">									
