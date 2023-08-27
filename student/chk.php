@@ -29,13 +29,13 @@
 			$_SESSION['s']     = $s;			
 				
 			echo "<script>";
-			echo "self.location='dashboard2.php';";
+			echo "self.location='dashboard.php';";
 			echo "</script>";	
 		 }
 	
 	else {
 		echo "<script>";
- 		echo "self.location='index2.php?msg=<font color=red>Email or Password is incorrect.</font>';";
+ 		echo "self.location='index.php?msg=<font color=red>Email or Password is incorrect.</font>';";
 		echo "</script>";		
 	}
 

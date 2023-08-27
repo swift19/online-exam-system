@@ -34,7 +34,7 @@
     <div class="dashboard-main-wrapper">
         
         <div class="dashboard-header">
-            <?php include 'header2.php';  ?>
+            <?php include 'header.php';  ?>
             <?php include 'navigation.php';  ?>
         </div>
         

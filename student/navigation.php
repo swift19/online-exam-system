@@ -12,7 +12,7 @@ $currentpage = $remove;
 // var_dump($page); -- for checking/debugging
 ?>
 <nav class="sub-navbar">
-    <a class="route" href="dashboard2.php">
+    <a class="route" href="dashboard.php">
         <span class="arrow-icon fa fa-solid fa-chevron-left">
             &nbsp;&nbsp;&nbsp;<?php echo $currentpage; ?>
         </span>
