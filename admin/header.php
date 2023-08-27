@@ -14,7 +14,7 @@
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">
                                         <i class="fas fa-regular fa-user mr-2"></i>
-                                        <a href="edit-profile.php" style="color:unset">My Profile</a>
+                                        <a href="edit_profile.php" style="color:unset">My Profile</a>
                                     </h5>
                                     <span class="status"></span><span class="ml-2">Online</span>
                                 </div>

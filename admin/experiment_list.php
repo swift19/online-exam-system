@@ -29,7 +29,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             
-                            <h5 class="card-header">Student List | <a href="student_add.php" style="color:red;">Add New</a></h5>
+                            <h5 class="card-header">Experiment | <a href="experiment_add.php" style="color:red;">Add New</a></h5>
                             <span style="padding-left:20px; padding-top:10px;">
                                 <?php 
                                     if (isset($_GET['msg'])) {
@@ -39,7 +39,7 @@
                                 <?php 
                                     if (isset($_GET['id'])) {
                                         include 'db.php';
-                                        $dlt = "DELETE FROM student WHERE id = '$_GET[id]'";
+                                        $dlt = "DELETE FROM experiment WHERE id = '$_GET[id]'";
                                         mysqli_query ($link, $dlt);
                                         echo "<font color='red'>Delete Success!</font>";
                                     }
@@ -52,12 +52,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Dept.</th>
-                                                <th>Phone No.</th>
-                                                <th>Email</th>
-                                                <th>Password</th>
+                                                <th>Experiment Name</th>
+                                                <th>URL</th>
+                                                
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
@@ -65,17 +62,13 @@
                                             <?php 
                                                 include 'db.php';
                                                 $sl = 0;
-                                                $query = mysqli_query($link, "select * from student where status = '1' and designation  = '$_SESSION[id]' ");
+                                                $query = mysqli_query($link, "select * from experiment where status = '1' and admin_id = '$_SESSION[id]' ");
                                                 while($data = mysqli_fetch_array($query)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo ++$sl; ?></td>
-                                                <td><?php echo $data['studentid']; ?></td>
                                                 <td><?php echo $data['name']; ?></td>
-                                                <td><?php echo $data['dept']; ?></td>
-                                                <td><?php echo $data['phoneno']; ?></td>
-                                                <td><?php echo $data['email']; ?></td>
-                                                <td><?php echo $data['pass']; ?></td>                                                                                                
+                                                <td><?php echo $data['url']; ?></td>
                                                 <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
                                             </tr> 
                                             <?php } ?>                                           

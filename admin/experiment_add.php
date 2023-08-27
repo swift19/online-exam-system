@@ -26,19 +26,15 @@
             if (isset($_POST['save'])) {
                 if ($_POST['name'] != "") {                                        
                     
-                    $studentid = $_POST['studentid'];
                     $name = $_POST['name'];
-                    $dept = $_POST['dept'];
-                    $phoneno = $_POST['phoneno'];
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    $address = $_POST['address'];
-                    $ins = "INSERT INTO student (studentid, name, dept, phoneno, email, pass, address, status,designation) 
-                            VALUES ('$studentid', '$name', '$dept', '$phoneno', '$email', '$password', '$address', '1',     $_SESSION[id]);";    
+                    $url = $_POST['url'];
+                    $subject_id = $_POST['subject_id'];
+                    $admin_id = $_SESSION['id'];
+                    $ins = "INSERT INTO experiment (subject_id, name, url, status, admin_id) VALUES ('$subject_id', '$name', '$url', '1', '$admin_id');";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
-                        echo "self.location='student_list.php?msg=<font color=green>Student Added Success!</font>';";
+                        echo "self.location='experiment_list.php?msg=<font color=green>Experiment Added Success!</font>';";
                         echo "</script>";
                     }
 
@@ -53,25 +49,27 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                         <div class="card">
                             
-                            <h5 class="card-header">Add New Student </h5>
+                            <h5 class="card-header">Add New Experiment </h5>
                                 
                             <div class="card-body">
                                 <form action="#" method="post">
                                     <div class="form-group">
 
-                                        <input name="studentid" class="form-control form-control-lg" type="text" placeholder="Student ID" autocomplete="off" required>
+                                        <select name="subject_id" class="form-control" required>
+                                            <option value="" selected disabled>Select Subject</option>
+                                            <?php 
+                                                include 'db.php';
+                                                $query = mysqli_query($link, "select * from subject where status = '1'");
+                                                while($data = mysqli_fetch_array($query)) {
+                                                    echo "<option value='$data[id]'>$data[name]</option>";
+                                                }
+                                            ?>
+                                            
+                                        </select>
                                         <br>
-                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Student Name" autocomplete="off" required>
+                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Experiment Name" autocomplete="off" required>
                                         <br>
-                                        <input name="dept" class="form-control form-control-lg" type="text" placeholder="Dept." autocomplete="off" required>
-                                        <br>
-                                        <input name="phoneno" class="form-control form-control-lg" type="text" placeholder="Phone No." autocomplete="off" required>
-                                        <br>
-                                        <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" autocomplete="off" required>
-                                        <br>
-                                        <input name="password" class="form-control form-control-lg" type="text" placeholder="Login Password" autocomplete="off" required>
-                                        <br>
-                                        <input name="address" class="form-control form-control-lg" type="text" placeholder="Address" autocomplete="off" required>
+                                        <input name="url" class="form-control form-control-lg" type="text" placeholder="URL" autocomplete="off" required>
                                         
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>

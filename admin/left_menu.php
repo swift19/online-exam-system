@@ -36,6 +36,9 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                                 <a class="nav-link <?php if($page == "subject_list.php"){ echo "active"; } ?>" href="subject_list.php"><i class="fab fa-fw fa-wpforms"></i>Subject List </a>
                             </li>
                             <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "edit_profile.php"){ echo "active"; } ?>" href="experiment_list.php"><i class="fab fa-fw fa-wpforms"></i>Experiment List</a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "exam_list.php"){ echo "active"; } ?>" href="exam_list.php"><i class="fab fa-fw fa-wpforms"></i>Exam List</a>
                             </li>
                             <li class="nav-item ">

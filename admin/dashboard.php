@@ -46,7 +46,7 @@
                                                 <?php 
                                                     include 'db.php';
                                                     $sl = 0;
-                                                    $query = mysqli_query($link, "select * from student where status = '1'");
+                                                    $query = mysqli_query($link, "select * from student where status = '1' and designation  = '$_SESSION[id]'");
                                                     while($data = mysqli_fetch_array($query)) {
                                                         $sl = $sl+1;
                                                     }
@@ -142,7 +142,7 @@
                                                     <?php 
                                                         include 'db.php';
                                                         $sl = 0;
-                                                        $query = mysqli_query($link, "select * from student where status = '1' order by id desc limit 10");
+                                                        $query = mysqli_query($link, "select * from student where designation  = '$_SESSION[id]' and status = '1' order by id desc limit 10");
                                                         while($data = mysqli_fetch_array($query)) {
                                                     ?>
                                                     <tr>
