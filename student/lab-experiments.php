@@ -22,28 +22,20 @@
             console.log("Selected Experiment Type:", selectedExperimentType);
             console.log("Selected Experiment:", selectedExperiment);
 
-            // Get the canvas element
-            var noSelection = document.getElementById('noSelection');
-            var densityCanvas = document.getElementById('myDensityCanvas');
-            var volcanoCanvas = document.getElementById('myVolcanoCanvas');
-            
-            // Check the selectedExperiment value and show/hide the canvas accordingly
-            if (selectedExperiment === "density") {
-                densityCanvas.style.display = "block"; // Show density 
-                volcanoCanvas.style.display = "none"; // Hide density 
-                noSelection.style.display = "none"; // Hide no selection
-            } else if (selectedExperiment === "volcano") {
-                densityCanvas.style.display = "none"; // Hide density
-                volcanoCanvas.style.display = "block"; // Show density 
-                noSelection.style.display = "none"; // Hide no selection         
-            } else {
-                densityCanvas.style.display = "none"; // Hide density 
-                volcanoCanvas.style.display = "none"; // Hide volcano 
-                noSelection.style.display = "block"; // Show no selection 
-            }
-
-          
-
+            // Make an AJAX request to fetch the iframe content based on the selected values
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "process_selection.php?experimentType=" + selectedExperimentType + "&experiment=" + selectedExperiment, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var iframeContent = xhr.responseText;
+                    console.log("iframe url:" ,iframeContent )
+                    var iframe = document.getElementById("experiment-iframe");
+                    iframe.src = iframe.src; // Refresh the iframe's content
+                    document.getElementById("withIFrame").style.display = "block"; // Show the container
+                    document.getElementById("noSelection").style.display = "none"; // Hide the container
+                }
+            };
+            xhr.send();
         }
     </script>
     <div class="dashboard-main-wrapper">
@@ -61,18 +53,21 @@
                 <div class="row">
                         <div class="form-group select">
                             <label for="subject-filter">Select your type of experiment:</label>
-                            <select class="form-control" id="subject-filter">
-                                <option value="biology">Biology</option>
-                                <option value="physics">Physics</option>
-                                <option value="chemistry">Chemistry</option>
+                            <select name="subject_id" class="form-control" id="subject-filter">
+                                <option value="" selected disabled>Select category</option>
+                                    <?php 
+                                        include 'db.php';
+                                        $query = mysqli_query($link, "select * from subject where status = '1'");
+                                        while($data = mysqli_fetch_array($query)) {
+                                            echo "<option value='$data[id]'>$data[name]</option>";
+                                        }
+                                    ?>                                            
                             </select>
                         </div>
 
                         <div class="form-group select">
-                            <select class="form-control" id="experiment-filter">
-                                <option value="volcano">Volcano Eruption</option>
-                                <option value="disect">Dissect a Frog</option>
-                                <option value="density">Density</option>
+                            <select name="experiment_id" class="form-control" id="experiment-filter">
+                                <option value="" selected disabled>Select an experiment</option>
                             </select>
                         </div>
                         <button class="start-button" onclick="handleStartButtonClick()" id="resizeIframe">Start</button>
@@ -85,19 +80,42 @@
                 not selected
             </div>
 
-            <div class="canvas-container" id="myDensityCanvas" style="display: none;">            
-                <iframe src="./experiment/iframe1.php" ></iframe>
+            <div class="canvas-container" id="withIFrame" style="display: none;">                
+                <iframe id="experiment-iframe" src="./experiment/iframe1.php" ></iframe>
             </div>
 
-            <div class="canvas-container" id="myVolcanoCanvas" style="display: none;">            
-                <iframe src="./experiment/volcano/index.html" ></iframe>
-            </div>
-           
         </div>
        
 
     </div>
     <?php include 'footer_file.php'; ?>
+
+    <script>
+        // Listen for the change event on the first dropdown
+        document.getElementById("subject-filter").addEventListener("change", function() {
+            var selectedSubjectId = this.value; // Get the selected value
+            
+            // Make an AJAX request to fetch experiments based on selected subject
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "get_experiments.php?subject_id=" + selectedSubjectId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var experiments = JSON.parse(xhr.responseText);
+                    var experimentDropdown = document.getElementById("experiment-filter");
+                    experimentDropdown.innerHTML = ""; // Clear existing options
+                    
+                    // Populate the second dropdown with fetched experiments
+                    experiments.forEach(function(experiment) {
+                        var option = document.createElement("option");
+                        option.value = experiment.id;
+                        option.textContent = experiment.name;
+                        experimentDropdown.appendChild(option);
+                    });
+                }
+            };
+            xhr.send();
+        });
+    </script>
 </body>
  
 </html>

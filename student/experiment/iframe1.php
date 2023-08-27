@@ -1,20 +1,13 @@
 <?php 
     session_start(); 
     if ($_SESSION['p'] != "") {
+      if (isset($_SESSION['url'])) {
+        $experimentUrl = $_SESSION['url'];
 ?>
 <!doctype html>
 <html lang="en">
 <head>
 <style>
-    .responsive-iframe {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
     .preloader {
       background: #191f26 url(preloader.gif) no-repeat center center;
       background-size: 50%;
@@ -54,8 +47,7 @@
 
 <div class="iframe-container">
     <div class="preloader"></div>
-    <iframe class="responsive-iframe" 
-      src="https://phet.colorado.edu/sims/html/density/latest/density_en.html">
+    <iframe class="responsive-iframe" src="<?php echo $experimentUrl; ?>">
     </iframe>
 </div>
 
@@ -72,6 +64,7 @@
 </body>
 </html>
 <?php 
+  }
 } else {
     echo "<script>";
     echo "self.location='index.php?msg=<font color=red>Please Login First.</font>';";
