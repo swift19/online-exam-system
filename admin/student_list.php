@@ -48,35 +48,47 @@
                                 
                             <div class="card-body">
                                 <div class="table-responsive">
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <a href="" style="color:red; padding-left:20px;" id="assignAllButton">Unassign All</a>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 25px;">
+                                                <input type="text" id="searchBox" placeholder="Search...">
+                                                <button id="searchButton" class="btn btn-primary btn-xs ml-2">Search</button>
+                                            </div>
+                                        </div>         
                                     <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>ID</th>
-                                                <th>Name</th>
+                                                <th><input type="checkbox" id="selectAll"></th>
+                                                <th>Student ID</th>
+                                                <th>Full Name</th>
                                                 <th>Dept.</th>
                                                 <th>Phone No.</th>
                                                 <th>Email</th>
-                                                <th>Password</th>
-                                                <th>Delete</th>
+                                                <th>Address</th>
+                                                <th>&nbsp;</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBody">
                                             <?php 
-                                                include 'db.php';
-                                                $sl = 0;
+                                                include 'db.php';                                                
                                                 $query = mysqli_query($link, "select * from student where status = '1' and designation  = '$_SESSION[id]' ");
                                                 while($data = mysqli_fetch_array($query)) {
                                             ?>
                                             <tr>
-                                                <td><?php echo ++$sl; ?></td>
+                                            <td><input type="checkbox" class="checkBox" style="padding-left: 10px;" value="<?php echo $data['id']; ?>"></td>
                                                 <td><?php echo $data['studentid']; ?></td>
                                                 <td><?php echo $data['name']; ?></td>
                                                 <td><?php echo $data['dept']; ?></td>
                                                 <td><?php echo $data['phoneno']; ?></td>
                                                 <td><?php echo $data['email']; ?></td>
-                                                <td><?php echo $data['pass']; ?></td>                                                                                                
-                                                <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
+                                                <td><?php echo $data['address']; ?></td>                                                                                                
+                                                <td>
+                                                    <a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a> 
+                                                    &nbsp;/&nbsp; 
+                                                    <a class="assignButton" href="#" data-studentid="<?php echo $data['id']; ?>" onclick="unassignStudent(this); return false;">Unassign</a>
+                                                </td>
                                             </tr> 
                                             <?php } ?>                                           
                                         </tbody>
@@ -115,6 +127,71 @@
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
+    <script>
+            document.getElementById("searchButton").addEventListener("click", function() {
+                var searchValue = document.getElementById("searchBox").value;
+                var sessionId = <?php echo json_encode($_SESSION['id']); ?>;
+                updateTable(searchValue, sessionId);
+            });
+
+            document.getElementById("selectAll").addEventListener("click", function() {
+                var checkboxes = document.getElementsByClassName("checkBox");
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = this.checked;
+                }
+            });
+
+            document.getElementById("assignAllButton").addEventListener("click", function() {
+                var selectedCheckboxes = document.querySelectorAll('.checkBox:checked');
+                var sessionId = 0;
+                
+                selectedCheckboxes.forEach(function(checkbox) {
+                    var studentId = checkbox.value;
+                    studentDesignation(studentId, sessionId);
+                });
+            });
+
+            function unassignStudent(linkElement) {
+                var studentId = linkElement.getAttribute("data-studentid");  
+                var sessionId = 0;
+                
+                studentDesignation(studentId , sessionId);
+            }
+
+            function studentDesignation(studentId, sessionId) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "update_designation.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            console.log(xhr.responseText);
+                            location.reload();
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+                    }
+                };
+                
+                var data = "studentId=" + encodeURIComponent(studentId) + "&sessionId=" + encodeURIComponent(sessionId);
+                xhr.send(data);
+            }
+
+            function updateTable(searchValue,sessionId) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "search.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById("tableBody").innerHTML = xhr.responseText;
+                    }
+                };
+                var data = "searchValue=" + encodeURIComponent(searchValue)  + "&sessionId=" + encodeURIComponent(sessionId);
+                xhr.send(data);
+            }
+        </script>
+
 </body>
  
 </html>

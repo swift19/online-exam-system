@@ -4508,6 +4508,7 @@ Pills vertical
     vertical-align: middle;
     border-top: 1px solid #e6e6f2;
     font-weight: normal;
+    padding-left: 20px;
 }
 
 .table thead th {
@@ -6976,7 +6977,10 @@ Media Query
     padding: 17px 29px;}
 }
 
-
+.align-right{
+    text-align: right;
+    margin-top: -20px;
+}
 
 
 /* Custom, iPhone Retina */
