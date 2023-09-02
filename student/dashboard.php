@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                        <form action="play-a-quiz.php" method="get" class="dashboard-alignment">
+                        <form action="quiz-list.php" method="get" class="dashboard-alignment">
                             <button type="submit" class="dashboard-button center">
                             <img src="./assets/images/play-a-quiz.png" alt="Quiz Icon" class="dash-icon">
                             Play a quiz
@@ -38,7 +38,7 @@
                             </button>
                         </form>
 
-                        <form action="#" method="get" class="dashboard-alignment">
+                        <form action="learn-more.php" method="get" class="dashboard-alignment">
                             <button type="submit" class="dashboard-button center">
                             <img src="./assets/images/want-to-know-more.png" alt="Want to Know More Icon" class="dash-icon">
                             I want to know more

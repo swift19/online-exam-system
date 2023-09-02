@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Let's take a Quiz</h2>
+                                <h2 class="pageheader-title">Discover the Depths of Knowledge</h2>
                             </div>
                         </div>
                     </div>
@@ -61,12 +61,12 @@
 
                                     <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
                                         
-                                        <h4>Exam Name : <?php echo $data2['name']; ?></h4>
+                                        <h4>Subject Name : <?php echo $data2['name']; ?></h4>
 
-                                        <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
-                                        
-                                        <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
-                                    
+                                        <a href="video_class.php?exam_id=<?php echo $data2['id']; ?>" target="_blank" style="color:#ff0000;">Video Class</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+
+                                        <a href="pdf_file.php?exam_id=<?php echo $data2['id']; ?>" target="_blank" style="color:#ff0000;">PDF File</a> &nbsp;&nbsp;&nbsp;
+
                                     </div>
                                     <?php } ?>
 
