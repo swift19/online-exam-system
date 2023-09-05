@@ -19,7 +19,7 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                             <br/>
                             <img src="<?php if ($_SESSION['i']) {
                                     echo $_SESSION['i'];
-                            } else { echo $noImage; } ?>" class="img-responsive" width="150px" height="150px" alt="image" class="responsive">									
+                            } else { echo $noImage; } ?>" class="img-responsive desktop-image" width="125px" height="125px" alt="image" class="responsive">									
     
                             <li class="nav-divider">Menu</li>
                             
@@ -50,7 +50,9 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "edit_profile.php"){ echo "active"; } ?>" href="edit_profile.php"><i class="fab fa-fw fa-wpforms"></i>My Profile</a>
                             </li>
-
+                            <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "logout.php"){ echo "active"; } ?>" href="logout.php"><i class="fab fa-fw fas fa-power-off"></i>Logout</a>
+                            </li>
                             
                         </ul>
                     </div>
