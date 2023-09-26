@@ -72,12 +72,12 @@
             <input type="number" id="studentid" name="studentid" placeholder="Enter your Student ID" class="rounded-input" required>
           </div>
           <div class="form-row">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your Email" class="rounded-input" required>
+            <label for="email">Email: (Gmail account only)</label>
+            <input type="email" id="email" name="email" placeholder="Enter your Email Address" class="rounded-input" required>
           </div>
           <div class="form-row">
             <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter your Address" class="rounded-input" required>
+            <input type="text" id="address" name="address" placeholder="Enter your Full Address" class="rounded-input" required>
           </div>
           <div class="form-row">
             <label for="password">Password:</label>
