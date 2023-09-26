@@ -39,6 +39,10 @@ body {
   /* background-color: #ffffff;  Add your desired background color */
 }
 
+.logos-xs-container{
+  display: none;
+}
+
 .logos-container img {
   /* width: 100px;  Adjust the logo size as needed */
   margin-bottom: 20px;
@@ -119,7 +123,6 @@ button {
   text-decoration: underline;
 }
 
-/* Updated to position the welcome header in the top left corner */
 .welcome-header {
   margin-bottom: 20px;
   position: absolute;
@@ -361,11 +364,6 @@ label {
   padding: 20px;
 }
 
-@media (max-width: 767px) {
-  .card-ep {
-      padding: 10px;
-  }
-}
 
 .avatar-ep {
   text-align: center;
@@ -406,4 +404,44 @@ form {
  
 .button-submit:hover {
   background-color: #0056b3; 
+}
+
+/* ================= Landing Page ================= */
+.landing-form {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 40px;
+}
+
+
+/* ================= Mobile View  ================= */
+@media (max-width: 767px) {
+  /* Add your mobile-specific CSS here */
+  .welcome-header {
+    position: static; 
+    margin-bottom: 10px;
+    font-size: 32px;
+  }
+  .form-row {
+    margin-right: unset
+  }
+  .registration-form {
+    display: unset;
+  }
+  .card-ep {
+    padding: 10px;
+  }
+  .login-container{
+    display: unset;
+  }
+  .logos-container {
+    display: none;
+  }
+  .logos-xs-container{
+    display: block;
+    background: linear-gradient(180deg, #2D46B9 0%, #1E3163 100%);
+  }
 }

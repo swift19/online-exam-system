@@ -11,6 +11,10 @@
     <!-- login page  -->
     <!-- ============================================================== -->
   <div class="login-container">
+    <div class="logos-xs-container">
+      <img src="./assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+    </div>
+    
     <div class="logos-container">
       <!-- logo header -->
       <div class="logo-fixed">

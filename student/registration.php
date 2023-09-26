@@ -8,10 +8,13 @@
 </head>
 <body>
   <div class="login-container">
+    <div class="logos-xs-container">
+      <img src="./assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+    </div>
     <div class="logos-container">
       <!-- logo header -->
       <div class="logo-fixed">
-        <img src="./assets/images/stemulate.png" width="120" height="120" alt="stemulate" class="img-rounded">
+        <img src="./assets/images/stemulate.png" width="120" height="120" alt="stemulate">
       </div>
     </div>
     <div class="registration-form">

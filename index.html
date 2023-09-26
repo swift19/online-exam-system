@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Welcome</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stemulate</title>
+  <link rel="stylesheet" href="student/assets/libs/css/main.css">
 </head>
 <body>
+  <div class="login-container">
+	<div class="logos-xs-container">
+		<img src="student/assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+	</div>
 
-	<center>
-		<br><br><br><br>
-		<a href="admin/">Admin Login</a>
-		<br><br>
-		<a href="student/">Student Login</a>
-	</center>
+    <div class="logos-container">
+      <div class="logo-fixed">
+        <img src="student/assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+      </div>
+      
+      <img src="student/assets/images/stemulate-home.png" width=80 height=250 alt="stemulate-home" class="img-testube">
+    </div>
+    <div class="landing-form">
+      <p class="welcome-header">Welcome!</p>
+      
+      <p class="sub-content">Who are you?</p>
 
+	  <div class="row">
+		<a href="admin/">
+			<img src="student/assets/images/frame-admin.png" alt="stemulate-home">
+		</a>
+		<a href="student/">
+			<img src="student/assets/images/frame-student.png" alt="stemulate-home">
+		</a>
+	  </div>
+	  
+    </div>
+  </div>
+
+    <script src="/student/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/student/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>

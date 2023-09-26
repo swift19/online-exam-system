@@ -45,13 +45,16 @@ if($_GET['secret'])
     <!-- reset password page  -->
     <!-- ============================================================== -->
   <div class="login-container">
+    <div class="logos-xs-container">
+      <img src="./assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+    </div>
     <div class="logos-container">
       <!-- logo header -->
       <div class="logo-fixed">
-        <img src="./assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate" class="img-rounded">
+        <img src="./assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
       </div>
       
-      <img src="./assets/images/stemulate-home.png" width=80 height=250 alt="stemulate-home" class="img-rounded">
+      <img src="./assets/images/stemulate-home.png" width=80 height=250 alt="stemulate-home">
     </div>
     <div class="login-form">
       <p class="welcome-header">Reset Password</p>
