@@ -118,6 +118,12 @@ button {
   margin-top: 20px;
 }
 
+.content {
+  font-size: 24px;
+  color: #333333;
+  font-family: Poppins;
+}
+
 .sub-content a {
   color: #f037a5;
   text-decoration: underline;
@@ -126,7 +132,7 @@ button {
 .welcome-header {
   margin-bottom: 20px;
   position: absolute;
-  top: 20px;
+  top: 40px;
   left: 40px;
   color: var(--blue, #2D46B9);
   font-size: 40px;
@@ -413,9 +419,46 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 40px;
+  /* padding-left: 40px; */
+  padding: 0px 40px 0px 40px
 }
 
+.top20{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80% !important;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 /* ================= Mobile View  ================= */
 @media (max-width: 767px) {
@@ -444,5 +487,17 @@ form {
   .logos-xs-container{
     display: block;
     background: linear-gradient(180deg, #2D46B9 0%, #1E3163 100%);
+  }
+  .landing-form{
+    align-items: center;
+  }
+  .top20{
+    position: unset;
+  }
+  .modal-content {
+    width: 100% !important;
+  }
+  .content {
+    font-size: 18px;
   }
 }
