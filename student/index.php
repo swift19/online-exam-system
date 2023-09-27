@@ -43,7 +43,7 @@
         <button type="submit" class="primary-button">Login</button>
         <a href="registration.php" class="secondary-button">Create New Account</a>
       </form>
-      <p class="sub-content">Forgot your password? <a href="forgot-password.php">Click here</a></p>
+      <p class="sub-content"><a href="../">Go back</a> | Forgot your password? <a href="forgot-password.php">Click here</a>  </p>
     </div>
   </div>
 

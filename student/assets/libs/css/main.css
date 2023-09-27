@@ -424,6 +424,7 @@ form {
     position: static; 
     margin-bottom: 10px;
     font-size: 32px;
+    text-align: center;
   }
   .form-row {
     margin-right: unset
