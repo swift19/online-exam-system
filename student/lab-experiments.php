@@ -50,10 +50,10 @@
             <div class="experiment-container">
           
             <div class="col-md-12">
-                <div class="row">
+                <div class="row draft">
                         <div class="form-group select">
                             <label for="subject-filter">Select your type of experiment:</label>
-                            <select name="subject_id" class="form-control" id="subject-filter">
+                            <select name="subject_id" class="form-control lab" id="subject-filter">
                                 <option value="" selected disabled>Select category</option>
                                     <?php 
                                         include 'db.php';
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group select">
-                            <select name="experiment_id" class="form-control" id="experiment-filter">
+                            <select name="experiment_id" class="form-control lab" id="experiment-filter">
                                 <option value="" selected disabled>Select an experiment</option>
                             </select>
                         </div>

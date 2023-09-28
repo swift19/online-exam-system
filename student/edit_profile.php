@@ -168,7 +168,7 @@
                     <div class="card-ep">
                             <div class="card">
                                 <div class="card-header">
-                                <div class="row">
+                                <div class="row goback">
                                     <div class="col-md-6">
                                         <h5>My Profile</h5>
                                     </div>

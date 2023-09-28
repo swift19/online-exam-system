@@ -54,7 +54,7 @@
                                                 <th>#</th>
                                                 <th>Experiment Name</th>
                                                 <th>URL</th>
-                                                
+                                                <th>Add Question</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
@@ -69,6 +69,7 @@
                                                 <td><?php echo ++$sl; ?></td>
                                                 <td><?php echo $data['name']; ?></td>
                                                 <td><?php echo $data['url']; ?></td>
+                                                <td><a href="question_experiment_add.php?id=<?php echo $data['id']; ?>">Add Question</a></td>
                                                 <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
                                             </tr> 
                                             <?php } ?>                                           

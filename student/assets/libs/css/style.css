@@ -249,6 +249,9 @@ label {
     margin-bottom: 5px;
     font-size: 15px;
     color: #71748d;
+    @media (max-width: 767px) {
+        font-size: 12px;
+    }
 }
 
 .form-control {
@@ -304,6 +307,16 @@ select.form-control {
     color: #F037A5;
     font-family: Poppins;
     width: 250px;
+}
+
+.lab{
+    width: 250px;
+}
+
+@media (max-width: 767px) {
+    .lab{
+        width: 125px !important;
+    }
 }
 
 textarea.form-control {
@@ -1248,6 +1261,9 @@ Top Header
     text-transform: uppercase;
     font-weight: 700;
     color: #007bff;
+    @media (max-width: 767px) {
+        padding: unset;
+    }
 }
 .navbar-brand:hover{
     color: #007bff;
@@ -2011,6 +2027,9 @@ Pageheader
 
 .page-header {
     margin: 20px;
+    @media (max-width: 767px) {
+        margin: unset;
+    }
 }
 
 .page-breadcrumb {}
@@ -2058,6 +2077,9 @@ Pageheader
     font-size: 40px;
     margin-bottom: 8px;
     font-weight: 600;
+    @media (max-width: 767px) {
+        font-size: 24px;
+    }
 }
 
 .pageheader-text {

@@ -500,4 +500,53 @@ form {
   .content {
     font-size: 18px;
   }
+  .navbar-toggler{
+    display: none;
+  }
+  .dashboard-button {
+    width: 350px;
+    height: 60px;
+  }
+  .dashboard-alignment {
+    padding: unset;
+    margin-top: 40px;
+  }
+  .dashboard-button .dash-icon {
+    margin: 5px;
+  }
+  .arrow-icon {
+    padding-right: 5px;
+  }
+  .route {
+    padding: 20px;
+    font-size: 18px;
+  }
+  .experiment {
+    padding: unset;
+  }
+  .start-button {
+    top: 50px;
+    right: 10px;
+    height: 35px;
+  }
+  .experiment-container {
+    padding: 5px;
+  }
+  .draft{
+    margin-left: unset;
+  }
+  .form-control-ep {
+    width: 100%;
+  }
+  .goback{
+    flex-wrap: unset;
+  }
+}
+
+/* ================= Mobile View (Landscape) ================= */
+@media screen and (orientation: landscape) {
+  .start-button {
+    top: unset;
+    width: 150px;
+  }
 }

@@ -47,9 +47,9 @@
                                                 <th>Semester</th>
                                                 <th>Subject</th>
                                                 <th>Exam Name</th>
-                                                <th>Total Mark</th>
-                                                <th>Your Mark</th>
-                                                <th>Merit Position</th>
+                                                <!-- <th>Total Mark</th> -->
+                                                <th>Your Score</th>
+                                                <!-- <th>Merit Position</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,10 +87,10 @@
                                                         }
                                                     ?>
                                                 </td>
-                                                <td><?php echo $data['total_mark']; ?></td>
+                                                <!-- <td><?php echo $data['total_mark']; ?></td> -->
                                                 <td><?php echo $data['your_mark']; ?></td>
                                                 
-                                                <td>
+                                                <!-- <td>
 
                                                     <?php 
                                                         $mp = 1;
@@ -105,7 +105,7 @@
 
                                                     ?>
 
-                                                </td>
+                                                </td> -->
                                             </tr> 
                                             <?php } ?>                                           
                                         </tbody>
