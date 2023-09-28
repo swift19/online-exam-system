@@ -98,7 +98,12 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
-                                    <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Upload Confirm</button>
+                                    <button type="submit" name="save" class="btn btn-primary btn-lg btn-block" 
+                                    <?php 
+                                    include 'db.php';
+                                    $query = mysqli_query($link, "select * from question where exam_id = '$_GET[exam_id]'");
+                                    echo (mysqli_num_rows($query) >= $_GET['q']) ? 'disabled' : ''; ?>
+                                    >Upload Confirm</button>
                                 </div>
                             </form>
                             

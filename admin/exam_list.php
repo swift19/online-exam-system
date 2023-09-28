@@ -94,7 +94,7 @@
                                                 <td><?php echo $data['question_mark']; ?></td>
                                                 <td><?php echo $data['total_mark']; ?></td>
                                                 <td><?php echo $data['total_question']; ?></td>
-                                                <td><a href="question_add.php?exam_id=<?php echo $data['id']; ?>">Add Question</a></td>
+                                                <td><a href="question_add.php?exam_id=<?php echo $data['id']; ?>&q=<?php echo $data['total_question']; ?>">Add Question</a></td>
                                                 <!-- <td><a href="download.php?exam_id=<?php echo $data['id']; ?>" target="_blank">Download</a></td> -->
                                                 
                                                 <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
