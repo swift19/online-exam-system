@@ -10,8 +10,8 @@
 			$_SESSION['u'] = $data['username'];
 			$_SESSION['n'] = $data['name'];
 			$_SESSION['m'] = $data['mobile'];
-			$_SESSION['p'] = $data['email'];
-			$_SESSION['e'] = $data['pass'];
+			$_SESSION['e'] = $data['email'];
+			$_SESSION['p'] = $data['pass'];
 			$_SESSION['s'] = $data['status'];
 			$_SESSION['i'] = $data['image'];
         }
