@@ -254,6 +254,17 @@ button {
   overflow: hidden;
 }
 
+.centered {
+  /* display: flex; */
+  display: inline-grid;
+  justify-content: center; /* Horizontally center */
+  align-items: center;     /* Vertically center */
+}
+
+.noSelected-img{
+  padding-top: 100px;
+}
+
 iframe {
   position: absolute;
   top: 0;
@@ -540,6 +551,14 @@ form {
   }
   .goback{
     flex-wrap: unset;
+  }
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .noSelected-img{
+    padding-top:unset;
+    justify-self: center;
+    width: 50%;
   }
 }
 

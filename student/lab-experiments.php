@@ -76,8 +76,10 @@
             </div>
         </div>
 
-            <div class="canvas-container"  id="noSelection" >            
-                not selected
+            <div class="canvas-container centered"  id="noSelection" >            
+                
+                <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img">
+                <span class="noSelected-label">You have no selected experiment yet</span>
             </div>
 
             <div class="canvas-container" id="withIFrame" style="display: none;">                
