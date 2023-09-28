@@ -242,6 +242,9 @@ button {
 .fa-chevron-left:before {
   font-size: 20px;
 }
+.mobile{
+  display: none;
+}
 
 /* ================= LAB Experiment ================= */
 .canvas-container {
@@ -559,6 +562,9 @@ form {
     padding-top:unset;
     justify-self: center;
     width: 50%;
+  }
+  .mobile{
+    display: block;
   }
 }
 

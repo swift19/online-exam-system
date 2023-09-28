@@ -25,7 +25,7 @@
                     </ul>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 mobile">
                         <ul class="navbar-nav ml-auto navbar-right-top">
                             <li class="nav-item dropdown nav-user">
                                 <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink" 
