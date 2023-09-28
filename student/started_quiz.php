@@ -72,7 +72,10 @@
 
                                             $et = $duration;
                                             $et = $et*60;
-                                            echo "<i style='color:white !important'>Time Remining : </i><span style='border:1px white solid; padding:3px;'><span id='display1' style='color:white;'></span></span><br>";
+                                            if (!isset($_POST['time_up'])) {
+                                                // Display time remaining only if the exam is not completed
+                                                echo "<i style='color:white !important'>Time Remaining: </i><span style='border:1px white solid; padding:3px;'><span id='display1' style='color:white;'></span></span><br>";
+                                            }
                                             echo "<span id='submitted'></span>";
                                         ?>
                                         <script>
@@ -89,7 +92,7 @@
                                                             if (timer > 0) {
                                                                --timer;
                                                             }else{
-                                                       clearInterval(interVal)
+                                                                clearInterval(interVal)
                                                                 SubmitFunction();
                                                              }
 
@@ -173,7 +176,7 @@
                                                 C. <?= $data3['op3'] ?><br><br>
                                                 D. <?= $data3['op4'] ?><br><br>                                              
                                                 <input type="hidden" name="result_id" value="<?= $data2['id'] ?>">
-                                                <select name="user_ans" required>
+                                                <select name="user_ans" class="form-control" required>
                                                     <option value="" selected disabled>Ans.</option>
                                                     <option value="a">A</option>
                                                     <option value="b">B</option>
@@ -181,7 +184,7 @@
                                                     <option value="d">D</option>
                                                 </select>
                                                 <br><br>
-                                                <input type="submit" name="submit_next" value="&nbsp;&nbsp;&nbsp;Next Question&nbsp;&nbsp;&nbsp;">
+                                                <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit_next" value="&nbsp;&nbsp;&nbsp;Next Question&nbsp;&nbsp;&nbsp;">
                                             </form>
                                         <?php } } ?>
 
