@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Frog Dissection</title>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="tools">
+            <img class="tool" src="tool1.png" alt="Tool 1">
+            <img class="tool" src="tool2.png" alt="Tool 2">
+            <img class="tool" src="tool3.png" alt="Tool 3">
+            <!-- Add more tools as needed -->
+        </div>
+        <div id="frogContainer">
+			<span class="title">FROG</span>
+            <img id="frogIinitial" src="frog_initial.png" alt="FrogTray">
+            <div id="overlay">
+                <img id="overlayImage" src="overlay_image.png" alt="Overlay" class="position">
+            </div>
+			<div id="header">
+				<button id="startButton" class="primary-button">Begin Dissecting</button>
+				<button id="cutToPieces" class="primary-button">Cut into pieces</button>
+			</div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
