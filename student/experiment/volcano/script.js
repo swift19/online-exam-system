@@ -21,6 +21,8 @@ let sprite4Y = 260;
 const volcanoImage = new Image();
 volcanoImage.src = "volcano-image.png";
 volcanoImage.onload = function() {
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
     animate(); // Start the animation after the image loads
 };
 
@@ -160,11 +162,11 @@ class Particle {
 
 function drawVolcano() {
     // Adjust the size of the volcano image by specifying the height and width
-	const imageWidth = 900;
-    const imageHeight = 320;
+	const imageWidth = canvas.width;
+    const imageHeight = canvas.height / 2;
 	 // Adjust the position of the volcano image by specifying the x and y coordinates
-    const volcanoX = 0;
-    const volcanoY = 280;
+     const volcanoX = 0;
+     const volcanoY = canvas.height - imageHeight;
     // ctx.drawImage(volcanoImage, volcanoX, volcanoY, canvas.width - volcanoX * 2, canvas.height + 300);
 	ctx.drawImage(volcanoImage, volcanoX, volcanoY, imageWidth, imageHeight);
 	
@@ -261,5 +263,89 @@ function addChemicals(spriteX, spriteY, particlesArray) {
 }
 
 // Optional: Adjust the size of the canvas and image
-canvas.width = 800;
-canvas.height = 600;
+// canvas.width = 800;
+// canvas.height = 600;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Add touch event listeners to the canvas to detect touches on the sprites
+canvas.addEventListener("touchstart", function(event) {
+    event.preventDefault(); // Prevent default behavior to avoid scrolling or zooming on touch devices
+    const rect = canvas.getBoundingClientRect();
+    const touchX = event.touches[0].clientX - rect.left;
+    const touchY = event.touches[0].clientY - rect.top;
+
+    // Check if sprite 1 is touched
+    if (touchX >= sprite1X && touchX <= sprite1X + 50 && touchY >= sprite1Y && touchY <= sprite1Y + 50) {
+        isDraggingSprite1 = true;
+    }
+
+    // Check if sprite 2 is touched
+    if (touchX >= sprite2X && touchX <= sprite2X + 50 && touchY >= sprite2Y && touchY <= sprite2Y + 50) {
+        isDraggingSprite2 = true;
+    }
+
+    // Check if sprite 3 is touched
+    if (touchX >= sprite3X && touchX <= sprite3X + 50 && touchY >= sprite3Y && touchY <= sprite3Y + 50) {
+        isDraggingSprite3 = true;
+    }
+
+    // Check if sprite 4 is touched
+    if (touchX >= sprite4X && touchX <= sprite4X + 50 && touchY >= sprite4Y && touchY <= sprite4Y + 50) {
+        isDraggingSprite4 = true;
+    }
+});
+
+canvas.addEventListener("touchmove", function(event) {
+    event.preventDefault(); // Prevent default behavior to avoid scrolling or zooming on touch devices
+    const rect = canvas.getBoundingClientRect();
+    const touchX = event.touches[0].clientX - rect.left;
+    const touchY = event.touches[0].clientY - rect.top;
+
+    // Update the position of sprite 1 as the user moves the touch
+    if (isDraggingSprite1) {
+        sprite1X = touchX - 25; // Adjust the position offset
+        sprite1Y = touchY - 25; // Adjust the position offset
+    }
+
+    // Update the position of sprite 2 as the user moves the touch
+    if (isDraggingSprite2) {
+        sprite2X = touchX - 25; // Adjust the position offset
+        sprite2Y = touchY - 25; // Adjust the position offset
+    }
+
+    // Update the position of sprite 3 as the user moves the touch
+    if (isDraggingSprite3) {
+        sprite3X = touchX - 25; // Adjust the position offset
+        sprite3Y = touchY - 25; // Adjust the position offset
+    }
+
+    // Update the position of sprite 4 as the user moves the touch
+    if (isDraggingSprite4) {
+        sprite4X = touchX - 25; // Adjust the position offset
+        sprite4Y = touchY - 25; // Adjust the position offset
+    }
+});
+
+canvas.addEventListener("touchend", function() {
+    isDraggingSprite1 = false;
+    isDraggingSprite2 = false;
+    isDraggingSprite3 = false;
+    isDraggingSprite4 = false;
+    
+    // Check if any sprite is at the center position and enable the button accordingly
+    if (
+        isAtCenter(sprite1X, sprite1Y) &&
+        isAtCenter(sprite2X, sprite2Y) &&
+        isAtCenter(sprite3X, sprite3Y) &&
+        isAtCenter(sprite4X, sprite4Y)
+    ) {
+        document.getElementById("addChemicalsBtn").disabled = false;
+    } else {
+        document.getElementById("addChemicalsBtn").disabled = true;
+    }
+});
+

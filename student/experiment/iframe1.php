@@ -3,6 +3,7 @@
     if ($_SESSION['p'] != "") {
       if (isset($_SESSION['url'])) {
         $experimentUrl = $_SESSION['url'];
+        $custom = $_SESSION['custom'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,18 +42,30 @@
       height: 55px; /* Adjust the height of the background as needed */
       background-color: #f0f0f0; /* Set the background color to your desired color */
     }
+    @media (max-width: 767px) {
+      .iframe-container::after {
+        height: 15px;
+      }
+    }
 </style>
 </head>
 <body>
 
 <div class="iframe-container">
     <div class="preloader"></div>
-    <iframe class="responsive-iframe" src="<?php echo $experimentUrl; ?>">
-    </iframe>
+    <iframe class="responsive-iframe" src="<?php echo $experimentUrl; ?>"></iframe>    
+    <?php if ($custom): ?>
+        <style>
+            .iframe-container::after {
+              height: unset !important;
+            }
+        </style>
+    <?php endif; ?>
 </div>
 
    
 <script>
+  
 	window.onload = function(){
     // hide the preloader with timeout 10sec
 		setTimeout(function(){
