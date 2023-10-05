@@ -67,7 +67,7 @@
 
                                 if (mysqli_query ($link, $ins) & $mail->send()) { 
                                     echo "<script>";
-                                    echo "self.location='index.php?msg=<font color=green>Registration Success! Login Now</font>';";
+                                    echo "self.location='index.php?msg=<font color=green>Registration Success! Please check your email</font>';";
                                     echo "</script>";
                                 } else {
                                     echo "<script>";
