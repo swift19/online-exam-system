@@ -23,6 +23,8 @@
                         if (isset($_POST['name'])) {
                             if ($_POST['name'] != "") {                                        
                                 
+                              $email = $_POST['email'];
+                              if(filter_var($email, FILTER_VALIDATE_EMAIL)){
                                 $studentid = $_POST['studentid'];
                                 $name = $_POST['name'];
                                 $dept = $_POST['dept'];
@@ -31,9 +33,39 @@
                                 $password = $_POST['password'];
                                 $address = $_POST['address'];
                                 $ins = "INSERT INTO student (studentid, name, dept, phoneno, email, pass, address, status) 
-                                        VALUES ('$studentid', '$name', '$dept', '$phoneno', '$email', '$password', '$address', '1');";    
+                                        VALUES ('$studentid', '$name', '$dept', '$phoneno', '$email', '$password', '$address', '0');";    
                 
-                                if (mysqli_query ($link, $ins)) {           
+                    
+                                $message = '<div>
+                                    <p><b>Hello!</b></p>
+                                    <p>Thank you for registering with STEMulate! We are thrilled to welcome you to our community. To complete your registration and activate your account, please click the button below:</p>
+                                    <br>
+                                    <p><button class="btn btn-primary"><a href="http://localhost/online-exam-system/student/verify.php?secret='.base64_encode($email).'">Verify Account</a></button></p>
+                                    <br>
+                                    <p>Once your account is activated, you will have full access to all the exciting features on our website. If you have any questions or need assistance, feel free to reach out to our support team at <a href="">stemulate03@gmail.com</a>.</p>
+                                    <br>
+                                    <p>Best regards,</p>
+                                    <p>The STEMulate Team</p>
+                                </div>';
+
+                                include_once("SMTP/class.phpmailer.php");
+                                include_once("SMTP/class.smtp.php");
+                                $email = $email; 
+                                $mail = new PHPMailer;
+                                $mail->IsSMTP();
+                                $mail->SMTPAuth = true;                 
+                                $mail->SMTPSecure = "tls";      
+                                $mail->Host = 'smtp.gmail.com';
+                                $mail->Port = 587; 
+                                $mail->Username = "stemulate03@gmail.com";
+                                $mail->Password = "waci hjgj dney shgn";
+                                $mail->FromName = "SteMulate Admin";
+                                $mail->AddAddress($email);
+                                $mail->Subject = "Verify Account - Student";
+                                $mail->isHTML( TRUE );
+                                $mail->Body =$message;
+
+                                if (mysqli_query ($link, $ins) & $mail->send()) { 
                                     echo "<script>";
                                     echo "self.location='index.php?msg=<font color=green>Registration Success! Login Now</font>';";
                                     echo "</script>";
@@ -42,6 +74,7 @@
                                     echo "self.location='registration.php?msg=<font color=red>Not Success!</font>';";
                                     echo "</script>";
                                 }
+                              }
 
                             }           
                         }               
