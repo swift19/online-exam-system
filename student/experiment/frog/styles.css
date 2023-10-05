@@ -83,3 +83,28 @@ body {
 .position{
   margin-top: -80px
 }
+
+@media (max-width: 767px) {
+    .tool {
+        height: 100px;
+    }
+    #tools {
+        margin-right: unset;
+    }
+    #frogContainer {
+        /* padding: 25px; */
+        padding-bottom: unset;
+    }
+   .tray {
+        width: 65%;
+   }
+   .position {
+    margin-top: unset;
+    height: 150px;
+    }
+    #overlay {
+        left: 35%;
+        width: 30%;
+        height: 55%;
+    }
+}
