@@ -188,7 +188,7 @@
                                         <div class="table-responsive">
                                         <div class="row">
                                             <div class="col-md-6 d-flex align-items-center">
-                                                <a href="" style="color:red; padding-left:20px;" id="assignAllButton">Assign All</a>
+                                                <a href="" style="color:red; padding-left:20px;" id="assignAllButton">Accept All</a>
                                             </div>
                                             <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 25px;">
                                                 <input type="text" id="searchBox" placeholder="Search...">
@@ -224,7 +224,7 @@
                                                         <td><?php echo $data['email']; ?></td>                                                                                             
                                                         <td><?php echo $data['address']; ?></td>
                                                         <td>
-                                                            <a class="assignButton" href="#" data-studentid="<?php echo $data['id']; ?>" onclick="assignStudent(this); return false;">Assign</a>                                                            
+                                                            <a class="assignButton" href="#" data-studentid="<?php echo $data['id']; ?>" onclick="assignStudent(this); return false;">Accept</a>                                                            
                                                         </td>
                                                         
                                                     </tr> 
