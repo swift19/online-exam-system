@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 01:03 PM
+-- Generation Time: Oct 09, 2023 at 02:14 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -44,7 +44,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `name`, `mobile`, `email`, `pass`, `status`, `image`) VALUES
 (1, 'admin', 'Teacher 1', '9354123456', 'admin@mail.com', '123', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
-(2, 'test', 'Teacher 2', '9354804461', 'test@mail.com', 'test', 1, '');
+(2, 'test', 'Teacher 2', '9354804461', 'test@mail.com', 'test', 1, ''),
+(200101078, 'test123', 'Test 123', 'test', 'geraldbathan24@gmail.com', '123', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -88,18 +89,20 @@ CREATE TABLE `experiment` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL
+  `admin_id` int(11) NOT NULL,
+  `custom` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `experiment`
 --
 
-INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`) VALUES
-(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1),
-(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1),
-(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1),
-(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1);
+INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `custom`) VALUES
+(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 0),
+(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, 1),
+(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, 0),
+(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, 0),
+(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -631,7 +634,8 @@ INSERT INTO `student` (`id`, `studentid`, `name`, `dept`, `phoneno`, `email`, `p
 (3, 20230729, 'Test Student 3', 'BEA', '09894828423', 'test3@gmail.com', '123', 'test address 3', 1, 2, NULL),
 (4, 20230730, 'Test Student 4', 'NU2', '09234891423', 'test4@gmail.com', '123', 'test address 4', 1, 2, NULL),
 (12, 20230830, 'Test Student 5', 'OP4', '09234891612', 'test5@gmail.com', '123', 'test address 5', 1, 0, NULL),
-(13, 20230901, 'Test Student 6', 'KR4', '09354478810', 'test6@gmail.com', '123', 'test address 6', 1, 0, NULL);
+(13, 20230901, 'Test Student 6', 'KR4', '09354478810', 'test6@gmail.com', '123', 'test address 6', 1, 0, NULL),
+(14, 66666, 'test', 'test', 'test', 'geraldbathan24@gmail.com', '123', 'test', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -765,7 +769,7 @@ ALTER TABLE `vdo`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200101078;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200101079;
 
 --
 -- AUTO_INCREMENT for table `exam`
@@ -777,7 +781,7 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT for table `experiment`
 --
 ALTER TABLE `experiment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `meritlist`
@@ -819,7 +823,7 @@ ALTER TABLE `semester`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subject`
