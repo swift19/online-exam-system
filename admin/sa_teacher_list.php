@@ -18,7 +18,7 @@
                     
                     $password = $_POST['password'];
                     $teacherid = $_POST['teacherid'];
-                    $ins = "UPDATE admin SET password ='$password' WHERE id ='$teacherid'";    
+                    $ins = "UPDATE admin SET pass ='$password' WHERE id ='$teacherid'";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
@@ -75,6 +75,7 @@
                                                 <th>Teacher Name</th>
                                                 <th>Mobile No.</th>
                                                 <th>Email</th>
+                                                <th>Password</th>
                                                 <th>Status</th>
                                                 <th>&nbsp;</th>
                                             </tr>
@@ -92,6 +93,7 @@
                                                 <td><?php echo $data['name']; ?></td>
                                                 <td><?php echo $data['mobile']; ?></td>
                                                 <td><?php echo $data['email']; ?></td>
+                                                <td><?php echo $data['pass']; ?></td>
                                                 <td><?php echo $data['status'] === '1' ? 'Active' : 'Inactive'; ?></td>
                                                 <td>
                                                     <a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a> 

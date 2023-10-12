@@ -171,7 +171,8 @@ function drawVolcano() {
 	ctx.drawImage(volcanoImage, volcanoX, volcanoY, imageWidth, imageHeight);
 	
 	// Add text above sprite 1
-    const text = "Volcanic Eruption";
+    // const text = "Volcanic Eruption";
+    const text = "";
     ctx.font = "18px Arial"; // Set the font and size
     ctx.fillStyle = "black"; // Set the text color
     ctx.fillText(text, volcanoX + 15, volcanoY - 250); // Position the text above sprite 1

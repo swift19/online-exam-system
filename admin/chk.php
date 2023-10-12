@@ -17,7 +17,7 @@
 		$_SESSION['i'] = '';
 			
 		echo "<script>";
-		echo "self.location='dashboard.php';";
+		echo "self.location='sa_teacher_list.php';";
 		echo "</script>";	
 	} else {
 		$query = mysqli_query($link, "select * from admin where username = '$username' AND pass = '$pass'");

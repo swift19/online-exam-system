@@ -11,7 +11,13 @@
 </head>
 
 <body>
-    
+    <script>
+        window.onbeforeunload = function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "clear_session.php", true);
+            xhr.send();
+        };
+    </script>
     <div class="dashboard-main-wrapper">
         
         <div class="dashboard-header">

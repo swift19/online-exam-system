@@ -1,4 +1,3 @@
-
 <?php 
     session_start(); 
     if ($_SESSION['p'] != "") {
@@ -11,8 +10,7 @@
 </head>
 
 <body>
-    <script>
-        
+<script>
         function handleStartButtonClick() {
             // Get the selected values from the two select elements
             var selectedExperimentType = document.getElementById('subject-filter').value;
@@ -28,15 +26,34 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var iframeContent = xhr.responseText;
-                    console.log("iframe url:" ,iframeContent )
+                    console.log("iframe url:", iframeContent);
                     var iframe = document.getElementById("experiment-iframe");
                     iframe.src = iframe.src; // Refresh the iframe's content
                     document.getElementById("withIFrame").style.display = "block"; // Show the container
                     document.getElementById("noSelection").style.display = "none"; // Hide the container
+
+                    if(selectedExperiment){
+                        // Set the selected experiment value in the hidden input field
+                        document.getElementById("experimentInput").value = selectedExperiment;
+                        // Submit the form
+                        document.getElementById("experimentForm").submit();
+                    }
                 }
             };
             xhr.send();
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var iframe = document.getElementById("experiment-iframe");
+            var iframeContent = '<?php echo isset($_SESSION["url"]) ? $_SESSION["url"] : ""; ?>';
+
+            if (iframeContent) {
+                iframe.src = iframe.src; // Refresh the iframe's content
+                document.getElementById("withIFrame").style.display = "block";
+                document.getElementById("examSelected").style.display = "block";
+                document.getElementById("noSelection").style.display = "none";
+            }
+        });
     </script>
     <div class="dashboard-main-wrapper">
         
@@ -48,20 +65,23 @@
         <div class="experiment">
         <div class="selection">
             <div class="experiment-container">
+                <form id="experimentForm" action="" method="GET" style="margin-bottom:unset">
+                    <input type="hidden" id="experimentInput" name="experimentId">
+                </form>
           
-            <div class="col-md-12">
-                <div class="row draft">
+                <div class="col-md-12">
+                    <div class="row draft">
                         <div class="form-group select">
                             <label for="subject-filter">Select your type of experiment:</label>
                             <select name="subject_id" class="form-control lab" id="subject-filter">
                                 <option value="" selected disabled>Select category</option>
-                                    <?php 
-                                        include 'db.php';
-                                        $query = mysqli_query($link, "select * from subject where status = '1'");
-                                        while($data = mysqli_fetch_array($query)) {
-                                            echo "<option value='$data[id]'>$data[name]</option>";
-                                        }
-                                    ?>                                            
+                                <?php 
+                                    include 'db.php';
+                                    $query = mysqli_query($link, "select * from subject where status = '1'");
+                                    while($data = mysqli_fetch_array($query)) {
+                                        echo "<option value='$data[id]'>$data[name]</option>";
+                                    }
+                                ?>                                            
                             </select>
                         </div>
 
@@ -71,31 +91,43 @@
                             </select>
                         </div>
                         <button class="start-button" onclick="handleStartButtonClick()" id="resizeIframe">Start</button>
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
+        
+        <?php 
+        include 'db.php';
+        if (isset($_SESSION["exId"]) && $_SESSION['exId']) {
+            $experimentId = $_SESSION['exId'];
+            $query2 = mysqli_query($link, "select * from experiment where id = '$experimentId' ");
+            while($data2 = mysqli_fetch_array($query2)) {
+        ?>
+
+        <div id="examSelected" style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;display: none;">
+            <h4>Exam Name : <?php echo $data2['name']; ?></h4>
+            <pre><?php echo $data2['description']; ?></pre>
+            <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
+            <a href="start_quiz_ex.php?experiment_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
+        </div>
+        <?php }} ?>
+        
+        <div class="canvas-container centered"  id="noSelection">            
+            <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img">
+            <span class="noSelected-label">You have no selected experiment yet</span>
         </div>
 
-            <div class="canvas-container centered"  id="noSelection" >            
-                
-                <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img">
-                <span class="noSelected-label">You have no selected experiment yet</span>
-            </div>
-
-            <div class="canvas-container" id="withIFrame" style="display: none;">                
-                <iframe id="experiment-iframe" src="./experiment/iframe1.php" ></iframe>
-            </div>
-
+        <div class="canvas-container" id="withIFrame" style="display: none;">                
+            <iframe id="experiment-iframe" src="./experiment/iframe1.php"></iframe>
         </div>
-       
-
+        </div>
     </div>
     <?php include 'footer_file.php'; ?>
 
     <script>
         // Listen for the change event on the first dropdown
         document.getElementById("subject-filter").addEventListener("change", function() {
-            var selectedSubjectId = this.value; // Get the selected value
+            var selectedSubjectId = this.value;
             
             // Make an AJAX request to fetch experiments based on selected subject
             var xhr = new XMLHttpRequest();

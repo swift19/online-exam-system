@@ -29,8 +29,9 @@
                     $name = $_POST['name'];
                     $url = $_POST['url'];
                     $subject_id = $_POST['subject_id'];
+                    $description = $_POST['description'];
                     $admin_id = $_SESSION['id'];
-                    $ins = "INSERT INTO experiment (subject_id, name, url, status, admin_id) VALUES ('$subject_id', '$name', '$url', '1', '$admin_id');";    
+                    $ins = "INSERT INTO experiment (subject_id, name, url, status, admin_id,description) VALUES ('$subject_id', '$name', '$url', '1', '$admin_id', '$description');";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
@@ -70,7 +71,8 @@
                                         <input name="name" class="form-control form-control-lg" type="text" placeholder="Experiment Name" autocomplete="off" required>
                                         <br>
                                         <input name="url" class="form-control form-control-lg" type="text" placeholder="URL" autocomplete="off" required>
-                                        
+                                        <br>
+                                        <textarea id="description" name="description" rows="4" cols="40" required></textarea>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
                                 </form>
