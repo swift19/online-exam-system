@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2023 at 02:14 PM
+-- Generation Time: Oct 12, 2023 at 03:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -43,9 +43,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `name`, `mobile`, `email`, `pass`, `status`, `image`) VALUES
-(1, 'admin', 'Teacher 1', '9354123456', 'admin@mail.com', '123', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
-(2, 'test', 'Teacher 2', '9354804461', 'test@mail.com', 'test', 1, ''),
-(200101078, 'test123', 'Test 123', 'test', 'geraldbathan24@gmail.com', '123', 1, NULL);
+(1, 'admin', 'Teacher 1', '9354123456', 'admin@mail.com', '345', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
+(2, 'test', 'Teacher 2', '9354804461', 'test@mail.com', 'test', 1, '');
 
 -- --------------------------------------------------------
 
@@ -90,6 +89,7 @@ CREATE TABLE `experiment` (
   `url` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
+  `description` text NOT NULL,
   `custom` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -97,12 +97,12 @@ CREATE TABLE `experiment` (
 -- Dumping data for table `experiment`
 --
 
-INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `custom`) VALUES
-(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 0),
-(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, 1),
-(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, 0),
-(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, 0),
-(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, 1);
+INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `description`, `custom`) VALUES
+(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 'Density is a word we use to describe how much space an object or substance takes up (its volume) in relation \nto the amount of matter in that object or substance (its mass). Another way to put it is that density is the \namount of mass per unit of volume. If an object is heavy and compact, it has a high density.', 0),
+(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1),
+(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0),
+(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0),
+(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1);
 
 -- --------------------------------------------------------
 
@@ -521,7 +521,45 @@ INSERT INTO `result` (`id`, `sl`, `student_id`, `exam_id`, `question_id`, `corre
 (310, 8, 1, 6, 13, 'a', '0', '0', '0', '1695893181_1_670'),
 (311, 9, 1, 6, 14, 'a', '0', '0', '0', '1695893181_1_670'),
 (312, 10, 1, 6, 15, 'c', '0', '0', '0', '1695893181_1_670'),
-(313, 11, 1, 6, 16, 'b', '0', '0', '0', '1695893181_1_670');
+(313, 11, 1, 6, 16, 'b', '0', '0', '0', '1695893181_1_670'),
+(314, 1, 1, 6, 6, 'c', '0', '0', '0', '1697105192_1_686'),
+(315, 2, 1, 6, 7, 'b', '0', '0', '0', '1697105192_1_686'),
+(316, 3, 1, 6, 8, 'd', '0', '0', '0', '1697105192_1_686'),
+(317, 4, 1, 6, 9, 'c', '0', '0', '0', '1697105192_1_686'),
+(318, 5, 1, 6, 10, 'd', '0', '0', '0', '1697105192_1_686'),
+(319, 6, 1, 6, 11, 'c', '0', '0', '0', '1697105192_1_686'),
+(320, 7, 1, 6, 12, 'a', '0', '0', '0', '1697105192_1_686'),
+(321, 8, 1, 6, 13, 'a', '0', '0', '0', '1697105192_1_686'),
+(322, 9, 1, 6, 14, 'a', '0', '0', '0', '1697105192_1_686'),
+(323, 10, 1, 6, 15, 'c', '0', '0', '0', '1697105192_1_686'),
+(324, 11, 1, 6, 16, 'b', '0', '0', '0', '1697105192_1_686');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result_experiment`
+--
+
+CREATE TABLE `result_experiment` (
+  `id` int(11) NOT NULL,
+  `sl` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `experiment_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `correct_ans` varchar(10) DEFAULT NULL,
+  `given_ans` varchar(10) DEFAULT NULL,
+  `question_mark` varchar(10) NOT NULL,
+  `sts` varchar(10) NOT NULL COMMENT '0 = no action, 1 = correct ans, 2 = wrong ans, 3 = skiped, 4 = blank ans',
+  `unique_code` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `result_experiment`
+--
+
+INSERT INTO `result_experiment` (`id`, `sl`, `student_id`, `experiment_id`, `question_id`, `correct_ans`, `given_ans`, `question_mark`, `sts`, `unique_code`) VALUES
+(0, 1, 1, 1, 0, 'a', 'c', '0', '2', '1697118610_1_165'),
+(0, 1, 1, 1, 0, 'a', 'c', '0', '2', '1697118637_1_734');
 
 -- --------------------------------------------------------
 
@@ -580,7 +618,34 @@ INSERT INTO `result_summery` (`id`, `student_id`, `exam_id`, `total_mark`, `your
 (46, 1, 12, '1', '3', 1, '1695882206_1_649', '2023-09-28', 4, 8),
 (47, 1, 12, '1', '3', 1, '1695882421_1_613', '2023-09-28', 4, 8),
 (48, 1, 12, '1', '3', 1, '1695882448_1_347', '2023-09-28', 4, 8),
-(49, 1, 6, '1', '0', 0, '1695893181_1_670', '2023-09-28', 4, 8);
+(49, 1, 6, '1', '0', 0, '1695893181_1_670', '2023-09-28', 4, 8),
+(50, 1, 0, '', '0', 0, '1697102360_1_926', '2023-10-12', 0, 0),
+(51, 1, 6, '1', '0', 0, '1697105192_1_686', '2023-10-12', 4, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result_summery_experiment`
+--
+
+CREATE TABLE `result_summery_experiment` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `experiment_id` int(11) NOT NULL,
+  `total_mark` varchar(10) NOT NULL,
+  `your_mark` varchar(10) NOT NULL,
+  `sts` int(11) NOT NULL,
+  `unique_code` varchar(255) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `result_summery_experiment`
+--
+
+INSERT INTO `result_summery_experiment` (`id`, `student_id`, `experiment_id`, `total_mark`, `your_mark`, `sts`, `unique_code`, `created_at`) VALUES
+(0, 1, 1, '0', '1', 1, '1697118610_1_165', '2023-10-12'),
+(0, 1, 1, '0', '0', 1, '1697118637_1_734', '2023-10-12');
 
 -- --------------------------------------------------------
 
@@ -805,13 +870,13 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 
 --
 -- AUTO_INCREMENT for table `result_summery`
 --
 ALTER TABLE `result_summery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `semester`
