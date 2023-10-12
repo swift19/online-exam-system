@@ -58,7 +58,7 @@
                                 <?php 
                                     if (isset($_GET['id'])) {
                                         include 'db.php';
-                                        $dlt = "DELETE FROM student WHERE id = '$_GET[id]'";
+                                        $dlt = "DELETE FROM admin WHERE id = '$_GET[id]'";
                                         mysqli_query ($link, $dlt);
                                         echo "<font color='red'>Delete Success!</font>";
                                     }
