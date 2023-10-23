@@ -83,7 +83,7 @@
                                             <option value="" selected disabled>Select Semester</option>
                                             <?php 
                                                 include 'db.php';
-                                                $query = mysqli_query($link, "select * from semester where status = '1' and admin_id = '$_SESSION[id]'");
+                                                $query = mysqli_query($link, "select * from semester where status = '1' ");
                                                 while($data = mysqli_fetch_array($query)) {
                                                     echo "<option value='$data[id]'>$data[name]</option>";
                                                 }
@@ -95,7 +95,7 @@
                                             <option value="" selected disabled>Select Subject</option>
                                             <?php 
                                                 include 'db.php';
-                                                $query = mysqli_query($link, "select * from subject where status='1' and admin_id = '$_SESSION[id]'");
+                                                $query = mysqli_query($link, "select * from subject where status='1' ");
                                                 while($data = mysqli_fetch_array($query)) {
                                                     echo "<option value='$data[id]'>$data[name]</option>";
                                                 }

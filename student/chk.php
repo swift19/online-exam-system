@@ -16,7 +16,7 @@
 		$p     = $data['pass'];
 		$s     = $data['status'];
 	}
-	if (($stdid == $studentid && $p == $pass) && ($s != "")) 
+	if (($stdid == $studentid && $p == $pass) && ($s == 1)) 
 		{
 			session_start();
 			$_SESSION['id']    = $id;
@@ -35,7 +35,7 @@
 	
 	else {
 		echo "<script>";
- 		echo "self.location='index.php?msg=<font color=red>Email or Password is incorrect.</font>';";
+ 		echo "self.location='index.php?msg=<font color=red>Student Id or Password is incorrect.</font>';";
 		echo "</script>";		
 	}
 

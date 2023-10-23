@@ -32,7 +32,7 @@
 			$s  = $data['status'];
 			$i  = $data['image'];
 		}
-		if (($u == $username && $p == $pass) && ($s != "")) 
+		if (($u == $username && $p == $pass) && ($s == 1)) 
 			{
 				session_start();
 				$_SESSION['id'] = $id;

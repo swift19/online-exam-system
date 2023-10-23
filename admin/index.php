@@ -60,7 +60,7 @@
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="registration.php" class="footer-link">Create An Account</a></div>
                 <div class="card-footer-item card-footer-item-bordered">
-                    <a href="#" class="footer-link">Forgot Password</a>
+                    <a href="forgot-password.php" class="footer-link">Forgot Password</a>
                 </div>
             </div>
         </div>
