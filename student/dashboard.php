@@ -60,24 +60,14 @@
                             </button>
                         </form>
 
-                        <form action="lab-experiments.php" method="get" class="dashboard-alignment">
-                            <button type="submit" class="dashboard-button center">
-                            <img src="./assets/images/lab-experiment.png" alt="Lab Experiment Icon" class="dash-icon">
-                            Lab Experiments
-                            <span class="arrow-icon fa fa-solid fa-chevron-right"></span>
+                        <form id="labExperimentForm" action="lab-experiments.php" method="get" class="dashboard-alignment">
+                            <button type="button" id="labExperimentButton" class="dashboard-button center">
+                                <img src="./assets/images/lab-experiment.png" alt="Lab Experiment Icon" class="dash-icon">
+                                Lab Experiments
+                                <span class="arrow-icon fa fa-solid fa-chevron-right"></span>
                             </button>
                         </form>
-<!-- 
-                        <form action="registration.php" method="get" class="dashboard-alignment">
-                            <button type="submit" class="dashboard-button center">I want to know more</button>
-                        </form>
-                        <form action="registration.php" method="get" class="dashboard-alignment">
-                            <button type="submit" class="dashboard-button center">My Scores</button>
-                        </form>
-                        <form action="lab-experiment.php" method="get" class="dashboard-alignment">
-                            <button type="submit" class="dashboard-button center">Lab Experiments</button>
-                        </form> -->
-                    
+
                 </div>
             </div>
             
@@ -86,7 +76,23 @@
     </div>
     <?php include 'footer_file.php'; ?>
 </body>
- 
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const labExperimentButton = document.getElementById('labExperimentButton');
+    const labExperimentForm = document.getElementById('labExperimentForm');
+
+    labExperimentButton.addEventListener('click', function() {
+        const password = prompt('Please enter the password:');
+
+            if (password === '123') {
+                // Password is correct, submit the form
+                labExperimentForm.submit();
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+    });
+ </script>
 </html>
 <?php 
 } else {

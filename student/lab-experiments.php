@@ -105,12 +105,10 @@
         ?>
 
         <div id="examSelected" style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;display: none;">
-            <h4>Exam Name : <?php echo $data2['name']; ?></h4>
-            <pre><?php echo $data2['description']; ?></pre>
+            <h4>Exam Name : <a data-experiment=""  onclick="openModal(this); return false;" ><?php echo $data2['name']; ?></a></h4>
             <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
             <a href="start_quiz_ex.php?experiment_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
         </div>
-        <?php }} ?>
         
         <div class="canvas-container centered"  id="noSelection">            
             <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img">
@@ -124,7 +122,27 @@
     </div>
     <?php include 'footer_file.php'; ?>
 
+                            <div id="experimentModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <form action="#" method="post">
+                                        <pre><?php echo $data2['description']; ?></pre>
+                                    </form>
+                                </div>
+                            </div>
+    <?php }} ?>
     <script>
+        function openModal(element) {
+            // Get student ID from data attribute
+            var modal = document.getElementById("experimentModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("experimentModal");
+            modal.style.display = "none";
+        }
+
         // Listen for the change event on the first dropdown
         document.getElementById("subject-filter").addEventListener("change", function() {
             var selectedSubjectId = this.value;
