@@ -117,7 +117,7 @@
           </div>
           <div class="form-row">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your Password" class="rounded-input" required>
+            <input type="password" id="password" name="password"  minlength="8"  placeholder="Enter your Password" class="rounded-input" required>
           </div>
           <div class="form-row">
             &nbsp;

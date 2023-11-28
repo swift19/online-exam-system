@@ -118,7 +118,7 @@
                         <input name="username" class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off" required>
                     </div>
                     <div class="form-group">
-                        <input name="password" class="form-control form-control-lg" id="password" type="password" placeholder="Password" required>
+                        <input name="password" class="form-control form-control-lg"  minlength="8" id="password" type="password" placeholder="Password" required>
                     </div>
                     
                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Submit</button>
