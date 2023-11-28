@@ -137,7 +137,8 @@
                             echo "<br>";
                             echo "Ans : ".$data['ans'];
                             echo "<br>";
-                            echo "<hr>";
+                            echo "<a href='#' onclick='confirmDelete({$data['id']})' style='color:red;'>Delete</a>";
+                            echo "<hr>"; 
                         }
                         ?>
                     </div>
@@ -148,6 +149,25 @@
         </div>
     </div>
     
+    <script>
+        function confirmDelete(questionId) {
+            var confirmDelete = confirm("Are you sure you want to delete this question?");
+            console.log("id here-----------" , encodedId)
+            if (confirmDelete) {
+                var xhr = new XMLHttpRequest();
+                var encodedId = encodeURIComponent(questionId);
+                console.log("id here-----------" , encodedId)
+                xhr.open("DELETE", "delete-question.php?table=" + encodeURIComponent("question") + "&id=" + encodedId, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log("Deletion successful");
+                        location.reload();
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
     <!-- Optional JavaScript -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
