@@ -55,9 +55,10 @@
                                                 <th>Name</th>
                                                 <th>Semester</th>
                                                 <th>Subject</th>
+                                                <!-- <th>per Question Mark</th>
+                                                <th>Total Mark</th> -->
                                                 <th>Duration</th>
-                                                <th>per Question Mark</th>
-                                                <th>Total Mark</th>
+                                                <th>Timer</th>
                                                 <th>Total Question</th>
                                                 <th>Add Question</th>
                                                 <!-- <th>Download</th> -->
@@ -90,9 +91,10 @@
                                                         }
                                                     ?>
                                                 </td>
+                                                <!-- <td><?php echo $data['question_mark']; ?></td>
+                                                <td><?php echo $data['total_mark']; ?></td> -->
+                                                <td><?php echo $data['startDate'];?> - <?php echo $data['endDate']; ?></td>
                                                 <td><?php echo $data['duration']; ?> min</td>
-                                                <td><?php echo $data['question_mark']; ?></td>
-                                                <td><?php echo $data['total_mark']; ?></td>
                                                 <td><?php echo $data['total_question']; ?></td>
                                                 <td><a href="question_add.php?exam_id=<?php echo $data['id']; ?>&q=<?php echo $data['total_question']; ?>">Add Question</a></td>
                                                 <!-- <td><a href="download.php?exam_id=<?php echo $data['id']; ?>" target="_blank">Download</a></td> -->

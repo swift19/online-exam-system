@@ -55,13 +55,14 @@
                                     </div>
 
                                     <?php 
-                                        $query2 = mysqli_query($link, "select * from exam where admin_id = '$data[trId]' ");
+                                        $currentDate = date('Y-m-d');
+                                        $query2 = mysqli_query($link, "select * from exam where admin_id = '$data[trId]' AND '$currentDate' BETWEEN startDate AND endDate ");
                                         while($data2 = mysqli_fetch_array($query2)) {
                                     ?>
 
                                     <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
                                         
-                                        <h4>Exam Name : <?php echo $data2['name']; ?></h4>
+                                        <h4><?php echo $data2['name']; ?></h4>
 
                                         <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
                                         

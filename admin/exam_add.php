@@ -36,7 +36,11 @@
                     $total_mark     = $_POST['total_mark'];
                     $total_question = $_POST['total_question'];
 
-                    $ins = "INSERT INTO exam (semester_id, subject_id, name, status, admin_id, duration, question_mark, total_mark, total_question) VALUES ('$semester_id', '$subject_id', '$name', '1', '$admin_id', '$duration', '$question_mark', '$total_mark', '$total_question');";    
+                    $startDate     = $_POST['startDate'];
+                    $endDate = $_POST['endDate'];
+
+                    $ins = "INSERT INTO exam (semester_id, subject_id, name, status, admin_id, duration, question_mark, total_mark, total_question,startDate,endDate) 
+                    VALUES ('$semester_id', '$subject_id', '$name', '1', '$admin_id', '$duration', '$question_mark', '$total_mark', '$total_question', '$startDate', '$endDate');";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
@@ -84,14 +88,23 @@
                                         <input name="name" class="form-control form-control-lg" type="text" placeholder="Exam Name" autocomplete="off" required>
 
                                         <br>
-                                        <input name="duration" class="form-control form-control-lg" type="text" placeholder="Exam Duration in Min" autocomplete="off" required>
+                                        <input name="duration" class="form-control form-control-lg" type="number" placeholder="Exam Duration in Min" autocomplete="off" required>
                                         <br>
-                                        <input name="question_mark" class="form-control form-control-lg" type="text" placeholder="per Question Mark" autocomplete="off" required>
+                                        <input name="question_mark" class="form-control form-control-lg" type="number" placeholder="per Question Mark" autocomplete="off" required>
                                         <br>
-                                        <input name="total_mark" class="form-control form-control-lg" type="text" placeholder="Total Mark" autocomplete="off" required>
+                                        <input name="total_mark" class="form-control form-control-lg" type="number" placeholder="Total Mark" autocomplete="off" required>
                                         <br>
-                                        <input name="total_question" class="form-control form-control-lg" type="text" placeholder="Total Question" autocomplete="off" required>
-                                        
+                                        <input name="total_question" class="form-control form-control-lg" type="number" placeholder="Total Question" autocomplete="off" required>
+                                        <br>
+                                        <label for="startDate">Duration</label>
+                                        <div class="form-group">
+                                        <label for="startDate">Start Date:</label>
+                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endDate">End Date:</label>
+                                            <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" required>
+                                        </div>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
                                 </form>
