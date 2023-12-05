@@ -24,25 +24,35 @@
         <?php
             include 'db.php';
             if (isset($_POST['save'])) {
-                if ($_POST['name'] != "") {                                        
-                    
+                if ($_POST['name'] != "") { 
+
                     $studentid = $_POST['studentid'];
                     $name = $_POST['name'];
                     $dept = $_POST['dept'];
                     $phoneno = $_POST['phoneno'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    $address = $_POST['address'];
-                    $ins = "INSERT INTO student (studentid, name, dept, phoneno, email, pass, address, status,designation) 
-                            VALUES ('$studentid', '$name', '$dept', '$phoneno', '$email', '$password', '$address', '1',     $_SESSION[id]);";    
+                    $address = $_POST['address']; 
 
-                    if (mysqli_query ($link, $ins)) {           
+                    $query = mysqli_query($link, "select * from student where email = '$email'");
+                    if(filter_var($email, FILTER_VALIDATE_EMAIL) && mysqli_num_rows($query) < 1){
+                        if ($_POST['name'] != "") {                                        
+                            $ins = "INSERT INTO student (studentid, name, dept, phoneno, email, pass, address, status,designation) 
+                                    VALUES ('$studentid', '$name', '$dept', '$phoneno', '$email', '$password', '$address', '1',     $_SESSION[id]);";    
+        
+                            if (mysqli_query ($link, $ins)) {           
+                                echo "<script>";
+                                echo "self.location='student_list.php?msg=<font color=green>Student Added Success!</font>';";
+                                echo "</script>";
+                            }
+        
+                        };  
+                    } else {
                         echo "<script>";
-                        echo "self.location='student_list.php?msg=<font color=green>Student Added Success!</font>';";
+                        echo "self.location='student_list.php?msg=<font color=red>Email is already used! Please try other email</font>';";
                         echo "</script>";
                     }
-
-                }           
+                }
             }               
         ?>
         
@@ -59,20 +69,25 @@
                                 <form action="#" method="post">
                                     <div class="form-group">
 
-                                        <input name="studentid" class="form-control form-control-lg" type="text" placeholder="Student ID" autocomplete="off" required>
+                                        <input name="studentid" class="form-control form-control-lg" type="text" placeholder="LRN ID" oninput="validateAlphanumeric(this)" required>
                                         <br>
-                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Student Name" autocomplete="off" required>
+                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Student Name" required>
                                         <br>
-                                        <input name="dept" class="form-control form-control-lg" type="text" placeholder="Dept." autocomplete="off" required>
+                                        <div class="form-group-ep">
+                                            <select class="form-control form-control-lg" id="dept" name="dept" style="width: -webkit-fill-available;">
+                                            </select>
+                                        </div>
                                         <br>
-                                        <input name="phoneno" class="form-control form-control-lg" type="text" placeholder="Phone No." autocomplete="off" required>
+                                        <input name="phoneno" class="form-control form-control-lg" type="text" placeholder="Phone No." required>
                                         <br>
-                                        <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" autocomplete="off" required>
+                                        <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" oninput="validateEmail(this)" required>
+                                        <p id="emailError" style="color: red;font-size:12px; margin: unset;"></p>
                                         <br>
-                                        <input name="password" class="form-control form-control-lg" type="text" placeholder="Login Password" autocomplete="off" required>
+                                        <input name="address" class="form-control form-control-lg" type="text" placeholder="Address" required>
                                         <br>
-                                        <input name="address" class="form-control form-control-lg" type="text" placeholder="Address" autocomplete="off" required>
-                                        
+                                        <input name="password" class="form-control form-control-lg" type="password" minlength="8" placeholder="Login Password" id="passwordInput" required>
+                                        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()" >
+                                        <label for="showPassword">Show Password</label>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
                                 </form>
@@ -106,7 +121,46 @@
     <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-    
+    <script>
+        function validateAlphanumeric(input) {
+            input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+        }
+        function validateEmail(input) {
+            const email = input.value;
+            const emailError = document.getElementById('emailError');
+
+            if (!input.checkValidity()) {
+                emailError.textContent = 'Please enter a valid email address.';
+                input.classList.add('invalid-email');
+            } else if (email.indexOf('@gmail.com') === -1) {
+                emailError.textContent = 'Please enter a Gmail address.';
+                input.classList.add('invalid-email');
+            } else {
+                emailError.textContent = '';
+                input.classList.remove('invalid-email');
+            }
+        }
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("passwordInput");
+            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+        }
+
+        fetch('sections.json')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('dept');
+
+            // Populate select options
+            data.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.value;
+                optionElement.text = option.label;
+                select.appendChild(optionElement);
+            });
+        })
+        .catch(error => console.error('Error fetching sections.json:', error));
+    </script>
+
 </body>
  
 </html>

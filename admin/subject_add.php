@@ -53,20 +53,16 @@
                             <div class="card-body">
                                 <form action="#" method="post">
                                     <div class="form-group">
-
-                                        <select name="semester_id" class="form-control" required>
-                                            <option value="" selected disabled>Select Semester</option>
-                                            <?php 
+                                        <?php 
                                                 include 'db.php';
-                                                $query = mysqli_query($link, "select * from semester where status = '1'");
+                                                $currentDate = date('Y-m-d');
+                                                $query = mysqli_query($link, "SELECT * FROM semester WHERE status = '1' AND '$currentDate' BETWEEN startDate AND endDate");
                                                 while($data = mysqli_fetch_array($query)) {
-                                                    echo "<option value='$data[id]'>$data[name]</option>";
+                                                    echo "<input name='semester_id' class='form-control form-control-lg' type='text' hidden value='$data[id]'>";
                                                 }
-                                            ?>
-                                            
-                                        </select>
+                                        ?>
                                         <br>
-                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Subject Name" autocomplete="off" required>
+                                        <input name="name" class="form-control form-control-lg" type="text" placeholder="Subject Name" required>
                                         
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>

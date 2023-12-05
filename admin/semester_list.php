@@ -1,6 +1,6 @@
 <?php 
     session_start(); 
-    if ($_SESSION['p'] != "") {
+    if ($_SESSION['u'] != "") {
 ?>
 <!doctype html>
 <html lang="en">

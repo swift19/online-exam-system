@@ -23,7 +23,9 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                             } else { echo $noImage; } ?>" class="img-responsive desktop-image" width="125px" height="125px" alt="image" class="responsive">									
     
                             <li class="nav-divider">Menu</li>
-                            
+                            <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "semester_list.php"){ echo "active"; } ?>" href="semester_list.php"><i class="fab fa-fw fa-wpforms"></i>Semester List </a>
+                            </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "sa_teacher_list.php"){ echo "active"; } ?>" href="sa_teacher_list.php"> <i class="fab fa-fw fa-wpforms"></i>Teacher List </a>
                             </li>
@@ -62,9 +64,6 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "vdo_list.php"){ echo "active"; } ?>" href="vdo_list.php"><i class="fab fa-fw fa-wpforms"></i>Video List </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link <?php if($page == "semester_list.php"){ echo "active"; } ?>" href="semester_list.php"><i class="fab fa-fw fa-wpforms"></i>Semester List </a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "subject_list.php"){ echo "active"; } ?>" href="subject_list.php"><i class="fab fa-fw fa-wpforms"></i>Subject List </a>

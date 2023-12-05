@@ -35,7 +35,7 @@
 	
 	else {
 		echo "<script>";
- 		echo "self.location='index.php?msg=<font color=red>Student Id or Password is incorrect.</font>';";
+ 		echo "self.location='index.php?msg=<font color=red>LRN ID or Password is incorrect.</font>';";
 		echo "</script>";		
 	}
 

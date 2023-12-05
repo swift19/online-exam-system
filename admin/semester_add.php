@@ -28,7 +28,9 @@
                     
                     $name = $_POST['name'];
                     $admin_id = $_SESSION['id'];
-                    $ins = "INSERT INTO semester (name, status, admin_id) VALUES ('$name', '1', '$admin_id');";    
+                    $startDate = $_POST['startDate'];
+                    $endDate = $_POST['endDate'];
+                    $ins = "INSERT INTO semester (name, status, admin_id, startDate, endDate) VALUES ('$name', '1', '$admin_id','$startDate','$endDate');";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
@@ -53,6 +55,14 @@
                                 <form action="#" method="post">
                                     <div class="form-group">
                                         <input name="name" class="form-control form-control-lg" type="text" placeholder="Semester Name" autocomplete="off" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="startDate">Start Date:</label>
+                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="endDate">End Date:</label>
+                                        <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" required>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
                                 </form>

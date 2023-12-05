@@ -13,4 +13,38 @@
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <title>Student Dashboard</title>
+
+    <script>
+        $(document).ready(function () {
+            // Function to check for updates
+            function checkForUpdates() {
+                // AJAX request to fetch notification status
+                $.ajax({
+                    url: 'check_notification.php', // Replace with the actual PHP file to check notifications
+                    type: 'GET',
+                    success: function (data) {
+                        // Display notification if there are updates
+                        if (data.trim() !== "") {
+                            showNotification(data);
+                        }
+                    },
+                    complete: function () {
+                        // Schedule the next check after a delay (e.g., every 10 seconds)
+                        setTimeout(checkForUpdates, 10000);
+                    }
+                });
+            }
+
+            // Function to display notification
+            function showNotification(message) {
+                // Replace this with your notification logic (e.g., display a bell icon)
+                alert('Notification: ' + message);
+            }
+
+            // Start checking for updates when the page is loaded
+            checkForUpdates();
+        });
+    </script>

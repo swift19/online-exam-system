@@ -53,7 +53,7 @@
                                                 <a href="" style="color:red; padding-left:20px;" id="assignAllButton">Unassign All</a>
                                             </div>
                                             <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 25px;">
-                                                <input type="text" id="searchBox" placeholder="Search...">
+                                                <input type="text" id="searchBox" placeholder="Search by name or section">
                                                 <button id="searchButton" class="btn btn-primary btn-xs ml-2">Search</button>
                                             </div>
                                         </div>         
@@ -61,9 +61,9 @@
                                         <thead>
                                             <tr>
                                                 <th><input type="checkbox" id="selectAll"></th>
-                                                <th>Student ID</th>
+                                                <th>LRN ID</th>
                                                 <th>Full Name</th>
-                                                <th>Dept.</th>
+                                                <th>Section</th>
                                                 <th>Phone No.</th>
                                                 <th>Email</th>
                                                 <th>Address</th>
@@ -78,7 +78,7 @@
                                             ?>
                                             <tr>
                                             <td><input type="checkbox" class="checkBox" style="padding-left: 10px;" value="<?php echo $data['id']; ?>"></td>
-                                                <td><?php echo $data['studentid']; ?></td>
+                                                <td style="cursor:pointer; color:red;" onclick="redirectToStudentRecordPage(<?php echo $data['id']; ?>)"><?php echo $data['studentid']; ?></td>
                                                 <td><?php echo $data['name']; ?></td>
                                                 <td><?php echo $data['dept']; ?></td>
                                                 <td><?php echo $data['phoneno']; ?></td>
@@ -128,6 +128,9 @@
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
     <script>
+            function redirectToStudentRecordPage(studentId) {
+                window.location.href = 'student_record.php?id=' + studentId;
+            }
             document.getElementById("searchButton").addEventListener("click", function() {
                 var searchValue = document.getElementById("searchBox").value;
                 var sessionId = <?php echo json_encode($_SESSION['id']); ?>;

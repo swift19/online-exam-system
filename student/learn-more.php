@@ -61,11 +61,11 @@
 
                                     <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
                                         
-                                        <h4>Subject Name : <?php echo $data2['name']; ?></h4>
+                                        <h4><?php echo $data2['name']; ?></h4>
 
                                         <a href="video_class.php?exam_id=<?php echo $data2['id']; ?>" target="_blank" style="color:#ff0000;">Video Class</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
 
-                                        <a href="pdf_file.php?exam_id=<?php echo $data2['id']; ?>" target="_blank" style="color:#ff0000;">PDF File</a> &nbsp;&nbsp;&nbsp;
+                                        <a href="pdf_file.php?exam_id=<?php echo $data2['id']; ?>" target="_blank" style="color:#ff0000;">PDF resource materials</a> &nbsp;&nbsp;&nbsp;
 
                                     </div>
                                     <?php } ?>

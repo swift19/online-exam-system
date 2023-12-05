@@ -132,7 +132,7 @@ button {
 .welcome-header {
   margin-bottom: 20px;
   position: absolute;
-  top: 40px;
+  top: 55px;
   left: 40px;
   color: var(--blue, #2D46B9);
   font-size: 40px;
@@ -155,6 +155,29 @@ button {
   grid-template-columns: 1fr; /* Single column for mobile view */
   gap: 10px;
   width: 100%; /* Set the width of the grid to occupy the full width of the form */
+  margin-top: 110px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding-top: 10px;
+  &.edit {
+    margin-right: 20px;
+  }
+} 
+.section{
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
 }
 
 @media (min-width: 600px) {
@@ -167,7 +190,6 @@ button {
 .form-row {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px; /* Add space between each form row */
   margin-right: 100px
 }
 
@@ -390,7 +412,7 @@ label {
 }
  
 form {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
 }
  
 .form-group-ep {
@@ -566,6 +588,14 @@ form {
   .mobile{
     display: block;
   }
+  .form-grid{  
+    margin-top: unset;
+  }
+  .password-toggle {
+    &.edit {
+      margin-right: unset;
+    }
+  } 
 }
 
 /* ================= Mobile View (Landscape) ================= */

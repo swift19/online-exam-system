@@ -34,8 +34,8 @@
                     ?>
         </span>
         <br/>
-        <label for="student-no">Student No:</label>
-        <input type="text" name="studentid" id="student-no" placeholder="Enter your Student No." class="rounded-input" required>
+        <label for="student-no">LRN ID:</label>
+        <input type="text" name="studentid" id="student-no" placeholder="Enter your LRN ID." class="rounded-input" required>
         <br/>
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" placeholder="Enter your password" class="rounded-input" required>

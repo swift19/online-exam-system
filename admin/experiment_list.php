@@ -37,12 +37,23 @@
                                     }
                                 ?>
                                 <?php 
-                                    if (isset($_GET['id'])) {
-                                        include 'db.php';
+                                    include 'db.php';
+                                    if (isset($_GET['id']) && isset($_GET['isdelete'])) {                                        
                                         $dlt = "DELETE FROM experiment WHERE id = '$_GET[id]'";
                                         mysqli_query ($link, $dlt);
                                         echo "<font color='red'>Delete Success!</font>";
                                     }
+                                    if (isset($_GET['islock']) && isset($_GET['id'])) {
+                                        if ($_GET['islock'] == 1) {
+                                            $dlt = "UPDATE experiment SET islock = 0 WHERE id = '$_GET[id]'";
+                                            mysqli_query($link, $dlt);
+                                            echo "<font color='green'>Unlock Success!</font>";
+                                        } else {
+                                            $dlt = "UPDATE experiment SET islock = 1 WHERE id = '$_GET[id]'";
+                                            mysqli_query($link, $dlt);
+                                            echo "<font color='green'>Lock Success!</font>";
+                                        }
+                                    }                                    
                                 ?>
                             </span>
                                 
@@ -55,6 +66,7 @@
                                                 <th>Experiment Name</th>
                                                 <th>URL</th>
                                                 <th>Add Question</th>
+                                                <th>Lock/Unlock</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
@@ -69,8 +81,14 @@
                                                 <td><?php echo ++$sl; ?></td>
                                                 <td><?php echo $data['name']; ?></td>
                                                 <td><?php echo $data['url']; ?></td>
-                                                <td><a href="question_experiment_add.php?id=<?php echo $data['id']; ?>">Add Question</a></td>
-                                                <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
+                                                <td><a href="question_experiment_add.php?id=<?php echo $data['id']; ?>">Click Me</a></td>
+                                                <td>
+                                                    <a href="?islock=<?php echo $data['islock']; ?>&id=<?php echo $data['id']; ?>" 
+                                                        onclick="return confirm('Confirm Action?');">
+                                                        <?php echo $data['islock'] > 0 ? 'Unlock':'Lock'; ?>
+                                                    </a>    
+                                                </td>
+                                                <td><a href="?isdelete=true&id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
                                             </tr> 
                                             <?php } ?>                                           
                                         </tbody>

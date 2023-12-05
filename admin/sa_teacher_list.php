@@ -56,11 +56,22 @@
                                     }
                                 ?>
                                 <?php 
-                                    if (isset($_GET['id'])) {
+                                      if (isset($_GET['id']) && isset($_GET['isdelete'])) { 
                                         include 'db.php';
                                         $dlt = "DELETE FROM admin WHERE id = '$_GET[id]'";
                                         mysqli_query ($link, $dlt);
                                         echo "<font color='red'>Delete Success!</font>";
+                                    }
+                                    if (isset($_GET['status']) && isset($_GET['id'])) {
+                                        if ($_GET['status'] == 1) {
+                                            $dlt = "UPDATE admin SET status = 2 WHERE id = '$_GET[id]'";
+                                            mysqli_query($link, $dlt);
+                                            echo "<font color='green'>Status Change to Inactive!</font>";
+                                        } else if ($_GET['status'] == 2) {
+                                            $dlt = "UPDATE admin SET status = 1 WHERE id = '$_GET[id]'";
+                                            mysqli_query($link, $dlt);
+                                            echo "<font color='green'>Status Change to Active!</font>";
+                                        }
                                     }
                                 ?>
                             </span>
@@ -85,7 +96,7 @@
                                                 <?php 
                                                     include 'db.php';    
                                                     $sl = 0;
-                                                    $query = mysqli_query($link, "select * from admin where status = '1'");
+                                                    $query = mysqli_query($link, "select * from admin");
                                                     while($data = mysqli_fetch_array($query)) {                                            
                                                 ?>
                                                 <td><?php echo ++$sl; ?></td>
@@ -94,9 +105,17 @@
                                                 <td><?php echo $data['mobile']; ?></td>
                                                 <td><?php echo $data['email']; ?></td>
                                                 <td><?php echo $data['pass']; ?></td>
-                                                <td><?php echo $data['status'] === '1' ? 'Active' : 'Inactive'; ?></td>
                                                 <td>
-                                                    <a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a> 
+                                                    <a href="?status=<?php echo $data['status']; ?>&id=<?php echo $data['id']; ?>" 
+                                                        <?php if ($data['status'] == 1 || $data['status'] > 1): ?>
+                                                            onclick="return confirm('Confirm Action?');"
+                                                        <?php endif; ?>
+                                                        style="color: <?php echo $data['status'] == 1 ? 'green' : ($data['status'] > 1 ? 'red' : 'orange'); ?>">
+                                                        <?php echo $data['status'] == 1 ? 'Active' : ($data['status'] > 1 ? 'Inactive' : 'Pending'); ?>
+                                                    </a>    
+                                                </td>
+                                                <td>
+                                                    <a href="?isdelete=true&?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a> 
                                                     &nbsp;/&nbsp; 
                                                     <a class="assignButton" href="#" data-teacherid="<?php echo $data['id']; ?>" onclick="openModal(this); return false;">Change Password</a>
                                                 </td>

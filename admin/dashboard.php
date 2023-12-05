@@ -32,7 +32,16 @@
                                 <?php if ($_SESSION['u']==='superadmin') { ?>
                                     <h2 class="pageheader-title">Welcome to Super Admin Dashboard </h2>
                                 <?php } else { ?>
-                                    <h2 class="pageheader-title">Welcome to Admin Dashboard </h2>
+                                    <h2 class="pageheader-title">Welcome <?php echo $_SESSION['n']; ?> </h2>
+                                    <a style="cursor: pointer;" onclick="openPDF()"><i class="fas fa-book mr-2"></i>KBA |  </a>
+                                    <?php 
+                                        include 'db.php';
+                                        $currentDate = date('Y-m-d');
+                                        $query = mysqli_query($link, "SELECT * FROM semester WHERE status = '1' AND '$currentDate' BETWEEN startDate AND endDate");
+                                        while($data = mysqli_fetch_array($query)) {
+                                            echo "$data[name]";
+                                        }
+                                    ?>
                                 <?php } ?>
                                 </div>
                             </div>
@@ -195,7 +204,7 @@
                                                 <a href="" style="color:red; padding-left:20px;" id="assignAllButton">Accept All</a>
                                             </div>
                                             <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 25px;">
-                                                <input type="text" id="searchBox" placeholder="Search...">
+                                                <input type="text" id="searchBox" placeholder="Search by name or section">
                                                 <button id="searchButton" class="btn btn-primary btn-xs ml-2">Search</button>
                                             </div>
                                         </div>
@@ -204,9 +213,9 @@
                                                 <thead class="bg-light">
                                                     <tr>
                                                         <th><input type="checkbox" id="selectAll"></th>                                                        
-                                                        <th>Student ID</th>
+                                                        <th>LRN ID</th>
                                                         <th>Full Name</th>
-                                                        <th>Dept.</th>
+                                                        <th>Section</th>
                                                         <th>Phone No.</th>
                                                         <th>Email</th>                                                    
                                                         <th>Address</th>
@@ -252,6 +261,10 @@
         <?php include 'footer_file.php'; ?>
 
         <script>
+            function openPDF() {
+                var pdfPath = 'assets/teacher-kba.pdf';
+                window.open(pdfPath, '_blank');
+            }
             document.getElementById("searchButton").addEventListener("click", function() {
                 var searchValue = document.getElementById("searchBox").value;
                 var sessionId = <?php echo json_encode($_SESSION['id']); ?>;

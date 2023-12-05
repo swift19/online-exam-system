@@ -17,6 +17,9 @@
             $_SESSION['a'] = $data['address'];
 			$_SESSION['s'] = $data['status'];
 			$_SESSION['i'] = $data['image'];
+            $_SESSION['cp'] = $data['conPerson'];
+            $_SESSION['cn'] = $data['conNumber'];
+            $_SESSION['ca'] = $data['conAddress'];
         }
 ?>
 <!doctype html>
@@ -125,36 +128,50 @@
                         }
                         // Update Profile
                         if (isset($_POST['name'])) {
-                            if ($_POST['name'] != "") {                                        
-                                
-                                $studentid = $_POST['studentid'];
-                                $name = $_POST['name'];
-                                $dept = $_POST['dept'];
-                                $phoneno = $_POST['phoneno'];
-                                $email = $_POST['email'];
-                                $pass = $_POST['password']; 
-                                $address = $_POST['address'];
-                                $ins = "UPDATE student SET 
-                                        studentid ='$studentid',
-                                        name ='$name',
-                                        dept ='$dept',
-                                        phoneno ='$phoneno',
-                                        email ='$email',
-                                        pass ='$pass',
-                                        address ='$address'
-                                        WHERE id='$_SESSION[id]'";
-                                          
-                                if (mysqli_query ($link, $ins)) {
-                                    echo "<script>";
-                                    echo "self.location='edit_profile.php?msg=<font color=green>Update Profile Success!</font>';";                                                                        
-                                    echo "</script>";                                    
+                            $studentid = $_POST['studentid'];
+                            $name = $_POST['name'];
+                            $dept = $_POST['dept'];
+                            $phoneno = $_POST['phoneno'];
+                            $email = $_POST['email'];
+                            $pass = $_POST['password']; 
+                            $address = $_POST['address'];
+                            $conPerson = $_POST['conPerson'];
+                            $conNumber = $_POST['conNumber'];
+                            $conAddress = $_POST['conAddress'];
+
+                            if ($_POST['name'] != "") {                      
+
+                                if(strpos($email, '@gmail.com') !== false){
+                                    $ins = "UPDATE student SET 
+                                    studentid ='$studentid',
+                                    name ='$name',
+                                    dept ='$dept',
+                                    phoneno ='$phoneno',
+                                    email ='$email',
+                                    pass ='$pass',
+                                    address ='$address',
+                                    conPerson ='$conPerson',
+                                    conNumber ='$conNumber',
+                                    conAddress ='$conAddress'
+                                    WHERE id='$_SESSION[id]'";
+                                      
+                                    if (mysqli_query ($link, $ins)) {
+                                        echo "<script>";
+                                        echo "self.location='edit_profile.php?msg=<font color=green>Update Profile Success!</font>';";                                                                        
+                                        echo "</script>";                                    
+                                    } else {
+                                        echo "<script>";
+                                        echo "self.location='edit_profile.php?msg=<font color=red>Not Success!</font>';";
+                                        echo "</script>";
+                                    }
+                            
                                 } else {
                                     echo "<script>";
-                                    echo "self.location='edit_profile.php?msg=<font color=red>Not Success!</font>';";
+                                    echo "self.location='edit_profile.php?msg=<font color=red>Invalid Email address!</font>';";
                                     echo "</script>";
-                                }
-                                
-                            }           
+                                }     
+                               
+                            }  
                         }               
                     ?>
                     <?php 
@@ -199,35 +216,59 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group-ep">
-                                                        <span>Student ID</span>
-                                                        <input name="studentid" value="<?php echo $_SESSION['si']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Student ID" autocomplete="off" required>
+                                                        <span>LRN ID</span>
+                                                        <input name="studentid" oninput="validateAlphanumeric(this)" value="<?php echo $_SESSION['si']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="LRN ID"   required>
                                                     </div>
                                                     <div class="form-group-ep">
-                                                        <span>Name</span>
-                                                        <input name="name" value="<?php echo $_SESSION['n']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Name" autocomplete="off" required>
+                                                        <span>Full Name</span>
+                                                        <input name="name" value="<?php echo $_SESSION['n']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Name"  required>
                                                     </div>
                                             
                                                     <div class="form-group-ep">
-                                                        <span>Department</span>
-                                                        <input name="dept" value="<?php echo $_SESSION['d']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Departmen" autocomplete="off" required>
+                                                        <span>Section</span>
+                                                        <select class="form-control-ep form-control-lg" id="dept" name="dept">
+                                                            <option value="<?php echo $_SESSION['d']; ?>"><?php echo $_SESSION['d']; ?></option>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group-ep">
                                                         <span>Phone No.</span>
-                                                        <input name="phoneno" value="<?php echo $_SESSION['pn']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Phone No." autocomplete="off" required>
+                                                        <input name="phoneno" value="<?php echo $_SESSION['pn']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Phone No."  required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group-ep">
                                                         <span>Email</span>
-                                                        <input name="email" value="<?php echo $_SESSION['e']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Email" autocomplete="off" required>
+                                                        <input name="email" oninput="validateEmail(this)" value="<?php echo $_SESSION['e']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Email"  required>
+                                                        <p id="emailError" style="color: red; font-size: 12px; margin: unset;"></p>
                                                     </div>
                                                     <div class="form-group-ep">
                                                         <span>Address</span>
-                                                        <input name="address" value="<?php echo $_SESSION['a']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Address" autocomplete="off" required>
+                                                        <input name="address" value="<?php echo $_SESSION['a']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Address"  required>
+                                                    </div>
+                                                    <div class="form-group-ep password-container ">
+                                                        <span>Password</span>
+                                                        <input type="password" id="password" name="password"  minlength="8" value="<?php echo $_SESSION['p']; ?>" class="form-control-ep form-control-lg" placeholder="Password"  required>
+                                                        <span class="password-toggle edit" onclick="togglePassword()">👁️</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <span>Emergency Contact Details</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group-ep">
+                                                        <span>Contact Person</span>
+                                                        <input name="conPerson" value="<?php echo $_SESSION['cp']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Contact Person"  required>
                                                     </div>
                                                     <div class="form-group-ep">
-                                                        <span>Password</span>
-                                                        <input name="password" value="<?php echo $_SESSION['p']; ?>" class="form-control-ep form-control-lg" type="password" placeholder="Password" autocomplete="off" required>
+                                                        <span>Contact No.</span>
+                                                        <input name="conNumber" value="<?php echo $_SESSION['cn']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Contact No" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group-ep">
+                                                        <span>Contact Address</span>
+                                                        <input name="conAddress" value="<?php echo $_SESSION['ca']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Contact Address" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,7 +288,52 @@
             
         </div>
     </div>
-  
+    <script>
+        function validateAlphanumeric(input) {
+            input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+        }
+        function validateEmail(input) {
+            const email = input.value;
+            const emailError = document.getElementById('emailError');
+
+            if (!input.checkValidity()) {
+                emailError.textContent = 'Please enter a valid email address.';
+                input.classList.add('invalid-email');
+            } else if (email.indexOf('@gmail.com') === -1) {
+                emailError.textContent = 'Please enter a Gmail address.';
+                input.classList.add('invalid-email');
+            } else {
+                emailError.textContent = '';
+                input.classList.remove('invalid-email');
+            }
+        }
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordToggle = document.querySelector('.password-toggle');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '👁️';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        }
+        fetch('sections.json')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('dept');
+            const filteredData = data.slice(1);
+            // Populate select options
+            filteredData.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.value;
+                optionElement.text = option.label;
+                select.appendChild(optionElement);
+            });
+        })
+        .catch(error => console.error('Error fetching sections.json:', error));
+  </script>
 </body>
  
 </html>

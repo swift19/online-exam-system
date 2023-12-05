@@ -65,11 +65,11 @@ if($_GET['secret'])
         </br>
         <input type="hidden" name="email" value="<?php echo $email; ?>"/>
         <label for="pwd">New Password</label>
-        <input type="password" name="pwd" id="pwd" placeholder="Enter your New Password" 
+        <input type="password" name="pwd" id="pwd" placeholder="Enter your New Password" minlength="8"
           data-parsley-type="pwd" data-parsley-trigger="keyup" class="rounded-input" required>
         
         <label for="cpwd">Confirm Password</label>
-        <input type="password" name="cpwd" id="cpwd" placeholder="Enter Confirm Password" 
+        <input type="password" name="cpwd" id="cpwd" placeholder="Enter Confirm Password" minlength="8"
           data-parsley-type="cpwd" data-parsley-trigger="keyup" class="form-control" required/>
         </br>
         <button type="submit" name="pwdrst" class="primary-button">Submit</button>

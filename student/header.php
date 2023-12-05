@@ -7,6 +7,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
+               
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
@@ -19,6 +20,7 @@
                                     </h5>
                                     <span class="status"></span><span class="ml-2">Online</span>
                                 </div>
+                                <a class="dropdown-item" onclick="openPDF()"><i class="fas fa-book mr-2"></i>KBA</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -47,3 +49,13 @@
                         </ul>
                 </div>
             </nav>
+
+<script>
+    function openPDF() {
+        // Provide the path to your PDF file
+        var pdfPath = 'assets/student-kba.pdf';
+
+        // Open the PDF in a new tab or window
+        window.open(pdfPath, '_blank');
+    }
+</script>

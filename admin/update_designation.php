@@ -12,7 +12,7 @@ if(isset($_POST['studentId']) && isset($_POST['sessionId']))  {
         echo "Error updating designation: " . mysqli_error($link);
     }
 } else {
-    echo "Invalid student ID.";
+    echo "Invalid LRN ID.";
 }
 
 ?>

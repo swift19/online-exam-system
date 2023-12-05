@@ -1,0 +1,9 @@
+[
+  {"value": "", "label": "Select Section"},
+  {"value": "FLEMING", "label": "FLEMING"},
+  {"value": "DESCARTES", "label": "DESCARTES"},
+  {"value": "LANDSTEINER", "label": "LANDSTEINER"},
+  {"value": "EUCLID", "label": "EUCLID"},
+  {"value": "TESLA", "label": "TESLA"},
+  {"value": "LEWIS", "label": "LEWIS"}
+]
