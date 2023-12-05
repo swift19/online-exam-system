@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2023 at 03:54 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Dec 05, 2023 at 07:06 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,15 +36,18 @@ CREATE TABLE `admin` (
   `pass` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `image` blob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `name`, `mobile`, `email`, `pass`, `status`, `image`) VALUES
-(1, 'admin', 'Teacher 1', '9354123456', 'admin@mail.com', '345', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
-(2, 'test', 'Teacher 2', '9354804461', 'test@mail.com', 'test', 1, '');
+(1, 'admin', 'Teacher 1', '9354123456', 'geraldbathan24@gmail.com', '12345678', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
+(2, 'test', 'Teacher 2', '9364804461', 'test@gmail.com', '12345678', 1, ''),
+(200101080, 'test2', 'Teacher 3', '9354804412', 'test2@gmail.com', '12345678', 0, NULL),
+(200101081, 'test3', 'Teacher 4', '9320045741', 'test3@gmail.com', '12345678', 0, NULL),
+(200101082, 'test4', 'Teacher 5', '9329945741', 'test-data@mailinator.com', '12345678', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,19 +65,22 @@ CREATE TABLE `exam` (
   `duration` int(11) DEFAULT NULL,
   `question_mark` int(11) DEFAULT NULL,
   `total_mark` int(11) DEFAULT NULL,
-  `total_question` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `total_question` int(11) NOT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`id`, `semester_id`, `subject_id`, `name`, `status`, `admin_id`, `duration`, `question_mark`, `total_mark`, `total_question`) VALUES
-(6, 4, 8, 'BIOLOGY | FINAL EXAM', 1, 1, 5, 1, 1, 10),
-(7, 4, 9, 'CHEMISTRY 101 | FINAL EXAM', 1, 1, 3, 5, 5, 5),
-(10, 4, 10, 'PHYSICS 201', 1, 1, 1, 1, 1, 3),
-(11, 4, 8, 'BIOLOGY | MIDTERM', 1, 1, 5, 1, 1, 5),
-(12, 4, 8, 'Testing Biology', 1, 1, 1, 1, 1, 3);
+INSERT INTO `exam` (`id`, `semester_id`, `subject_id`, `name`, `status`, `admin_id`, `duration`, `question_mark`, `total_mark`, `total_question`, `startDate`, `endDate`) VALUES
+(6, 4, 8, 'HUMAN ANATOMY', 1, 1, 5, 1, 1, 10, '2023-11-01', '2025-12-01'),
+(7, 4, 9, 'CHEMISTRY 101 | FINAL EXAM', 1, 1, 3, 5, 5, 5, '2023-11-01', '2025-12-01'),
+(10, 4, 10, 'PHYSICS 201', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
+(11, 4, 8, 'BIOLOGY | MIDTERM', 1, 1, 5, 1, 1, 5, '2023-11-01', '2025-12-01'),
+(12, 4, 8, 'SCIENCE 101', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
+(14, 5, 10, 'EXPERIMENTAL BEHAVIOR', 1, 1, 1, 1, 1, 1, '2023-12-01', '2023-12-04');
 
 -- --------------------------------------------------------
 
@@ -90,19 +96,21 @@ CREATE TABLE `experiment` (
   `status` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `description` text NOT NULL,
-  `custom` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `custom` tinyint(1) NOT NULL,
+  `islock` tinyint(1) NOT NULL,
+  `prev_islock` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `experiment`
 --
 
-INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `description`, `custom`) VALUES
-(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 'Density is a word we use to describe how much space an object or substance takes up (its volume) in relation \nto the amount of matter in that object or substance (its mass). Another way to put it is that density is the \namount of mass per unit of volume. If an object is heavy and compact, it has a high density.', 0),
-(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1),
-(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0),
-(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0),
-(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1);
+INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `description`, `custom`, `islock`, `prev_islock`) VALUES
+(1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 'Density is a word we use to describe how much space an object or substance takes up (its volume) in relation \nto the amount of matter in that object or substance (its mass). \n\n<img src=\"https://blog.udemy.com/wp-content/uploads/2014/05/bigstock-test-icon-63758263.jpg\" width=250 height=100>\n\nAnother way to put it is that density is the \namount of mass per unit of volume. If an object is heavy and compact, it has a high density.', 0, 0, 0),
+(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1, 0, 0),
+(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0, 0, 0),
+(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0, 0, 0),
+(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +126,7 @@ CREATE TABLE `meritlist` (
   `subjectid` int(11) NOT NULL,
   `marks` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -135,7 +143,7 @@ CREATE TABLE `pdf` (
   `pdf_file` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pdf`
@@ -161,7 +169,7 @@ CREATE TABLE `question` (
   `op4` text NOT NULL,
   `ans` varchar(100) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `question`
@@ -193,8 +201,7 @@ INSERT INTO `question` (`id`, `exam_id`, `des`, `op1`, `op2`, `op3`, `op4`, `ans
 (28, 10, 'Question 2', 'type A', 'type B', 'type C', 'type D', 'd', 1),
 (29, 10, 'testing 3', 'test 1', 'test 2', 'test 3', 'test 4', 'd', 1),
 (30, 12, '1+1 =', '2', '4', '3', '5', 'a', 1),
-(44, 12, '2', '2', '2', '2', '2', 'a', 1),
-(47, 12, '3', '3', '3', '3', '3', 'a', 1);
+(44, 12, '2', '2', '2', '2', '2', 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -212,14 +219,15 @@ CREATE TABLE `question_experiment` (
   `op4` text NOT NULL,
   `ans` varchar(100) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `question_experiment`
 --
 
 INSERT INTO `question_experiment` (`id`, `experiment_id`, `des`, `op1`, `op2`, `op3`, `op4`, `ans`, `status`) VALUES
-(0, 1, 'What is Density?', 'Density is a substance of mass per unit volume', 'N/A', 'N/A', 'N/A', 'a', 1);
+(1, 1, 'What is my favorite color', 'Red', 'Blue', 'Black', 'Green', 'b', 1),
+(6, 9, 'What is my age range', '20s', '30s', '40s', '50s', 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -238,7 +246,7 @@ CREATE TABLE `result` (
   `question_mark` varchar(10) NOT NULL,
   `sts` varchar(10) NOT NULL COMMENT '0 = no action, 1 = correct ans, 2 = wrong ans, 3 = skiped, 4 = blank ans',
   `unique_code` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `result`
@@ -532,7 +540,18 @@ INSERT INTO `result` (`id`, `sl`, `student_id`, `exam_id`, `question_id`, `corre
 (321, 8, 1, 6, 13, 'a', '0', '0', '0', '1697105192_1_686'),
 (322, 9, 1, 6, 14, 'a', '0', '0', '0', '1697105192_1_686'),
 (323, 10, 1, 6, 15, 'c', '0', '0', '0', '1697105192_1_686'),
-(324, 11, 1, 6, 16, 'b', '0', '0', '0', '1697105192_1_686');
+(324, 11, 1, 6, 16, 'b', '0', '0', '0', '1697105192_1_686'),
+(325, 1, 2, 6, 6, 'c', 'a', '0', '2', '1701159952_2_204'),
+(326, 2, 2, 6, 7, 'b', 'a', '0', '2', '1701159952_2_204'),
+(327, 3, 2, 6, 8, 'd', 'a', '0', '2', '1701159952_2_204'),
+(328, 4, 2, 6, 9, 'c', 'a', '0', '2', '1701159952_2_204'),
+(329, 5, 2, 6, 10, 'd', 'c', '0', '2', '1701159952_2_204'),
+(330, 6, 2, 6, 11, 'c', 'c', '1', '1', '1701159952_2_204'),
+(331, 7, 2, 6, 12, 'a', 'c', '0', '2', '1701159952_2_204'),
+(332, 8, 2, 6, 13, 'a', 'd', '0', '2', '1701159952_2_204'),
+(333, 9, 2, 6, 14, 'a', 'd', '0', '2', '1701159952_2_204'),
+(334, 10, 2, 6, 15, 'c', 'a', '0', '2', '1701159952_2_204'),
+(335, 11, 2, 6, 16, 'b', 'a', '0', '2', '1701159952_2_204');
 
 -- --------------------------------------------------------
 
@@ -551,7 +570,7 @@ CREATE TABLE `result_experiment` (
   `question_mark` varchar(10) NOT NULL,
   `sts` varchar(10) NOT NULL COMMENT '0 = no action, 1 = correct ans, 2 = wrong ans, 3 = skiped, 4 = blank ans',
   `unique_code` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `result_experiment`
@@ -559,7 +578,8 @@ CREATE TABLE `result_experiment` (
 
 INSERT INTO `result_experiment` (`id`, `sl`, `student_id`, `experiment_id`, `question_id`, `correct_ans`, `given_ans`, `question_mark`, `sts`, `unique_code`) VALUES
 (0, 1, 1, 1, 0, 'a', 'c', '0', '2', '1697118610_1_165'),
-(0, 1, 1, 1, 0, 'a', 'c', '0', '2', '1697118637_1_734');
+(0, 1, 1, 1, 0, 'a', 'c', '0', '2', '1697118637_1_734'),
+(0, 1, 2, 1, 1, 'a', '0', '1', '0', '1701160729_2_663');
 
 -- --------------------------------------------------------
 
@@ -578,15 +598,15 @@ CREATE TABLE `result_summery` (
   `created_at` date NOT NULL DEFAULT current_timestamp(),
   `semester_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `result_summery`
 --
 
 INSERT INTO `result_summery` (`id`, `student_id`, `exam_id`, `total_mark`, `your_mark`, `sts`, `unique_code`, `created_at`, `semester_id`, `subject_id`) VALUES
-(16, 1, 6, '1', '0', 1, '1691385761_8_577', '2023-08-07', 4, 8),
-(17, 1, 6, '1', '0', 1, '1691385827_8_283', '2023-08-07', 4, 8),
+(16, 1, 6, '4', '4', 1, '1691385761_8_577', '2023-08-07', 4, 8),
+(17, 1, 6, '8', '8', 1, '1691385827_8_283', '2023-08-07', 4, 8),
 (18, 2, 6, '1', '0', 1, '1691385844_8_343', '2023-08-07', 4, 8),
 (19, 2, 6, '1', '0', 1, '1691385904_8_770', '2023-08-07', 4, 8),
 (20, 2, 6, '1', '0', 1, '1691385904_8_770', '2023-08-07', 4, 8),
@@ -614,13 +634,14 @@ INSERT INTO `result_summery` (`id`, `student_id`, `exam_id`, `total_mark`, `your
 (42, 1, 12, '1', '0', 1, '1695878172_1_790', '2023-09-28', 4, 8),
 (43, 1, 12, '1', '0', 1, '1695878428_1_178', '2023-09-28', 4, 8),
 (44, 1, 12, '1', '1', 1, '1695878730_1_431', '2023-09-28', 4, 8),
-(45, 1, 12, '1', '3', 1, '1695882044_1_221', '2023-09-28', 4, 8),
+(45, 1, 12, '1', '2', 1, '1695882044_1_221', '2023-09-28', 4, 8),
 (46, 1, 12, '1', '3', 1, '1695882206_1_649', '2023-09-28', 4, 8),
 (47, 1, 12, '1', '3', 1, '1695882421_1_613', '2023-09-28', 4, 8),
 (48, 1, 12, '1', '3', 1, '1695882448_1_347', '2023-09-28', 4, 8),
 (49, 1, 6, '1', '0', 0, '1695893181_1_670', '2023-09-28', 4, 8),
 (50, 1, 0, '', '0', 0, '1697102360_1_926', '2023-10-12', 0, 0),
-(51, 1, 6, '1', '0', 0, '1697105192_1_686', '2023-10-12', 4, 8);
+(51, 1, 6, '1', '0', 0, '1697105192_1_686', '2023-10-12', 4, 8),
+(52, 2, 6, '1', '1', 1, '1701159952_2_204', '2023-11-28', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -637,15 +658,17 @@ CREATE TABLE `result_summery_experiment` (
   `sts` int(11) NOT NULL,
   `unique_code` varchar(255) NOT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `result_summery_experiment`
 --
 
 INSERT INTO `result_summery_experiment` (`id`, `student_id`, `experiment_id`, `total_mark`, `your_mark`, `sts`, `unique_code`, `created_at`) VALUES
-(0, 1, 1, '0', '1', 1, '1697118610_1_165', '2023-10-12'),
-(0, 1, 1, '0', '0', 1, '1697118637_1_734', '2023-10-12');
+(1, 1, 1, '0', '1', 1, '1697118610_1_165', '2023-10-12'),
+(2, 1, 1, '0', '3', 1, '1697118637_1_734', '2023-10-12'),
+(3, 2, 1, '0', '5', 1, '1701160729_2_663', '2023-11-28'),
+(4, 1, 5, '0', '2', 1, '1701660923_0_325', '2023-12-04');
 
 -- --------------------------------------------------------
 
@@ -657,17 +680,19 @@ CREATE TABLE `semester` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `admin_id` int(11) NOT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `semester`
 --
 
-INSERT INTO `semester` (`id`, `name`, `status`, `admin_id`) VALUES
-(4, '1st Semester', 1, 1),
-(5, '2nd Semester', 1, 1),
-(6, '3nd Semester', 1, 1);
+INSERT INTO `semester` (`id`, `name`, `status`, `admin_id`, `startDate`, `endDate`) VALUES
+(4, '1st Semester', 1, 0, '2023-12-01', '2023-12-04'),
+(5, '2nd Semester', 1, 0, '2023-12-05', '2023-12-13'),
+(6, '3nd Semester', 1, 0, '2023-12-14', '2023-12-31');
 
 -- --------------------------------------------------------
 
@@ -677,7 +702,7 @@ INSERT INTO `semester` (`id`, `name`, `status`, `admin_id`) VALUES
 
 CREATE TABLE `student` (
   `id` int(11) NOT NULL,
-  `studentid` int(11) NOT NULL,
+  `studentid` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `dept` varchar(255) NOT NULL,
   `phoneno` varchar(100) NOT NULL,
@@ -686,21 +711,27 @@ CREATE TABLE `student` (
   `address` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `designation` int(11) NOT NULL,
-  `image` blob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `image` blob DEFAULT NULL,
+  `conPerson` varchar(255) DEFAULT NULL,
+  `conNumber` varchar(255) DEFAULT NULL,
+  `conAddress` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `studentid`, `name`, `dept`, `phoneno`, `email`, `pass`, `address`, `status`, `designation`, `image`) VALUES
-(1, 20230727, 'Test Student 1', 'CS7', '09354804468', 'test1@gmail.com', '123', 'test address 1', 1, 1, 0x6173736574732f696d616765732f75736572732f73747564656e742e706e67),
-(2, 20230728, 'Test Student 2', 'COE', '09994804423', 'test2@gmail.com', '123', 'test address 2', 1, 1, NULL),
-(3, 20230729, 'Test Student 3', 'BEA', '09894828423', 'test3@gmail.com', '123', 'test address 3', 1, 2, NULL),
-(4, 20230730, 'Test Student 4', 'NU2', '09234891423', 'test4@gmail.com', '123', 'test address 4', 1, 2, NULL),
-(12, 20230830, 'Test Student 5', 'OP4', '09234891612', 'test5@gmail.com', '123', 'test address 5', 1, 0, NULL),
-(13, 20230901, 'Test Student 6', 'KR4', '09354478810', 'test6@gmail.com', '123', 'test address 6', 1, 0, NULL),
-(14, 66666, 'test', 'test', 'test', 'geraldbathan24@gmail.com', '123', 'test', 1, 0, NULL);
+INSERT INTO `student` (`id`, `studentid`, `name`, `dept`, `phoneno`, `email`, `pass`, `address`, `status`, `designation`, `image`, `conPerson`, `conNumber`, `conAddress`) VALUES
+(1, '20230727', 'Test Student 1', 'AB2', '09354804468', 'test1@gmail.com', '123', 'test address 1', 1, 1, 0x6173736574732f696d616765732f75736572732f73747564656e742e706e67, '555', '25', '34'),
+(2, '20230728', 'Test Student 2', 'COE', '09994804423', 'test2@gmail.com', '123', 'test address 2', 1, 1, NULL, '', '', ''),
+(3, '20230729', 'Test Student 3', 'BEA', '09894828423', 'test3@gmail.com', '123', 'test address 3', 1, 2, NULL, '', '', ''),
+(4, '20230730', 'Test Student 4', 'NU2', '09234891423', 'test4@gmail.com', '123', 'test address 4', 1, 2, NULL, '', '', ''),
+(12, '20230830', 'Test Student 5', 'OP4', '09234891612', 'test5@gmail.com', '123', 'test address 5', 1, 0, NULL, '', '', ''),
+(13, '20230901', 'Test Student 6', 'KR4', '09354478810', 'test6@gmail.com', '123', 'test address 6', 1, 0, NULL, '', '', ''),
+(14, '66666', 'test', 'test', 'test', 'geraldbathan24@gmail.com', '123', 'test', 1, 0, NULL, '', '', ''),
+(15, '20230727', 'www', '', '123', 'test@mailinator.com', '12345678', 'qwf', 0, 0, NULL, 'qwrqr', 'qe12e12e', 'qwfqwf'),
+(16, '22', '22', '33', '33', '44', '44', '44', 1, 0, NULL, '', '', ''),
+(18, 'admin123', '123', 'Section B', '123', '123@gmail.com', '123', 'qwrqw', 1, 1, NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -714,7 +745,7 @@ CREATE TABLE `subject` (
   `name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `subject`
@@ -740,7 +771,7 @@ CREATE TABLE `vdo` (
   `url` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `vdo`
@@ -748,7 +779,7 @@ CREATE TABLE `vdo` (
 
 INSERT INTO `vdo` (`id`, `semester_id`, `subject_id`, `exam_id`, `title`, `url`, `status`, `admin_id`) VALUES
 (5, 4, 8, 6, 'Biology: Cell Structure I Nucleus Medical Media', 'URUJD5NEXC8?si=SA-uTTc1FhBbXype', 1, 1),
-(6, 4, 8, 11, 'Frog Dissection: Internal Anatomy', 'iDRzbRlUzDw?si=GzcpQDk-c6uqQ-NT', 1, 1);
+(6, 4, 8, 11, 'Frog Dissection: Internal Anatomy', 'jdgs3VRZezo?si=eC6rMmKRYlw-Jdfs', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -791,6 +822,12 @@ ALTER TABLE `question`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `question_experiment`
+--
+ALTER TABLE `question_experiment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `result`
 --
 ALTER TABLE `result`
@@ -800,6 +837,12 @@ ALTER TABLE `result`
 -- Indexes for table `result_summery`
 --
 ALTER TABLE `result_summery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `result_summery_experiment`
+--
+ALTER TABLE `result_summery_experiment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -834,19 +877,19 @@ ALTER TABLE `vdo`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200101079;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200101083;
 
 --
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `experiment`
 --
 ALTER TABLE `experiment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `meritlist`
@@ -864,31 +907,43 @@ ALTER TABLE `pdf`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT for table `question_experiment`
+--
+ALTER TABLE `question_experiment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=336;
 
 --
 -- AUTO_INCREMENT for table `result_summery`
 --
 ALTER TABLE `result_summery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `result_summery_experiment`
+--
+ALTER TABLE `result_summery_experiment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `subject`
