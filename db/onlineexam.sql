@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 07:06 AM
+-- Generation Time: Dec 06, 2023 at 02:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -551,7 +551,13 @@ INSERT INTO `result` (`id`, `sl`, `student_id`, `exam_id`, `question_id`, `corre
 (332, 8, 2, 6, 13, 'a', 'd', '0', '2', '1701159952_2_204'),
 (333, 9, 2, 6, 14, 'a', 'd', '0', '2', '1701159952_2_204'),
 (334, 10, 2, 6, 15, 'c', 'a', '0', '2', '1701159952_2_204'),
-(335, 11, 2, 6, 16, 'b', 'a', '0', '2', '1701159952_2_204');
+(335, 11, 2, 6, 16, 'b', 'a', '0', '2', '1701159952_2_204'),
+(336, 1, 1, 12, 30, 'a', 'a', '1', '1', '1701756532_1_406'),
+(337, 2, 1, 12, 44, 'a', 'a', '1', '1', '1701756532_1_406'),
+(338, 1, 1, 12, 30, 'a', 'b', '0', '2', '1701756597_1_927'),
+(339, 2, 1, 12, 44, 'a', 'b', '0', '2', '1701756597_1_927'),
+(340, 1, 1, 12, 30, 'a', 'c', '0', '2', '1701756976_1_333'),
+(341, 2, 1, 12, 44, 'a', 'c', '0', '2', '1701756976_1_333');
 
 -- --------------------------------------------------------
 
@@ -641,7 +647,10 @@ INSERT INTO `result_summery` (`id`, `student_id`, `exam_id`, `total_mark`, `your
 (49, 1, 6, '1', '0', 0, '1695893181_1_670', '2023-09-28', 4, 8),
 (50, 1, 0, '', '0', 0, '1697102360_1_926', '2023-10-12', 0, 0),
 (51, 1, 6, '1', '0', 0, '1697105192_1_686', '2023-10-12', 4, 8),
-(52, 2, 6, '1', '1', 1, '1701159952_2_204', '2023-11-28', 4, 8);
+(52, 2, 6, '1', '1', 1, '1701159952_2_204', '2023-11-28', 4, 8),
+(53, 1, 12, '1', '2', 1, '1701756532_1_406', '2023-12-05', 4, 8),
+(54, 1, 12, '1', '0', 1, '1701756597_1_927', '2023-12-05', 4, 8),
+(55, 1, 12, '1', '0', 1, '1701756976_1_333', '2023-12-05', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -744,17 +753,20 @@ CREATE TABLE `subject` (
   `semester_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL
+  `admin_id` int(11) NOT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `semester_id`, `name`, `status`, `admin_id`) VALUES
-(8, 4, 'BIOLOGY', 1, 1),
-(9, 4, 'CHEMISTRY', 1, 1),
-(10, 4, 'PHYSICS', 1, 1);
+INSERT INTO `subject` (`id`, `semester_id`, `name`, `status`, `admin_id`, `startDate`, `endDate`) VALUES
+(8, 4, 'BIOLOGY', 1, 1, '2022-12-01', '2024-12-31'),
+(9, 4, 'CHEMISTRY', 1, 1, '2022-12-01', '2024-12-31'),
+(10, 4, 'PHYSICS', 1, 1, '2022-12-01', '2024-12-31'),
+(13, 5, 'NEUROLOGY', 1, 1, '2023-12-01', '2023-12-05');
 
 -- --------------------------------------------------------
 
@@ -919,13 +931,13 @@ ALTER TABLE `question_experiment`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=336;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
 
 --
 -- AUTO_INCREMENT for table `result_summery`
 --
 ALTER TABLE `result_summery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `result_summery_experiment`
@@ -949,7 +961,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `vdo`
