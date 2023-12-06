@@ -43,6 +43,10 @@
                 
                     
                                 $message = '<div>
+                                    <div style="background: linear-gradient(180deg, #2D46B9 0%, #1E3163 100%);  ">
+                                         <img src="http://localhost/online-exam-system/admin/assets/images/logo-stemulate.png" width=250 height=100 alt="logo-stemulate">
+                                    </div>
+                                    <br>
                                     <p><b>Hello!</b></p>
                                     <p>Thank you for registering with STEMulate! We are thrilled to welcome you to our community. To complete your registration and activate your account, please click the button below:</p>
                                     <br>

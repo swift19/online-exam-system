@@ -42,7 +42,8 @@
                             if ($_POST['name'] != "") {                                        
                                 
                                 $email = $_POST['email'];
-                                if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                                $query = mysqli_query($link, "select * from student where email = '$email'");
+                                if(filter_var($email, FILTER_VALIDATE_EMAIL  && mysqli_num_rows($query) < 1)){
                                     $name = $_POST['name'];
                                     $username = $_POST['username'];
                                     $mobile = $_POST['mobile'];
@@ -96,6 +97,10 @@
                                         echo "self.location='registration.php?msg=<font color=red>Not Success!</font>';";
                                         echo "</script>";
                                     }
+                                } else {
+                                    echo "<script>";
+                                    echo "self.location='registration.php?msg=<font color=red>Email is already used! Please try other email</font>';";
+                                    echo "</script>";
                                 }
                                
                             }           

@@ -59,7 +59,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                         <div class="card">
                             
-                            <h5 class="card-header">Add New Subject </h5>
+                            <h5 class="card-header">Add New Exam </h5>
                                 
                             <div class="card-body">
                                 <form action="#" method="post">
@@ -77,7 +77,8 @@
                                             <option value="" selected disabled>Select Subject</option>
                                             <?php 
                                                 include 'db.php';
-                                                $query = mysqli_query($link, "select * from subject where status='1'");
+                                                $currentDate = date('Y-m-d');
+                                                $query = mysqli_query($link, "select * from subject where status='1' AND '$currentDate' BETWEEN startDate AND endDate");
                                                 while($data = mysqli_fetch_array($query)) {
                                                     echo "<option value='$data[id]'>$data[name]</option>";
                                                 }
@@ -96,7 +97,7 @@
                                         <br>
                                         <input name="total_question" class="form-control form-control-lg" type="number" placeholder="Total Question" autocomplete="off" required>
                                         <br>
-                                        <label for="startDate">Duration</label>
+                                        <label>Duration</label>
                                         <div class="form-group">
                                         <label for="startDate">Start Date:</label>
                                         <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" required>

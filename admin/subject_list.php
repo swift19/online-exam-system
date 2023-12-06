@@ -54,7 +54,7 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Semester</th>
-                                                
+                                                <th>Duration</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
@@ -76,7 +76,7 @@
                                                         }
                                                     ?>
                                                 </td>
-                                                
+                                                <td><?php echo $data['startDate']; ?>-<?php echo $data['endDate']; ?></td>
                                                 <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
                                             </tr> 
                                             <?php } ?>                                           

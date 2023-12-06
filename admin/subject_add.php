@@ -29,7 +29,10 @@
                     $name = $_POST['name'];
                     $semester_id = $_POST['semester_id'];
                     $admin_id = $_SESSION['id'];
-                    $ins = "INSERT INTO subject (semester_id, name, status, admin_id) VALUES ('$semester_id', '$name', '1', '$admin_id');";    
+                    $startDate = $_POST['startDate'];
+                    $endDate = $_POST['endDate'];
+                    $ins = "INSERT INTO subject (semester_id, name, status, admin_id,startDate,endDate) 
+                            VALUES ('$semester_id', '$name', '1', '$admin_id', '$startDate', '$endDate');";    
 
                     if (mysqli_query ($link, $ins)) {           
                         echo "<script>";
@@ -63,7 +66,16 @@
                                         ?>
                                         <br>
                                         <input name="name" class="form-control form-control-lg" type="text" placeholder="Subject Name" required>
-                                        
+                                        <br>
+                                        <label>Duration</label>
+                                        <div class="form-group">
+                                            <label for="startDate">Start Date:</label>
+                                            <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endDate">End Date:</label>
+                                            <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" required>
+                                        </div>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
                                 </form>

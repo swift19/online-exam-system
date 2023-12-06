@@ -59,7 +59,11 @@
                             <span class="arrow-icon fa fa-solid fa-chevron-right"></span>          
                             </button>
                         </form>
-
+                        <?php 
+                        include 'db.php';
+                        $query = mysqli_query($link, "SELECT DISTINCT islock FROM `experiment`");
+                        if(mysqli_num_rows($query) == 1) {
+                         ?>
                         <form action="laboratory-activities.php" method="get" class="dashboard-alignment">
                             <button type="submit" class="dashboard-button center">
                             <img src="./assets/images/lab-experiment.png" alt="Lab ExpeActivityriment Icon" class="dash-icon">
@@ -67,7 +71,7 @@
                             <span class="arrow-icon fa fa-solid fa-chevron-right"></span>       
                             </button>
                         </form>
-
+                        <?php } ?>
                         <!-- <form id="labExperimentForm" action="laboratory-activities.php" method="get" class="dashboard-alignment">
                             <button type="button" id="labExperimentButton" class="dashboard-button center">
                                 <img src="./assets/images/lab-experiment.png" alt="Lab Experiment Icon" class="dash-icon">

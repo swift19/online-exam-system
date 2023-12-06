@@ -45,7 +45,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             var iframe = document.getElementById("experiment-iframe");
-            var iframeContent = '<?php echo isset($_SESSION["url"]) ? $_SESSION["url"] : ""; ?>';
+            var iframeContent = '<?php echo isset($_SESSION["url"])  ?>';
 
             if (iframeContent) {
                 iframe.src = iframe.src; // Refresh the iframe's content
@@ -107,7 +107,7 @@
         ?>
 
         <div id="examSelected" style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;display: none;">
-            <h4>Exam Name : <a data-experiment=""  onclick="openModal(this); return false;" ><?php echo $data2['name']; ?></a></h4>
+            <h4>Exam Name : <?php echo $data2['name']; ?><a data-experiment=""  onclick="openModal(this); return false;" style="cursor:pointer"> &#128712</a></h4>
             <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
             <a href="start_quiz_ex.php?experiment_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
         </div>
@@ -147,28 +147,28 @@
 
         // Listen for the change event on the first dropdown
         document.getElementById("subject-filter").addEventListener("change", function() {
-            var selectedSubjectId = this.value;
-            
-            // Make an AJAX request to fetch experiments based on selected subject
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "get_experiments.php?subject_id=" + selectedSubjectId, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var experiments = JSON.parse(xhr.responseText);
-                    var experimentDropdown = document.getElementById("experiment-filter");
-                    experimentDropdown.innerHTML = ""; // Clear existing options
-                    
-                    // Populate the second dropdown with fetched experiments
-                    experiments.forEach(function(experiment) {
-                        var option = document.createElement("option");
-                        option.value = experiment.id;
-                        option.textContent = experiment.name;
-                        experimentDropdown.appendChild(option);
-                    });
-                }
-            };
-            xhr.send();
-        });
+        var selectedSubjectId = this.value;
+        
+        // Make an AJAX request to fetch experiments based on selected subject
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_experiments.php?subject_id=" + selectedSubjectId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                var experiments = JSON.parse(xhr.responseText);
+                var experimentDropdown = document.getElementById("experiment-filter");
+                experimentDropdown.innerHTML = ""; // Clear existing options
+                
+                // Populate the second dropdown with fetched experiments
+                experiments.forEach(function(experiment) {
+                    var option = document.createElement("option");
+                    option.value = experiment.id;
+                    option.textContent = experiment.name;
+                    experimentDropdown.appendChild(option);
+                });
+            }
+        };
+        xhr.send();
+    });
     </script>
 </body>
  
