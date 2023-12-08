@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 02:11 PM
+-- Generation Time: Dec 08, 2023 at 01:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -107,10 +107,10 @@ CREATE TABLE `experiment` (
 
 INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `description`, `custom`, `islock`, `prev_islock`) VALUES
 (1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 'Density is a word we use to describe how much space an object or substance takes up (its volume) in relation \nto the amount of matter in that object or substance (its mass). \n\n<img src=\"https://blog.udemy.com/wp-content/uploads/2014/05/bigstock-test-icon-63758263.jpg\" width=250 height=100>\n\nAnother way to put it is that density is the \namount of mass per unit of volume. If an object is heavy and compact, it has a high density.', 0, 0, 0),
-(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1, 0, 0),
-(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0, 0, 0),
-(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0, 0, 0),
-(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1, 0, 0);
+(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1, 1, 1),
+(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0, 1, 1),
+(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0, 1, 1),
+(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +127,38 @@ CREATE TABLE `meritlist` (
   `marks` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `details` varchar(255) NOT NULL,
+  `isread` tinyint(1) NOT NULL,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `student_id`, `details`, `isread`, `created_at`) VALUES
+(182, 1, 'Frog Dissecting is Lock!', 1, '2023-12-08 19:48:48'),
+(183, 2, 'Frog Dissecting is Lock!', 0, '2023-12-08 19:48:48'),
+(184, 18, 'Frog Dissecting is Lock!', 0, '2023-12-08 19:48:48'),
+(185, 1, 'State of matter is Lock!', 1, '2023-12-08 19:57:24'),
+(186, 2, 'State of matter is Lock!', 0, '2023-12-08 19:57:24'),
+(187, 18, 'State of matter is Lock!', 0, '2023-12-08 19:57:24'),
+(188, 1, 'Energy Skate Park is Lock!', 1, '2023-12-08 20:02:45'),
+(189, 2, 'Energy Skate Park is Lock!', 0, '2023-12-08 20:02:45'),
+(190, 18, 'Energy Skate Park is Lock!', 0, '2023-12-08 20:02:45'),
+(191, 1, 'Density is Unlock!', 1, '2023-12-08 20:04:43'),
+(192, 2, 'Density is Unlock!', 0, '2023-12-08 20:04:43'),
+(193, 18, 'Density is Unlock!', 0, '2023-12-08 20:04:43');
 
 -- --------------------------------------------------------
 
@@ -822,6 +854,12 @@ ALTER TABLE `meritlist`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pdf`
 --
 ALTER TABLE `pdf`
@@ -908,6 +946,12 @@ ALTER TABLE `experiment`
 --
 ALTER TABLE `meritlist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT for table `pdf`
