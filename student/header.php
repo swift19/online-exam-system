@@ -1,4 +1,4 @@
-            
+        
             <nav class="navbar navbar-expand-lg bg-blue fixed-top">
                 <a class="navbar-brand" href="dashboard.php">
                     <img src="./assets/images/logo-stemulate.png" width=200 height=50 alt="logo-stemulate" class="img-rounded">
@@ -11,7 +11,26 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="<?php 
+                                $noImage = "assets/images/avatar-1.jpg";
+                                if ($_SESSION['i']) {
+                                    echo $_SESSION['i'];
+                                } else {
+                                    echo $noImage;
+                                }
+                            ?>" alt="" class="user-avatar-md rounded-circle">
+                        </a>
+                        <?php
+                            include 'db.php';
+                            $admin_id = $_SESSION['id'];
+                            $selectQuery = "SELECT * FROM notification WHERE isread = 0 and student_id = $admin_id ";
+                            $result = mysqli_query($link, $selectQuery);
+                            if($result && mysqli_num_rows($result) > 0) {
+                        ?>
+                            <span class="notification-count"><?php echo mysqli_num_rows($result); ?></span>
+                        <?php } ?>
+
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">                                   
@@ -21,6 +40,7 @@
                                     <span class="status"></span><span class="ml-2">Online</span>
                                 </div>
                                 <a class="dropdown-item" onclick="openPDF()"><i class="fas fa-book mr-2"></i>KBA</a>
+                                <a class="dropdown-item" href="notification-table.php"><i class="fas fa fa-bell mr-2"></i>Notification</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -30,10 +50,26 @@
                 <div class="col-xs-12 mobile">
                         <ul class="navbar-nav ml-auto navbar-right-top">
                             <li class="nav-item dropdown nav-user">
-                                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink" 
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle">
+                                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="<?php 
+                                        
+                                        $noImage = "assets/images/avatar-1.jpg";
+                                        if ($_SESSION['i']) {
+                                            echo $_SESSION['i'];
+                                        } else {
+                                            echo $noImage;
+                                        }
+                                    ?>" alt="" class="user-avatar-md rounded-circle">
                                 </a>
+                                <?php
+                                    include 'db.php';
+                                    $admin_id = $_SESSION['id'];
+                                    $selectQuery = "SELECT * FROM notification WHERE isread = 0 and student_id = $admin_id ";
+                                    $result = mysqli_query($link, $selectQuery);
+                                    if($result && mysqli_num_rows($result) > 0) {
+                                ?>
+                                    <span class="notification-count"><?php echo mysqli_num_rows($result); ?></span>
+                                <?php } ?>
                                 <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" 
                                     aria-labelledby="navbarDropdownMenuLink">
                                     <div class="nav-user-info">

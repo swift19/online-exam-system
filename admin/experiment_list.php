@@ -43,15 +43,41 @@
                                         mysqli_query ($link, $dlt);
                                         echo "<font color='red'>Delete Success!</font>";
                                     }
+
+                                    $admin_id = $_SESSION['id'];
+                                    $selectQuery = "SELECT id FROM student WHERE status = 1 and designation = $admin_id ";
+                                    $result = mysqli_query($link, $selectQuery);
+
+                                    if(isset($_GET['id'])){
+                                        $selectQuery2 = "SELECT name FROM experiment WHERE id = '$_GET[id]' ";
+                                        $result2 = mysqli_query($link, $selectQuery2);
+                                        $data = mysqli_fetch_assoc($result2);
+                                        $name = $data['name'];
+                                        $currentDateTime = date('Y-m-d H:i:s');
+                                    }
+                                    
                                     if (isset($_GET['islock']) && isset($_GET['id'])) {
                                         if ($_GET['islock'] == 1) {
                                             $dlt = "UPDATE experiment SET islock = 0 WHERE id = '$_GET[id]'";
                                             mysqli_query($link, $dlt);
                                             echo "<font color='green'>Unlock Success!</font>";
+                                          
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $student_id = $row['id'];
+                                                $ins = "INSERT INTO notification (student_id, details,isread,created_at) VALUES ('$student_id', '$name is Unlock!' ,'0', '$currentDateTime')";
+                                                mysqli_query($link, $ins);
+                                            }
+                                                
                                         } else {
                                             $dlt = "UPDATE experiment SET islock = 1 WHERE id = '$_GET[id]'";
                                             mysqli_query($link, $dlt);
                                             echo "<font color='green'>Lock Success!</font>";
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $student_id = $row['id'];
+                                                $ins = "INSERT INTO notification (student_id, details,isread,created_at) VALUES ('$student_id', '$name is Lock!','0', '$currentDateTime')";
+                                                mysqli_query($link, $ins);
+                                            }
                                         }
                                     }                                    
                                 ?>

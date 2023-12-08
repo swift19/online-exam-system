@@ -605,3 +605,15 @@ form {
     width: 150px;
   }
 }
+
+/* ================= Notification Bell ================= */
+.notification-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+}

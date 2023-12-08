@@ -15,6 +15,7 @@
 		$e     = $data['email'];
 		$p     = $data['pass'];
 		$s     = $data['status'];
+		$i     = $data['image'];
 	}
 	if (($stdid == $studentid && $p == $pass) && ($s == 1)) 
 		{
@@ -27,6 +28,7 @@
 			$_SESSION['p']     = $p;
 			$_SESSION['e']     = $e;
 			$_SESSION['s']     = $s;			
+			$_SESSION['i']     = $i;		
 				
 			echo "<script>";
 			echo "self.location='dashboard.php';";
