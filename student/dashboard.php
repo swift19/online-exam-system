@@ -62,7 +62,7 @@
                         <?php 
                         include 'db.php';
                         $query = mysqli_query($link, "SELECT DISTINCT islock FROM `experiment`");
-                        if(mysqli_num_rows($query) == 1) {
+                        if(mysqli_num_rows($query) === 1) {
                          ?>
                         <form action="laboratory-activities.php" method="get" class="dashboard-alignment">
                             <button type="submit" class="dashboard-button center">
