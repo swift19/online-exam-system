@@ -43,7 +43,8 @@
                                 
                                 $email = $_POST['email'];
                                 $query = mysqli_query($link, "select * from admin where email = '$email'");
-                                if(filter_var($email, FILTER_VALIDATE_EMAIL  && mysqli_num_rows($query) < 1)){
+                                var_dump("qqqq" , mysqli_num_rows($query));
+                                if(filter_var($email, FILTER_VALIDATE_EMAIL)  && mysqli_num_rows($query) < 1){
                                     $name = $_POST['name'];
                                     $username = $_POST['username'];
                                     $mobile = $_POST['mobile'];
