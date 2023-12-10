@@ -12,9 +12,11 @@ if (isset($_GET['experimentType']) && isset($_GET['experiment'])) {
     $exId = $data['id'];
     // Store the URL in a session variable
     session_start();
-    $_SESSION['url'] = $iframeContent;
-    $_SESSION['custom'] = $custom;
-    $_SESSION['exId'] = $exId;
+    if($iframeContent || $custom || $exId){
+        $_SESSION['url'] = $iframeContent;
+        $_SESSION['custom'] = $custom;
+        $_SESSION['exId'] = $exId;
+    }
 
     echo $iframeContent;
 }

@@ -11,6 +11,22 @@
 
 <body>
 <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var iframe = document.getElementById("experiment-iframe");
+            var iframeContent = '<?php echo isset($_SESSION["url"]) ? $_SESSION["url"] : "" ?>';
+
+            if (iframeContent !== "") {
+                iframe.src = iframe.src; // Refresh the iframe's content
+                document.getElementById("withIFrame").style.display = "block";
+                document.getElementById("examSelected").style.display = "block";
+                document.getElementById("noSelection").style.display = "none";
+                var modal = document.getElementById("experimentModal");
+                modal.style.display = "block";
+            } else {
+                document.getElementById("noSelection").style.display = "block";
+            }
+        });
+
         function handleStartButtonClick() {
             // Get the selected values from the two select elements
             var selectedExperimentType = document.getElementById('subject-filter').value;
@@ -26,9 +42,13 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var iframeContent = xhr.responseText;
+                    // Reload the current page
+                    window.location.reload();
                     console.log("iframe url:", iframeContent);
                     var iframe = document.getElementById("experiment-iframe");
-                    iframe.src = iframe.src; // Refresh the iframe's content
+                    if(iframe){ 
+                        iframe.src = iframe.src; // Refresh the iframe's content
+                    }
                     document.getElementById("withIFrame").style.display = "block"; // Show the container
                     document.getElementById("noSelection").style.display = "none"; // Hide the container
 
@@ -43,19 +63,6 @@
             xhr.send();
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var iframe = document.getElementById("experiment-iframe");
-            var iframeContent = '<?php echo isset($_SESSION["url"])  ?>';
-
-            if (iframeContent) {
-                iframe.src = iframe.src; // Refresh the iframe's content
-                document.getElementById("withIFrame").style.display = "block";
-                document.getElementById("examSelected").style.display = "block";
-                document.getElementById("noSelection").style.display = "none";
-                var modal = document.getElementById("experimentModal");
-                modal.style.display = "block";
-            }
-        });
     </script>
     <div class="dashboard-main-wrapper">
         
@@ -113,7 +120,7 @@
         </div>
         
         <div class="canvas-container centered"  id="noSelection">            
-            <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img">
+            <!-- <img src="assets/images/no-selected.svg" alt="no selected" class="noSelected-img"> -->
             <span class="noSelected-label">You have no selected experiment yet</span>
         </div>
 
@@ -168,7 +175,7 @@
             }
         };
         xhr.send();
-    });
+        });
     </script>
 </body>
  
