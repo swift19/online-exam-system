@@ -43,7 +43,6 @@
                                 
                                 $email = $_POST['email'];
                                 $query = mysqli_query($link, "select * from admin where email = '$email'");
-                                var_dump("qqqq" , mysqli_num_rows($query));
                                 if(filter_var($email, FILTER_VALIDATE_EMAIL)  && mysqli_num_rows($query) < 1){
                                     $name = $_POST['name'];
                                     $username = $_POST['username'];
@@ -123,7 +122,7 @@
                         <input name="mobile" class="form-control form-control-lg" id="mobile" type="text" placeholder="Mobile No." autocomplete="off" required>
                     </div>
                     <div class="form-group">
-                        <input name="email" class="form-control form-control-lg" id="email" type="email" placeholder="Email (gmail account only)" autocomplete="off" required>
+                        <input name="email" class="form-control form-control-lg" id="email" type="email" oninput="validateEmail(this)" placeholder="Email (gmail account only)" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <input name="username" class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off" required>
@@ -146,6 +145,23 @@
     <!-- Optional JavaScript -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script>
+        function validateEmail(input) {
+            const email = input.value;
+            const emailError = document.getElementById('emailError');
+
+            if (!input.checkValidity()) {
+                emailError.textContent = 'Please enter a valid email address.';
+                input.classList.add('invalid-email');
+            } else if (email.indexOf('@gmail.com') === -1) {
+                emailError.textContent = 'Please enter a Gmail address.';
+                input.classList.add('invalid-email');
+            } else {
+                emailError.textContent = '';
+                input.classList.remove('invalid-email');
+            }
+        }
+    </script>
 </body>
  
 </html>
