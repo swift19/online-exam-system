@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 01:06 PM
+-- Generation Time: Dec 10, 2023 at 05:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -80,7 +80,7 @@ INSERT INTO `exam` (`id`, `semester_id`, `subject_id`, `name`, `status`, `admin_
 (10, 4, 10, 'PHYSICS 201', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
 (11, 4, 8, 'BIOLOGY | MIDTERM', 1, 1, 5, 1, 1, 5, '2023-11-01', '2025-12-01'),
 (12, 4, 8, 'SCIENCE 101', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
-(14, 5, 10, 'EXPERIMENTAL BEHAVIOR', 1, 1, 1, 1, 1, 1, '2023-12-01', '2023-12-04');
+(14, 5, 10, 'EXPERIMENTAL BEHAVIOR', 1, 1, 1, 1, 1, 1, '2023-12-01', '2023-12-10');
 
 -- --------------------------------------------------------
 
@@ -107,10 +107,11 @@ CREATE TABLE `experiment` (
 
 INSERT INTO `experiment` (`id`, `subject_id`, `name`, `url`, `status`, `admin_id`, `description`, `custom`, `islock`, `prev_islock`) VALUES
 (1, 8, 'Density', 'https://phet.colorado.edu/sims/html/density/latest/density_en.html', 1, 1, 'Density is a word we use to describe how much space an object or substance takes up (its volume) in relation \nto the amount of matter in that object or substance (its mass). \n\n<img src=\"https://blog.udemy.com/wp-content/uploads/2014/05/bigstock-test-icon-63758263.jpg\" width=250 height=100>\n\nAnother way to put it is that density is the \namount of mass per unit of volume. If an object is heavy and compact, it has a high density.', 0, 0, 0),
-(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1, 1, 1),
-(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0, 1, 1),
-(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0, 1, 1),
-(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1, 1, 1);
+(4, 9, 'Volcano Experiment', './volcano/index.html', 1, 1, '', 1, 0, 0),
+(5, 10, 'Energy Skate Park', 'https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html', 1, 1, '', 0, 0, 0),
+(6, 9, 'State of matter', 'https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html', 1, 1, '', 0, 0, 0),
+(7, 8, 'Frog Dissecting', './frog/index.html', 1, 1, '', 1, 0, 0),
+(12, 13, 'new experiment teacher 2', 'test', 1, 2, 'test', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -148,17 +149,40 @@ CREATE TABLE `notification` (
 
 INSERT INTO `notification` (`id`, `student_id`, `details`, `isread`, `created_at`) VALUES
 (182, 1, 'Frog Dissecting is Lock!', 1, '2023-12-08 19:48:48'),
-(183, 2, 'Frog Dissecting is Lock!', 0, '2023-12-08 19:48:48'),
+(183, 2, 'Frog Dissecting is Lock!', 1, '2023-12-08 19:48:48'),
 (184, 18, 'Frog Dissecting is Lock!', 0, '2023-12-08 19:48:48'),
 (185, 1, 'State of matter is Lock!', 1, '2023-12-08 19:57:24'),
-(186, 2, 'State of matter is Lock!', 0, '2023-12-08 19:57:24'),
+(186, 2, 'State of matter is Lock!', 1, '2023-12-08 19:57:24'),
 (187, 18, 'State of matter is Lock!', 0, '2023-12-08 19:57:24'),
 (188, 1, 'Energy Skate Park is Lock!', 1, '2023-12-08 20:02:45'),
-(189, 2, 'Energy Skate Park is Lock!', 0, '2023-12-08 20:02:45'),
+(189, 2, 'Energy Skate Park is Lock!', 1, '2023-12-08 20:02:45'),
 (190, 18, 'Energy Skate Park is Lock!', 0, '2023-12-08 20:02:45'),
 (191, 1, 'Density is Unlock!', 1, '2023-12-08 20:04:43'),
-(192, 2, 'Density is Unlock!', 0, '2023-12-08 20:04:43'),
-(193, 18, 'Density is Unlock!', 0, '2023-12-08 20:04:43');
+(192, 2, 'Density is Unlock!', 1, '2023-12-08 20:04:43'),
+(193, 18, 'Density is Unlock!', 0, '2023-12-08 20:04:43'),
+(194, 1, 'Volcano Experiment is Unlock!', 1, '2023-12-10 23:02:31'),
+(195, 2, 'Volcano Experiment is Unlock!', 1, '2023-12-10 23:02:31'),
+(196, 18, 'Volcano Experiment is Unlock!', 0, '2023-12-10 23:02:31'),
+(197, 1, 'Volcano Experiment is Unlock!', 1, '2023-12-10 23:02:49'),
+(198, 2, 'Volcano Experiment is Unlock!', 1, '2023-12-10 23:02:49'),
+(199, 18, 'Volcano Experiment is Unlock!', 0, '2023-12-10 23:02:49'),
+(200, 1, 'Energy Skate Park is Unlock!', 1, '2023-12-10 23:02:57'),
+(201, 2, 'Energy Skate Park is Unlock!', 1, '2023-12-10 23:02:57'),
+(202, 18, 'Energy Skate Park is Unlock!', 0, '2023-12-10 23:02:57'),
+(203, 1, 'State of matter is Unlock!', 1, '2023-12-10 23:03:00'),
+(204, 2, 'State of matter is Unlock!', 1, '2023-12-10 23:03:00'),
+(205, 18, 'State of matter is Unlock!', 0, '2023-12-10 23:03:00'),
+(206, 1, 'Frog Dissecting is Unlock!', 1, '2023-12-10 23:03:02'),
+(207, 2, 'Frog Dissecting is Unlock!', 1, '2023-12-10 23:03:02'),
+(208, 18, 'Frog Dissecting is Unlock!', 0, '2023-12-10 23:03:02'),
+(209, 1, 'Frog Dissecting is Lock!', 1, '2023-12-10 23:12:11'),
+(210, 2, 'Frog Dissecting is Lock!', 1, '2023-12-10 23:12:11'),
+(211, 18, 'Frog Dissecting is Lock!', 0, '2023-12-10 23:12:11'),
+(212, 1, 'Frog Dissecting is Unlock!', 1, '2023-12-10 23:15:19'),
+(213, 2, 'Frog Dissecting is Unlock!', 1, '2023-12-10 23:15:19'),
+(214, 18, 'Frog Dissecting is Unlock!', 0, '2023-12-10 23:15:19'),
+(215, 3, 'new experiment teacher 2 is Lock!', 1, '2023-12-10 23:32:08'),
+(216, 4, 'new experiment teacher 2 is Lock!', 0, '2023-12-10 23:32:08');
 
 -- --------------------------------------------------------
 
@@ -589,7 +613,15 @@ INSERT INTO `result` (`id`, `sl`, `student_id`, `exam_id`, `question_id`, `corre
 (338, 1, 1, 12, 30, 'a', 'b', '0', '2', '1701756597_1_927'),
 (339, 2, 1, 12, 44, 'a', 'b', '0', '2', '1701756597_1_927'),
 (340, 1, 1, 12, 30, 'a', 'c', '0', '2', '1701756976_1_333'),
-(341, 2, 1, 12, 44, 'a', 'c', '0', '2', '1701756976_1_333');
+(341, 2, 1, 12, 44, 'a', 'c', '0', '2', '1701756976_1_333'),
+(342, 1, 1, 12, 30, 'a', '0', '0', '0', '1702218578_1_758'),
+(343, 2, 1, 12, 44, 'a', '0', '0', '0', '1702218578_1_758'),
+(344, 1, 1, 12, 30, 'a', '0', '0', '0', '1702218774_1_497'),
+(345, 2, 1, 12, 44, 'a', '0', '0', '0', '1702218774_1_497'),
+(346, 1, 1, 12, 30, 'a', '0', '0', '0', '1702218835_1_271'),
+(347, 2, 1, 12, 44, 'a', '0', '0', '0', '1702218835_1_271'),
+(348, 1, 1, 12, 30, 'a', '0', '0', '0', '1702218851_1_539'),
+(349, 2, 1, 12, 44, 'a', '0', '0', '0', '1702218851_1_539');
 
 -- --------------------------------------------------------
 
@@ -682,7 +714,11 @@ INSERT INTO `result_summery` (`id`, `student_id`, `exam_id`, `total_mark`, `your
 (52, 2, 6, '1', '1', 1, '1701159952_2_204', '2023-11-28', 4, 8),
 (53, 1, 12, '1', '2', 1, '1701756532_1_406', '2023-12-05', 4, 8),
 (54, 1, 12, '1', '0', 1, '1701756597_1_927', '2023-12-05', 4, 8),
-(55, 1, 12, '1', '0', 1, '1701756976_1_333', '2023-12-05', 4, 8);
+(55, 1, 12, '1', '0', 1, '1701756976_1_333', '2023-12-05', 4, 8),
+(56, 1, 12, '1', '0', 0, '1702218578_1_758', '2023-12-10', 4, 8),
+(57, 1, 12, '1', '0', 0, '1702218774_1_497', '2023-12-10', 4, 8),
+(58, 1, 12, '1', '0', 0, '1702218835_1_271', '2023-12-10', 4, 8),
+(59, 1, 12, '1', '0', 0, '1702218851_1_539', '2023-12-10', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -738,6 +774,27 @@ INSERT INTO `semester` (`id`, `name`, `status`, `admin_id`, `startDate`, `endDat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `started_exam`
+--
+
+CREATE TABLE `started_exam` (
+  `id` int(11) NOT NULL,
+  `student_id` varchar(255) NOT NULL,
+  `admin_id` varchar(255) NOT NULL,
+  `is_started` tinyint(1) NOT NULL,
+  `exam_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `started_exam`
+--
+
+INSERT INTO `started_exam` (`id`, `student_id`, `admin_id`, `is_started`, `exam_id`) VALUES
+(14, '1', '1', 1, 12);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -764,7 +821,7 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`id`, `studentid`, `name`, `dept`, `phoneno`, `email`, `pass`, `address`, `status`, `designation`, `image`, `conPerson`, `conNumber`, `conAddress`) VALUES
 (1, '20230727', 'Test Student 1', 'AB2', '09354804468', 'test1@gmail.com', '123', 'test address 1', 1, 1, 0x6173736574732f696d616765732f75736572732f73747564656e742e706e67, '555', '25', '34'),
-(2, '20230728', 'Test Student 2', 'COE', '09994804423', 'test2@gmail.com', '123', 'test address 2', 1, 1, NULL, '', '', ''),
+(2, '20230728', 'Test Student 2', 'COE', '09994804423', 'test2@gmail.com', '123', 'test address 2', 1, 2, NULL, '', '', ''),
 (3, '20230729', 'Test Student 3', 'BEA', '09894828423', 'test3@gmail.com', '123', 'test address 3', 1, 2, NULL, '', '', ''),
 (4, '20230730', 'Test Student 4', 'NU2', '09234891423', 'test4@gmail.com', '123', 'test address 4', 1, 2, NULL, '', '', ''),
 (12, '20230830', 'Test Student 5', 'OP4', '09234891612', 'test5@gmail.com', '123', 'test address 5', 1, 0, NULL, '', '', ''),
@@ -902,6 +959,12 @@ ALTER TABLE `semester`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `started_exam`
+--
+ALTER TABLE `started_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -939,7 +1002,7 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT for table `experiment`
 --
 ALTER TABLE `experiment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `meritlist`
@@ -951,7 +1014,7 @@ ALTER TABLE `meritlist`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `pdf`
@@ -975,13 +1038,13 @@ ALTER TABLE `question_experiment`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
 
 --
 -- AUTO_INCREMENT for table `result_summery`
 --
 ALTER TABLE `result_summery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `result_summery_experiment`
@@ -994,6 +1057,12 @@ ALTER TABLE `result_summery_experiment`
 --
 ALTER TABLE `semester`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `started_exam`
+--
+ALTER TABLE `started_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `student`
