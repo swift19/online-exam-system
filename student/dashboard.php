@@ -61,7 +61,8 @@
                         </form>
                         <?php 
                         include 'db.php';
-                        $query = mysqli_query($link, "SELECT DISTINCT islock FROM `experiment`");
+                        $query = mysqli_query($link, "SELECT DISTINCT a.islock FROM `experiment`as a 
+                        inner join student as b on a.admin_id=b.designation where b.id = '$_SESSION[id]' ");
                         if(mysqli_num_rows($query) === 1) {
                          ?>
                         <form action="laboratory-activities.php" method="get" class="dashboard-alignment">
