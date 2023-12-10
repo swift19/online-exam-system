@@ -62,17 +62,22 @@
                         <?php 
                         include 'db.php';
                         $query = mysqli_query($link, "SELECT DISTINCT a.islock FROM `experiment`as a 
-                        inner join student as b on a.admin_id=b.designation where b.id = '$_SESSION[id]' ");
-                        if(mysqli_num_rows($query) === 1) {
-                         ?>
-                        <form action="laboratory-activities.php" method="get" class="dashboard-alignment">
-                            <button type="submit" class="dashboard-button center">
-                            <img src="./assets/images/lab-experiment.png" alt="Lab ExpeActivityriment Icon" class="dash-icon">
-                            Laboratory Activity
-                            <span class="arrow-icon fa fa-solid fa-chevron-right"></span>       
-                            </button>
-                        </form>
-                        <?php } ?>
+                                    inner join student as b on a.admin_id=b.designation where b.id = '$_SESSION[id]' ");
+                       $row_count = mysqli_num_rows($query);
+
+                       if ($row_count === 1) {
+                           $row = mysqli_fetch_array($query);
+                           if ($row['islock'] === "0") {
+                        ?>
+                            <form action="laboratory-activities.php" method="get" class="dashboard-alignment">
+                                <button type="submit" class="dashboard-button center">
+                                    <img src="./assets/images/lab-experiment.png" alt="Lab Experiment Icon" class="dash-icon">
+                                    Laboratory Activity
+                                    <span class="arrow-icon fa fa-solid fa-chevron-right"></span>       
+                                </button>
+                            </form>
+                        <?php }} ?>
+
                         <!-- <form id="labExperimentForm" action="laboratory-activities.php" method="get" class="dashboard-alignment">
                             <button type="button" id="labExperimentButton" class="dashboard-button center">
                                 <img src="./assets/images/lab-experiment.png" alt="Lab Experiment Icon" class="dash-icon">
