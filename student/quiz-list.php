@@ -56,8 +56,14 @@
 
                                     <?php 
                                         $currentDate = date('Y-m-d');
-                                        $query2 = mysqli_query($link, "select * from exam where admin_id = '$data[trId]' AND '$currentDate' BETWEEN startDate AND endDate ");
-                                        while($data2 = mysqli_fetch_array($query2)) {
+                                        $query_str = mysqli_query($link, "select exam_id from started_exam where student_id = '$_SESSION[id]' ");
+                                        while($data_str = mysqli_fetch_array($query_str)) {
+                                            $exam_id = $data_str['exam_id'];
+                                            $query2 = mysqli_query($link, "select * from exam where admin_id = '$data[trId]' 
+                                            AND '$currentDate' BETWEEN startDate AND endDate 
+                                            AND id != '$exam_id' ");
+                                            
+                                            while($data2 = mysqli_fetch_array($query2)) {
                                     ?>
 
                                     <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
@@ -69,7 +75,7 @@
                                         <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
                                     
                                     </div>
-                                    <?php } ?>
+                                    <?php } }?>
 
                                 </div>
                             </div>

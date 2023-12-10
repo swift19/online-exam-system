@@ -12,10 +12,16 @@
     	$duration = $data['duration'];
     	$question_mark = $data['question_mark'];
     	$total_mark = $data['total_mark'];
+		$admin_id = $data['admin_id'];
+		$id = $data['id'];
     }
-
-    	$created_at = date('Y-m-d');
-    	$ins = "INSERT INTO result_summery (student_id, exam_id, total_mark, your_mark, sts, unique_code, created_at, semester_id, subject_id) 
+		// started_exam for 1time examination
+    	$str = "INSERT INTO started_exam (student_id, admin_id, is_started,exam_id) 
+    	        VALUES ('$_SESSION[id]', '$admin_id', '1', '$id');";
+    	mysqli_query ($link, $str);
+		
+		$created_at = date('Y-m-d');
+		$ins = "INSERT INTO result_summery (student_id, exam_id, total_mark, your_mark, sts, unique_code, created_at, semester_id, subject_id) 
     	        VALUES ('$_SESSION[id]', '$_GET[exam_id]', '$total_mark', '0', '0', '$unique_code', '$created_at', '$semester_id', '$subject_id');";
     	mysqli_query ($link, $ins);
 
