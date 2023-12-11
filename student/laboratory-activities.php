@@ -134,7 +134,7 @@
                             <div id="experimentModal" class="modal">
                                 <div class="modal-content">
                                     <span class="close" onclick="closeModal()">&times;</span>
-                                    <form action="#" method="post">
+                                    <form action="#" method="post" class="modal-form">
                                         <pre><?php echo $data2['description']; ?></pre>
                                     </form>
                                 </div>

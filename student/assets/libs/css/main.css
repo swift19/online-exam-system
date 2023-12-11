@@ -470,7 +470,8 @@ form {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  /* position: sticky; */
+  /* z-index: 1; */
   left: 0;
   top: 0;
   width: 100%;
@@ -485,6 +486,15 @@ form {
   padding: 20px;
   border: 1px solid #888;
   width: 80% !important;
+}
+
+.modal-form {
+  max-width: 100%; /* Adjust this value as needed */
+  
+}
+
+pre {
+  white-space: pre-wrap;
 }
 
 .close {
