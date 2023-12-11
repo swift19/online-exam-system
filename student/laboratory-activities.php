@@ -131,7 +131,7 @@
     </div>
     <?php include 'footer_file.php'; ?>
 
-                            <div id="experimentModal" class="modal">
+                            <div id="experimentModal" class="modal" style="padding-top: 120px;">
                                 <div class="modal-content">
                                     <span class="close" onclick="closeModal()">&times;</span>
                                     <form action="#" method="post" class="modal-form">
