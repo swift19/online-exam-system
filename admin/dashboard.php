@@ -267,7 +267,7 @@
             }
             document.getElementById("searchButton").addEventListener("click", function() {
                 var searchValue = document.getElementById("searchBox").value;
-                var sessionId = <?php echo json_encode($_SESSION['id']); ?>;
+                var sessionId = 0;
                 updateTable(searchValue , sessionId);
             });
 
