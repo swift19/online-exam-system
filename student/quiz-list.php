@@ -60,41 +60,34 @@
                                     $row_count = mysqli_num_rows($query_str);
 
                                     if ($row_count > 0) {
-                                        // If the student has started an exam
+                                        $exam_ids = array();
+                                        
                                         while ($data_str = mysqli_fetch_array($query_str)) {
-                                            $exam_id = $data_str['exam_id'];
-                                            $query2 = mysqli_query($link, "SELECT * FROM exam WHERE admin_id = '$data[trId]' 
-                                                AND '$currentDate' BETWEEN startDate AND endDate 
-                                                AND id != '$exam_id'");
-                                            
-                                            while ($data2 = mysqli_fetch_array($query2)) {
-                                                // Process each exam when the student has started an exam
-                                                ?>
-                                                <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
-                                                    <h4><?php echo $data2['name']; ?></h4>
-                                                    <?php $unique_code = time() . "_" . $_SESSION['id'] . "_" . rand(111, 999); ?>
-                                                    <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
-                                                </div>
-                                                <?php
-                                            }
+                                            $exam_ids[] = $data_str['exam_id'];
                                         }
+                                    
+                                        $exam_ids_str = implode(',', $exam_ids);
+                                        
+                                        $query2 = mysqli_query($link, "SELECT * FROM exam WHERE admin_id = '$data[trId]' 
+                                            AND '$currentDate' BETWEEN startDate AND endDate 
+                                            AND id NOT IN ($exam_ids_str)");
                                     } else {
-                                        // If the student has not started any exams
                                         $query2 = mysqli_query($link, "SELECT * FROM exam WHERE admin_id = '$data[trId]' 
                                             AND '$currentDate' BETWEEN startDate AND endDate");
-                                        
-                                        while ($data2 = mysqli_fetch_array($query2)) {
-                                            // Process each exam when the student has not started any exams
-                                            ?>
-                                            <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
-                                                <h4><?php echo $data2['name']; ?></h4>
-                                                <?php $unique_code = time() . "_" . $_SESSION['id'] . "_" . rand(111, 999); ?>
-                                                <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
-                                            </div>
-                                            <?php
-                                        }
                                     }
-                                    ?>
+
+                                    while ($data2 = mysqli_fetch_array($query2)) {
+                                        ?>
+                                        <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
+
+                                            <h4><?php echo $data2['name']; ?></h4>
+
+                                            <?php $unique_code = time() . "_" . $_SESSION['id'] . "_" . rand(111, 999); ?>
+
+                                            <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
+
+                                        </div>
+                                    <?php } ?>
 
 
                                 </div>
