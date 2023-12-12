@@ -79,6 +79,8 @@
                                         </h5>
                                         <span class="status"></span><span class="ml-2">Online</span>
                                     </div>
+                                    <a class="dropdown-item" onclick="openPDF()"><i class="fas fa-book mr-2"></i>KBA</a>
+                                    <a class="dropdown-item" href="notification-table.php"><i class="fas fa fa-bell mr-2"></i>Notification</a>
                                     <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                                 </div>
                             </li>
