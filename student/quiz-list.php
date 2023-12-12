@@ -54,28 +54,34 @@
                                         <h3 style="color:white"><?php echo $data['teacher']; ?></h3>
                                     </div>
 
-                                    <?php 
+                                    <?php
                                         $currentDate = date('Y-m-d');
-                                        $query_str = mysqli_query($link, "select exam_id from started_exam where student_id = '$_SESSION[id]' ");
-                                        while($data_str = mysqli_fetch_array($query_str)) {
+                                        $query_str = mysqli_query($link, "SELECT exam_id FROM started_exam WHERE student_id = '$_SESSION[id]'");
+                                        $row_count = mysqli_num_rows($query_str);
+
+                                        if ($row_count === 1) {
+                                            $data_str = mysqli_fetch_array($query_str);
                                             $exam_id = $data_str['exam_id'];
-                                            $query2 = mysqli_query($link, "select * from exam where admin_id = '$data[trId]' 
-                                            AND '$currentDate' BETWEEN startDate AND endDate 
-                                            AND id != '$exam_id' ");
-                                            
-                                            while($data2 = mysqli_fetch_array($query2)) {
-                                    ?>
+                                            $query2 = mysqli_query($link, "SELECT * FROM exam WHERE admin_id = '$data[trId]' 
+                                                AND '$currentDate' BETWEEN startDate AND endDate 
+                                                AND id != '$exam_id'");
+                                        } else {
+                                            $query2 = mysqli_query($link, "SELECT * FROM exam WHERE admin_id = '$data[trId]' 
+                                                AND '$currentDate' BETWEEN startDate AND endDate");
+                                        }
 
-                                    <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
-                                        
-                                        <h4><?php echo $data2['name']; ?></h4>
+                                        while ($data2 = mysqli_fetch_array($query2)) {
+                                            ?>
+                                            <div style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;">
 
-                                        <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
-                                        
-                                        <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
-                                    
-                                    </div>
-                                    <?php } }?>
+                                                <h4><?php echo $data2['name']; ?></h4>
+
+                                                <?php $unique_code = time() . "_" . $_SESSION['id'] . "_" . rand(111, 999); ?>
+
+                                                <a href="start_quiz.php?exam_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
+
+                                            </div>
+                                        <?php } ?>
 
                                 </div>
                             </div>
