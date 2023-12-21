@@ -77,7 +77,16 @@
                             </span>
                                 
                             <div class="card-body">
-                                <div class="table-responsive">     
+                                <div class="table-responsive">  
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 25px;">
+                                                <input type="text" id="searchBox" placeholder="Search by name or username">
+                                                <button id="searchButton" class="btn btn-primary btn-xs ml-2">Search</button>
+                                            </div>
+                                        </div>     
                                     <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
@@ -96,7 +105,11 @@
                                                 <?php 
                                                     include 'db.php';    
                                                     $sl = 0;
-                                                    $query = mysqli_query($link, "select * from admin");
+                                                    if (isset($_GET['value'])) {
+                                                        $query = mysqli_query($link, "select * from admin where (name like '$_GET[value]' or username like '$_GET[value]')");
+                                                    } else {
+                                                        $query = mysqli_query($link, "select * from admin");
+                                                    }
                                                     while($data = mysqli_fetch_array($query)) {                                            
                                                 ?>
                                                 <td><?php echo ++$sl; ?></td>
@@ -148,6 +161,13 @@
             
         </div>
     </div>
+    <script>
+
+            document.getElementById("searchButton").addEventListener("click", function() {
+                var searchValue = document.getElementById("searchBox").value;
+                window.location.href = '?value=' + encodeURIComponent(searchValue);
+            });
+    </script>
     
     <!-- Optional JavaScript -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>

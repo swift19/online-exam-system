@@ -112,6 +112,7 @@
 <script>
 const data = <?php echo $dataJson; ?>;
 const dataExp = <?php echo $dataExpJson; ?>;
+console.log("data" , dataExp)
 const colors = Highcharts.getOptions().colors;
 const uniqueNames = [...new Set(data.map(item => item[2]))];
 const uniqueNamesExp = [...new Set(dataExp.map(item => item[2]))];

@@ -1,6 +1,6 @@
-<?php  
+<?php 
     session_start(); 
-    if ($_SESSION['p'] != "") {
+    if ($_SESSION['u'] != "") {
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,7 +15,10 @@
         
          <div class="dashboard-header">
             <?php include 'header.php';  ?>
-            <?php include 'navigation.php';  ?>
+        </div>
+        
+       <div class="nav-left-sidebar sidebar-dark">
+            <?php include 'left_menu.php'; ?>
         </div>
         
         <div class="dashboard-wrapper">
@@ -26,23 +29,21 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             
-                            <h5 class="card-header">
-                                PDF File List ( 
-                                <?php 
-                                    include 'db.php';
-                                    $querye = mysqli_query($link, "select * from exam where id = '$_GET[exam_id]' and status = '1' ");
-                                    while($datae = mysqli_fetch_array($querye)) {
-                                        echo $datae['name'];
-                                    }
-                                ?> )
-                            </h5>
+                            <h5 class="card-header">Academic Year | <a href="academic_yr_add.php" style="color:red;">Add New</a></h5>
                             <span style="padding-left:20px; padding-top:10px;">
                                 <?php 
                                     if (isset($_GET['msg'])) {
                                         echo $_GET['msg'];
                                     }
                                 ?>
-                               
+                                <?php 
+                                    if (isset($_GET['year'])) {
+                                        include 'db.php';
+                                        $dlt = "DELETE FROM year WHERE year = '$_GET[year]'";
+                                        mysqli_query ($link, $dlt);
+                                        echo "<font color='red'>Delete Success!</font>";
+                                    }
+                                ?>
                             </span>
                                 
                             <div class="card-body">
@@ -51,43 +52,21 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <!-- <th>Semester</th>
-                                                <th>Subject</th> -->
-                                                <th>Title</th>
-                                                <th>File View</th>
-                                                
+                                                <th>Year</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
+                                                include 'db.php';
                                                 $sl = 0;
-                                                $query = mysqli_query($link, "select * from pdf where exam_id = '$_GET[exam_id]' and status = '1' ");
+                                                $query = mysqli_query($link, "select * from year order by year desc");
                                                 while($data = mysqli_fetch_array($query)) {
-                                                    $query2 = mysqli_query($link, "select * from pdf_status where student_id = '$_SESSION[id]' and pdf_id = '$data[id]'");
-                                                    $count = mysqli_num_rows($query2);
                                             ?>
                                             <tr>
                                                 <td><?php echo ++$sl; ?></td>
-<!--                                                 
-                                                <td>
-                                                    <?php 
-                                                        $query2 = mysqli_query($link, "select * from semester where id = '$data[semester_id]'");
-                                                        while($data2 = mysqli_fetch_array($query2)) {
-                                                            echo $data2['name']; 
-                                                        }
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php 
-                                                        $query2 = mysqli_query($link, "select * from subject where id = '$data[subject_id]'");
-                                                            while($data2 = mysqli_fetch_array($query2)) {
-                                                            echo $data2['name']; 
-                                                        }
-                                                    ?>
-                                                </td> -->
-                                                <td><?php echo $data['title']; ?>  | <?php echo $count < 1 ? "Unread" : "Read"; ?> </td>
-                                                <td><a href="../admin/assets/<?php echo $data['pdf_file']; ?>" onclick="updateStatus(<?php echo $data['id']; ?>,<?php echo $_SESSION['id']; ?>,<?php echo $data['admin_id']; ?>)" target="_blank">View File</a></td>
-                                                
+                                                <td><?php echo $data['year']; ?></td>
+                                                <td><a href="?year=<?php echo $data['year']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>
                                             </tr> 
                                             <?php } ?>                                           
                                         </tbody>
@@ -104,32 +83,6 @@
             
         </div>
     </div>
-    <script>
-        function updateStatus(pdfId, studentId, adminId) {
-
-            var xhr = new XMLHttpRequest();
-
-            xhr.open("POST", "update_pdf_status.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        console.log(xhr.responseText);
-                        location.reload();
-                    } else {
-                        console.log("Error: " + xhr.status);
-                    }
-                }
-            };
-
-            var data = "pdfId=" + encodeURIComponent(pdfId) + 
-                       "&studentId=" + encodeURIComponent(studentId) +
-                       "&adminId=" + encodeURIComponent(adminId);
-            xhr.send(data);
-        }
-    </script>
-
     
     <!-- Optional JavaScript -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>

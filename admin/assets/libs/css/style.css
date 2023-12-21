@@ -7042,3 +7042,17 @@ Media Query
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+/* ================= KBA ================= */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #00f; }
+    50% { box-shadow: 0 0 20px #00f, 0 0 30px #00f; }
+    100% { box-shadow: 0 0 10px #00f; }
+  }
+  
+  .glowing-icon {
+    width: 55px;
+    background-color: #fff;
+    margin-left: 15px;
+    animation: glow 1s infinite;
+}

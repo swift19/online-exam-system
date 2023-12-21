@@ -33,7 +33,8 @@
                                     <h2 class="pageheader-title">Welcome to Super Admin Dashboard </h2>
                                 <?php } else { ?>
                                     <h2 class="pageheader-title">Welcome <?php echo $_SESSION['n']; ?> </h2>
-                                    <a style="cursor: pointer;" onclick="openPDF()"><i class="fas fa-book mr-2"></i>KBA |  </a>
+                                    <div class="row">
+                                    <a style="cursor: pointer;" onclick="openPDF()"><div class="glowing-icon"><i class="fas fa-book mr-2"></i>KBA</div></a>  | 
                                     <?php 
                                         include 'db.php';
                                         $currentDate = date('Y-m-d');
@@ -41,8 +42,18 @@
                                         while($data = mysqli_fetch_array($query)) {
                                             echo "$data[name]";
                                         }
+                                    ?> |
+                                    <?php 
+                                        include 'db.php';
+                                        $currentDate = date('Y-m-d');
+                                        $query = mysqli_query($link, "SELECT * FROM year WHERE '$currentDate' BETWEEN startDate AND endDate");
+                                        while($data = mysqli_fetch_array($query)) {
+                                            echo "$data[year]";
+                                        }
                                     ?>
-                                <?php } ?>
+                                    <?php } ?>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

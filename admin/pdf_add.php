@@ -66,8 +66,6 @@
                                     } else {
                                         echo "no title";
                                     }        
-                                } else {
-                                    echo "not save";
                                 } 
 
                             ?>
@@ -100,7 +98,7 @@
                                         </select>
                                         <br>
                                         <select name="exam_id" class="form-control" required>
-                                            <option value="" selected disabled>Select Exam</option>
+                                            <option value="" selected disabled>Select Type</option>
                                             <?php 
                                                 include 'db.php';
                                                 $query = mysqli_query($link, "select * from exam where status='1' and admin_id = '$_SESSION[id]'");

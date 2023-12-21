@@ -53,10 +53,10 @@
                                 
                             </span>
                             
-                            <div id="container" style="height: 400px;"></div>
+                            <!-- <div id="container" style="height: 400px;"></div> -->
                             
-                            <div class="card-body" style="margin-top: -100px;">
-                            <h4><b>Computation:</b> (sum(your score)/sum(total question)) * 100% = Average rating</h4>
+                            <div class="card-body">
+                            <!-- <h4><b>Computation:</b> (sum(your score)/sum(total question)) * 100% = Average rating</h4> -->
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                         <thead>

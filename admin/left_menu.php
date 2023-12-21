@@ -24,6 +24,9 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
     
                             <li class="nav-divider">Menu</li>
                             <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "academic_yr_list.php"){ echo "active"; } ?>" href="academic_yr_list.php"><i class="fab fa-fw fa-wpforms"></i>Academic Year </a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "semester_list.php"){ echo "active"; } ?>" href="semester_list.php"><i class="fab fa-fw fa-wpforms"></i>Semester List </a>
                             </li>
                             <li class="nav-item ">
