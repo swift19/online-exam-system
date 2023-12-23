@@ -6,6 +6,7 @@
 <html lang="en">
  
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'head.php'; ?>
 </head>
 
@@ -115,6 +116,7 @@
 
         <div id="examSelected" style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;display: none;">
             <h4>Exam Name : <?php echo $data2['name']; ?><a data-experiment=""  onclick="openModal(this); return false;" style="cursor:pointer"> &#128712</a></h4>
+            <i class="fas fa-expand" onclick="enterFullscreen()" style="float: inline-end;"></i>
             <?php $unique_code = time()."_".$_SESSION['id']."_".rand(111,999); ?>
             <a href="start_quiz_ex.php?experiment_id=<?php echo $data2['id']; ?>&unique_code=<?php echo $unique_code; ?>" style="color:#ff0000;">Start Online Exam</a>
         </div>
@@ -125,7 +127,7 @@
         </div>
 
         <div class="canvas-container" id="withIFrame" style="display: none;">                
-            <iframe id="experiment-iframe" src="./experiment/iframe1.php"></iframe>
+            <iframe id="experiment-iframe" src="./experiment/iframe1.php" allowfullscreen></iframe>
         </div>
         </div>
     </div>
@@ -176,6 +178,19 @@
         };
         xhr.send();
         });
+
+        function enterFullscreen() {
+            const iframe = document.getElementById("experiment-iframe");
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { /* Firefox */
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+                iframe.msRequestFullscreen();
+            }
+        }
     </script>
 </body>
  

@@ -55,6 +55,7 @@
                                                 <th>Semester</th>
                                                 <th>Subject</th>
                                                 <th>Title</th>
+                                                <th>Viewers</th>
                                                 <th>File View</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -86,6 +87,15 @@
                                                     ?>
                                                 </td>
                                                 <td><?php echo $data['title']; ?></td>
+                                                <td>
+                                                    <?php 
+                                                        $query4 = mysqli_query($link, "select * from student where designation = '$_SESSION[id]' ");
+                                                        $query3 = mysqli_query($link, "select * from pdf_status where pdf_id = '$data[id]'");
+                                                        echo (mysqli_num_rows($query3));
+                                                        echo " / ";
+                                                        echo (mysqli_num_rows($query4));
+                                                    ?>
+                                                </td>
                                                 <td><a href="assets/<?php echo $data['pdf_file']; ?>" target="_blank">View File</td>
                                                 
                                                 <td><a href="?id=<?php echo $data['id']; ?>" onclick="return confirm('Delete Confirm?');">Delete</a></td>

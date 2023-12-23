@@ -20,6 +20,8 @@
             $_SESSION['cp'] = $data['conPerson'];
             $_SESSION['cn'] = $data['conNumber'];
             $_SESSION['ca'] = $data['conAddress'];
+            $_SESSION['cr'] = $data['conRelationship'];
+            
         }
 ?>
 <!doctype html>
@@ -138,7 +140,8 @@
                             $conPerson = $_POST['conPerson'];
                             $conNumber = $_POST['conNumber'];
                             $conAddress = $_POST['conAddress'];
-
+                            $conRelationship = $_POST['conRelationship'];
+                            
                             if ($_POST['name'] != "") {                      
 
                                 if(strpos($email, '@gmail.com') !== false){
@@ -152,7 +155,9 @@
                                     address ='$address',
                                     conPerson ='$conPerson',
                                     conNumber ='$conNumber',
-                                    conAddress ='$conAddress'
+                                    conAddress ='$conAddress',
+                                    conRelationship ='$conRelationship'
+                                    
                                     WHERE id='$_SESSION[id]'";
                                       
                                     if (mysqli_query ($link, $ins)) {
@@ -269,6 +274,12 @@
                                                     <div class="form-group-ep">
                                                         <span>Contact Address</span>
                                                         <input name="conAddress" value="<?php echo $_SESSION['ca']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Contact Address" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group-ep">
+                                                        <span>Relationship to student</span>
+                                                        <input name="conRelationship" value="<?php echo $_SESSION['cr']; ?>" class="form-control-ep form-control-lg" type="text" placeholder="Relationship" required>
                                                     </div>
                                                 </div>
                                             </div>
