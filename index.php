@@ -48,14 +48,24 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <div class="table-responsive"  style="height: 300px; overflow-y: auto;">
-                                      <table class="table table-striped table-bordered"><thead>
+                                              
+                                      <table class="table table-striped table-bordered">
+                                        <thead>
+                                              
                                             <tr>
-                                              <th>Top 20 Student</th>
+                                              <th>Top Ranking Student</th>
+                                              <th colspan='6'>
+                                                <div class="col-md-12 d-flex align-items-center justify-content-end" >
+                                                  <input type="text" id="searchBox" placeholder="Search by subject, section or exam">
+                                                  <i id="searchButton" class="fa fa-search" style="margin-left: -25px;"></i>
+                                                </div>
+                                              </th>
                                             </tr>
                                             <tr>
                                                 <th>Ranking</th>
                                                 <th>Date</th>
                                                 <th>Student Name</th>
+                                                <th>Section</th>
                                                 <!-- <th>Semester</th> -->
                                                 <th>Subject</th>
                                                 <th>Exam Name</th>
@@ -65,11 +75,11 @@
                                                 <th>Highest Score</th> -->
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBody">
                                             <?php 
                                                 $sl = 0;
                                                 include 'student/db.php'; 
-                                                $query = mysqli_query($link, "SELECT *, MAX(your_mark) as highest_score from result_summery where  sts = '1'  GROUP BY student_id order by id DESC LIMIT 20 ");
+                                                $query = mysqli_query($link, "SELECT *from result_summery order by CAST(your_mark AS SIGNED) DESC  ");
                                                 while($data = mysqli_fetch_array($query)) {
                                             ?>
                                             <tr>
@@ -80,6 +90,11 @@
                                                         $query2 = mysqli_query($link, "select * from student where id = '$data[student_id]'");
                                                         while($data2 = mysqli_fetch_array($query2)) {
                                                             echo $data2['name']; 
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                            echo $data2['dept'];
                                                         }
                                                     ?>
                                                 </td>
@@ -166,7 +181,22 @@
           modal.style.display = "none";
         }
       });
-
+            document.getElementById("searchButton").addEventListener("click", function() {
+                var searchValue = document.getElementById("searchBox").value;
+                updateTable(searchValue);
+            });
+            function updateTable(searchValue) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "ranking_search.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById("tableBody").innerHTML = xhr.responseText;
+                    }
+                };
+                var data = "searchValue=" + encodeURIComponent(searchValue);
+                xhr.send(data);
+            }
     </script>
 
 </body>

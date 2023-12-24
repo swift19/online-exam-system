@@ -32,6 +32,7 @@
         .iframe-container {
             position: relative;
             width: 100%;
+            overflow: hidden;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
         }
 
@@ -57,7 +58,7 @@
 
         @media screen and (min-width: 768px) {
             .iframe-container::after {
-                height: 55px; /* Adjust the height for larger screens */
+                height: 70px; /* Adjust the height for larger screens */
             }
         }
     </style>
