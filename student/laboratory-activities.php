@@ -112,6 +112,7 @@
             $experimentId = $_SESSION['exId'];
             $query2 = mysqli_query($link, "select * from experiment where id = '$experimentId' ");
             while($data2 = mysqli_fetch_array($query2)) {
+                $_SESSION['isrubric'] = $data2['isrubric'];
         ?>
 
         <div id="examSelected" style="text-align:left; padding:20px; border-bottom:2px #DAF7A6 solid; background-color:#F9F9F9;display: none;">
@@ -143,6 +144,14 @@
                             </div>
     <?php }} ?>
     <script>
+        // Check if 'isRubric' is defined and not null
+        var isRubric = <?php echo isset($_SESSION['isrubric']) ? json_encode($_SESSION['isrubric']) : 'null'; ?>;
+        // Set 'isRubric' in localStorage only if it's defined
+        if (isRubric !== null) {
+            localStorage.setItem('isRubric', isRubric);
+            console.log("isRubric?", isRubric)
+        }
+
         function openModal(element) {
             // Get student ID from data attribute
             var modal = document.getElementById("experimentModal");

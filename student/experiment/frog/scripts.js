@@ -1,3 +1,12 @@
+var storedIsRubric = localStorage.getItem('isRubric');
+console.log("storedIsRubric", storedIsRubric);
+let point = 0
+if(storedIsRubric > 0){ // 1 for enable rubric
+    point = 0
+} else {
+    point = 5
+}
+
 const scoreDisplay = document.getElementById('scoreDisplay');
 const tools = document.querySelectorAll('.tool');
 const canvas = document.getElementById('frogCanvas');
@@ -283,7 +292,7 @@ function handleStartButtonClick() {
     score = 0;
     scoreDisplay.innerText = `Score: ${score}`; // Update the score display
     startButton.innerText = 'Reset Disecting';
-    
+    cutToPiecesButton.style.display = "none"; // hide cutToPieces
     dissectionStarted = true;
     disableAllTools();
     updateFrogImage();
@@ -305,7 +314,7 @@ tools.forEach((tool, index) => {
                         score += 5;
                     } else {
                         // Incorrect tool, deduct 5 points
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 1:
@@ -315,7 +324,7 @@ tools.forEach((tool, index) => {
                         score += 5;
                     } else {
                         // Incorrect tool, deduct 5 points
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 2:
@@ -325,7 +334,7 @@ tools.forEach((tool, index) => {
                         score += 5;
                     } else {
                         // Incorrect tool, deduct 5 points
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 3:
@@ -335,7 +344,7 @@ tools.forEach((tool, index) => {
                         score += 5;
                     } else {
                         // Incorrect tool, deduct 5 points
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 4:
@@ -345,7 +354,7 @@ tools.forEach((tool, index) => {
                         score += 5;
                     } else {
                         // Incorrect tool, deduct 5 points
-                        score -= 5;
+                        score -= point;
                     }
                     break;
             }
@@ -364,7 +373,7 @@ tools.forEach((tool, index) => {
                         currentStepCut++;
                         score += 5;
                     } else {
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 1:
@@ -372,7 +381,7 @@ tools.forEach((tool, index) => {
                         currentStepCut++;
                         score += 5;
                     } else {
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 2:
@@ -380,7 +389,7 @@ tools.forEach((tool, index) => {
                         currentStepCut++;
                         score += 5;
                     } else {
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 3:
@@ -388,7 +397,7 @@ tools.forEach((tool, index) => {
                         currentStepCut++;
                         score += 5;
                     } else {
-                        score -= 5;
+                        score -= point;
                     }
                     break;
                 case 4:
@@ -396,7 +405,7 @@ tools.forEach((tool, index) => {
                         currentStepCut++;
                         score += 5;
                     } else {
-                        score -= 5;
+                        score -= point;
                     }
                     break;
             }
@@ -500,6 +509,7 @@ cutToPiecesButton.addEventListener('click', () => {
     dissectionStarted = false;
     currentStepCut = 0;
     score = 0;
+    startButton.style.display = "none"; // hide startButton
     // Hide all sprites except 'tool3-cut.png'
     sprites.forEach(sprite => {
         if (sprite.image !== 'tool3-cut.png') {

@@ -11,7 +11,7 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
 <?php if ($_SESSION['u']==='superadmin') { ?>
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Teacher List</a>
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -34,6 +34,9 @@ $noImage = "https://placehold.it/150/30a5ff/fff";
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "sa_student_list.php"){ echo "active"; } ?>" href="sa_student_list.php"><i class="fab fa-fw fa-wpforms"></i>Student List</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link <?php if($page == "config.php"){ echo "active"; } ?>" href="config.php"><i class="fab fa-fw fa-wpforms"></i>Configuration</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php if($page == "logout.php"){ echo "active"; } ?>" href="logout.php"><i class="fab fa-fw fas fa-power-off"></i>Logout</a>
