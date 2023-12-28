@@ -330,7 +330,7 @@
                 passwordToggle.textContent = '👁️';
             }
         }
-        fetch('sections.json')
+        fetch('./../admin/sections.json')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('dept');
