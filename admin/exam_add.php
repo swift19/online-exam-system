@@ -48,7 +48,7 @@
                         echo "</script>";
                     }
 
-                }           
+                }
             }               
         ?>
         
@@ -100,11 +100,11 @@
                                         <label>Duration</label>
                                         <div class="form-group">
                                         <label for="startDate">Start Date:</label>
-                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" required>
+                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" value="<?php  echo $currentDate ?>" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label for="endDate">End Date:</label>
-                                            <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" required>
+                                            <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" min="<?php  echo $currentDate ?>" required>
                                         </div>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>
