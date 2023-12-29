@@ -241,7 +241,11 @@ function handleMouseMoveCutToPieces(e) {
 function spriteInsidePointer(draggedSprite, insidePart) {
     // Your function logic when the sprite is inside a specific pointer
     console.log(`Sprite is inside the ${insidePart} pointer!`, draggedSprite);
-
+    Head = false;
+    LeftLeg = false;
+    RightLeg = false;
+    LeftArm = false;
+    RightArm = false;
     // Handle specific logic for different body parts if needed
     if (insidePart === 'Head') {
         Head = true;
@@ -367,6 +371,11 @@ tools.forEach((tool, index) => {
         } else if (cutToPieces){
             // window.alert("test");
             console.log("currentStepCut" , currentStepCut)
+            console.log("RightArm" , RightArm)
+            console.log("LeftArm" , LeftArm)
+            console.log("RightLeg" , RightLeg)
+            console.log("LeftLeg" , LeftLeg)
+            console.log("Head" , Head)
             switch (currentStepCut) {
                 case 0:
                     if (RightArm) {
@@ -509,6 +518,8 @@ cutToPiecesButton.addEventListener('click', () => {
     dissectionStarted = false;
     currentStepCut = 0;
     score = 0;
+    scoreDisplay.innerText = `Score: ${score}`;
+    cutToPiecesButton.innerText = 'Reset Cutting';
     startButton.style.display = "none"; // hide startButton
     // Hide all sprites except 'tool3-cut.png'
     sprites.forEach(sprite => {
