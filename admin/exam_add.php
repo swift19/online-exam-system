@@ -36,7 +36,7 @@
                     $total_mark     = $_POST['total_mark'];
                     $total_question = $_POST['total_question'];
 
-                    $startDate     = $_POST['startDate'];
+                    $startDate = $_POST['startDate'];
                     $endDate = $_POST['endDate'];
 
                     $ins = "INSERT INTO exam (semester_id, subject_id, name, status, admin_id, duration, question_mark, total_mark, total_question,startDate,endDate) 
@@ -49,6 +49,7 @@
                     }
 
                 }
+
             }               
         ?>
         
@@ -100,7 +101,7 @@
                                         <label>Duration</label>
                                         <div class="form-group">
                                         <label for="startDate">Start Date:</label>
-                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" value="<?php  echo $currentDate ?>" disabled>
+                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" value="<?php  echo $currentDate ?>" readonly >
                                         </div>
                                         <div class="form-group">
                                             <label for="endDate">End Date:</label>
