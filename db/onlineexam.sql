@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2023 at 01:41 PM
+-- Generation Time: Jan 02, 2024 at 02:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,21 +35,22 @@ CREATE TABLE `admin` (
   `email` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `image` blob DEFAULT NULL
+  `image` blob DEFAULT NULL,
+  `isread` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `name`, `mobile`, `email`, `pass`, `status`, `image`) VALUES
-(1, 'admin', 'Teacher 1', '9354123456', 'geraldbathan24@gmail.com', '12345678', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67),
-(2, 'test2', 'Teacher 2', '9364804461', 'test@gmail.com', '12345678', 1, ''),
-(200101080, 'test3', 'Teacher 3', '9354804412', 'test2@gmail.com', '12345678', 0, NULL),
-(200101081, 'test4', 'Teacher 4', '9320045741', 'test3@gmail.com', '12345678', 0, NULL),
-(200101082, 'test5', 'Teacher 5', '9329945741', 'test4@mailinator.com', '12345678', 2, NULL),
-(200101083, 'test6', 'Teacher 6', '9329942341', 'test5@mailinator.com', '12345678', 1, NULL),
-(200101084, 'test7', 'Teacher 7', '9361942341', 'test6@mailinator.com', '12345678', 0, NULL);
+INSERT INTO `admin` (`id`, `username`, `name`, `mobile`, `email`, `pass`, `status`, `image`, `isread`) VALUES
+(1, 'admin', 'Teacher 1', '9354123456', 'geraldbathan24@gmail.com', '12345678', 1, 0x6173736574732f696d616765732f75736572732f746561636865722e706e67, 1),
+(2, 'test2', 'Teacher 2', '9364804461', 'test@gmail.com', '12345678', 1, '', 0),
+(200101080, 'test3', 'Teacher 3', '9354804412', 'test2@gmail.com', '12345678', 0, NULL, 0),
+(200101081, 'test4', 'Teacher 4', '9320045741', 'test3@gmail.com', '12345678', 0, NULL, 0),
+(200101082, 'test5', 'Teacher 5', '9329945741', 'test4@mailinator.com', '12345678', 2, NULL, 0),
+(200101083, 'test6', 'Teacher 6', '9329942341', 'test5@mailinator.com', '12345678', 1, NULL, 0),
+(200101084, 'test7', 'Teacher 7', '9361942341', 'test6@mailinator.com', '12345678', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,8 @@ CREATE TABLE `exam` (
   `question_mark` int(11) DEFAULT NULL,
   `total_mark` int(11) DEFAULT NULL,
   `total_question` int(11) NOT NULL,
-  `startDate` date DEFAULT NULL,
-  `endDate` date DEFAULT NULL
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -77,12 +78,14 @@ CREATE TABLE `exam` (
 --
 
 INSERT INTO `exam` (`id`, `semester_id`, `subject_id`, `name`, `status`, `admin_id`, `duration`, `question_mark`, `total_mark`, `total_question`, `startDate`, `endDate`) VALUES
-(6, 4, 8, 'HUMAN ANATOMY', 1, 1, 1, 1, 1, 10, '2023-11-01', '2025-12-01'),
-(7, 4, 9, 'CHEMISTRY 101 | FINAL EXAM', 1, 1, 1, 1, 1, 5, '2023-11-01', '2025-12-01'),
-(10, 4, 10, 'PHYSICS 201', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
-(11, 4, 8, 'BIOLOGY | MIDTERM', 1, 1, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
-(12, 4, 8, 'SCIENCE 101', 1, 200101083, 1, 1, 1, 3, '2023-11-01', '2025-12-01'),
-(14, 4, 10, 'EXPERIMENTAL BEHAVIOR', 1, 200101083, 1, 1, 1, 8, '2023-12-01', '2023-12-31');
+(6, 4, 8, 'HUMAN ANATOMY', 1, 1, 1, 1, 1, 10, '2023-11-01 00:00:00', '2025-12-01 00:00:00'),
+(7, 4, 9, 'CHEMISTRY 101 | FINAL EXAM', 1, 1, 1, 1, 1, 5, '2023-11-01 00:00:00', '2025-12-01 00:00:00'),
+(10, 4, 10, 'PHYSICS 201', 1, 1, 1, 1, 1, 3, '2023-11-01 00:00:00', '2025-12-01 00:00:00'),
+(11, 4, 8, 'BIOLOGY | MIDTERM', 1, 1, 1, 1, 1, 3, '2023-11-01 00:00:00', '2025-12-01 00:00:00'),
+(12, 4, 8, 'SCIENCE 101', 1, 200101083, 1, 1, 1, 3, '2023-11-01 00:00:00', '2025-12-01 00:00:00'),
+(14, 4, 10, 'EXPERIMENTAL BEHAVIOR', 1, 200101083, 1, 1, 1, 8, '2023-12-01 00:00:00', '2023-12-31 00:00:00'),
+(20, 6, 9, 'PHATOLOGY', 1, 1, 1, 1, 1, 1, '2024-01-02 21:08:08', '2024-01-31 07:10:00'),
+(22, 10, 9, 'CYPTOLOGY', 1, 1, 1, 1, 1, 1, '2024-01-02 21:53:05', '2024-02-29 21:59:00');
 
 -- --------------------------------------------------------
 
@@ -479,7 +482,8 @@ CREATE TABLE `semester` (
 INSERT INTO `semester` (`id`, `name`, `status`, `admin_id`, `startDate`, `endDate`) VALUES
 (4, '1st Semester', 1, 0, '2023-12-01', '2023-12-04'),
 (5, '2nd Semester', 1, 0, '2023-12-05', '2023-12-13'),
-(6, '3nd Semester', 1, 0, '2023-12-14', '2023-12-31');
+(6, '3nd Semester', 1, 0, '2023-12-14', '2023-12-31'),
+(10, '4th Semester', 1, 0, '2024-01-01', '2024-07-31');
 
 -- --------------------------------------------------------
 
@@ -753,7 +757,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `experiment`
@@ -825,7 +829,7 @@ ALTER TABLE `result_summery_experiment`
 -- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `started_exam`
@@ -837,7 +841,7 @@ ALTER TABLE `started_exam`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `subject`
