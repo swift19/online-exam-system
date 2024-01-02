@@ -1,6 +1,8 @@
 <?php 
     session_start(); 
     if ($_SESSION['p'] != "") {
+        
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,8 +38,8 @@
                     $total_mark     = $_POST['total_mark'];
                     $total_question = $_POST['total_question'];
 
-                    $startDate = $_POST['startDate'];
-                    $endDate = $_POST['endDate'];
+                    $startDate = $_POST['startDate']." ".$_POST['startTime'];
+                    $endDate = $_POST['endDate']." ".$_POST['endTime'];
 
                     $ins = "INSERT INTO exam (semester_id, subject_id, name, status, admin_id, duration, question_mark, total_mark, total_question,startDate,endDate) 
                     VALUES ('$semester_id', '$subject_id', '$name', '1', '$admin_id', '$duration', '$question_mark', '$total_mark', '$total_question', '$startDate', '$endDate');";    
@@ -68,6 +70,7 @@
                                         <?php 
                                                 include 'db.php';
                                                 $currentDate = date('Y-m-d');
+                                                $currentTime = date('H:i:s');
                                                 $query = mysqli_query($link, "SELECT * FROM semester WHERE status = '1' AND '$currentDate' BETWEEN startDate AND endDate");
                                                 while($data = mysqli_fetch_array($query)) {
                                                     echo "<input name='semester_id' class='form-control form-control-lg' type='text' hidden value='$data[id]'>";
@@ -100,12 +103,18 @@
                                         <br>
                                         <label>Duration</label>
                                         <div class="form-group">
-                                        <label for="startDate">Start Date:</label>
-                                        <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" value="<?php  echo $currentDate ?>" readonly >
+                                            <label for="startDate">Start Date:</label>
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" name="startDate" id="startDate" value="<?php  echo $currentDate ?>" readonly >
+                                                <input type="time" class="form-control form-control-lg" name="startTime" id="startTime" value="<?php  echo $currentTime ?>" readonly >
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="endDate">End Date:</label>
-                                            <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" min="<?php  echo $currentDate ?>" required>
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" name="endDate" id="endDate" min="<?php  echo $currentDate ?>" required>
+                                                <input type="time" class="form-control form-control-lg" name="endTime" id="endTime" required>
+                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary btn-lg btn-block">Add Confirm</button>

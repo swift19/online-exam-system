@@ -31,6 +31,7 @@
 			$p  = $data['pass'];
 			$s  = $data['status'];
 			$i  = $data['image'];
+			$r  = $data['isread'];
 		}
 		if (($u == $username && $p == $pass) && ($s == 1)) 
 			{
@@ -43,6 +44,7 @@
 				$_SESSION['e'] = $e;
 				$_SESSION['s'] = $s;
 				$_SESSION['i'] = $i;
+				$_SESSION['r'] = $r;
 					
 				echo "<script>";
 				echo "self.location='dashboard.php';";

@@ -55,7 +55,10 @@
                                     </div>
 
                                     <?php
-                                    $currentDate = date('Y-m-d');
+                                    // $date = date('Y-m-d');
+                                    // $time = date('H:i:s');
+                                    // $currentDate = $date."".$time;
+                                    $currentDate = date('Y-m-d H:i:s');
                                     $query_str = mysqli_query($link, "SELECT exam_id FROM started_exam WHERE student_id = '$_SESSION[id]'");
                                     $row_count = mysqli_num_rows($query_str);
 

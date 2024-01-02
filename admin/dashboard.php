@@ -269,6 +269,7 @@
             </div>
             
         </div>
+
         <?php include 'footer_file.php'; ?>
 
         <script>
@@ -338,7 +339,23 @@
                 var data = "searchValue=" + encodeURIComponent(searchValue) + "&sessionId=" + encodeURIComponent(sessionId);
                 xhr.send(data);
             }
+           
+           
+            window.onload = function() {
+                const alert = <?php echo $_SESSION['r']; ?>;
+                const teacherName = "<?php echo $_SESSION['n'] ?>";
+                console.log("show alert:" , alert)
+                if (alert < 1){
+                    window.alert("Welcome "+teacherName+ ", Please see the KBA 1st for instruction on how to operate the system");
+                    <?php  
+                        include 'db.php';
+                        $dlt = "UPDATE admin SET isread = 1 WHERE id = '$_SESSION[id]' ";
+                        mysqli_query($link, $dlt);
+                    ?>
+                }   
+            }
         </script>
+</body>
     </body>
     
     </html>
